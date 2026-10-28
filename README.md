@@ -254,42 +254,34 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 </table>
 
 
-<h2 align="center">🎬 Flight Demonstration Videos</h2>
 
-<p align="center">
-  <em>Recorded flight-test videos from the Aero Drop project.</em>
-</p>
+## 🎥 Flight Test Videos
 
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <a href="./flight-test-01.mp4">▶️ Watch Flight Test 01</a>
-    </td>
-    <td align="center" width="50%">
-      <a href="./flight-test-02.mp4">▶️ Watch Flight Test 02</a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <a href="./flight-test-03.mp4">▶️ Watch Flight Test 03</a>
-    </td>
-    <td align="center" width="50%">
-      <a href="./flight-test-04.mp4">▶️ Watch Flight Test 04</a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <a href="./flight-test-05.mp4">▶️ Watch Flight Test 05</a>
-    </td>
-    <td align="center" width="50%">
-      <a href="./flight-test-06.mp4">▶️ Watch Flight Test 06</a>
-    </td>
-  </tr>
-</table>
+The following videos demonstrate the prototype development and flight testing of the **Aero Drop – Smart Drone Delivery System**.
 
-<p align="center">
-  <sub>Select a video link to open the corresponding MP4 file in GitHub.</sub>
-</p>
+These recordings document practical testing of the drone prototype and its flight demonstrations.
+
+### 📹 Video Demonstrations
+
+| S. No. | Video | Watch |
+|---|---|---|
+| 1 | Flight Test 01 | [▶️ Watch Video](https://drive.google.com/file/d/1Fbjw1Pz-1gFRTSq7l7yDvbrRSLIZA7hu/view) |
+| 2 | Flight Test 02 | [▶️ Watch Video](https://drive.google.com/file/d/1XUPTdHZIBxy2QSfTNEFAJBH4Ilrn7chb/view) |
+| 3 | Flight Test 03 | [▶️ Watch Video](https://drive.google.com/file/d/1R1NiR6lLr082Um87en-610RGrQzF2w-g/view) |
+| 4 | Flight Test 04 | [▶️ Watch Video](https://drive.google.com/file/d/1Xy7SSq4uWVLR5EgGfu1jIaB7Bxmt4zyw/view) |
+| 5 | Flight Test 05 | [▶️ Watch Video](https://drive.google.com/file/d/13YNOyZcHwFSxX8AI5emh71bFJl_IKPMD/view) |
+| 6 | Flight Test 06 | [▶️ Watch Video](https://drive.google.com/file/d/1_g-dzM5s7iTkPrZjr3yRnYVc7PUF2DuK/view) |
+
+### 🔗 Video Access
+
+- All videos are hosted on Google Drive.
+- Click **Watch Video** to open the corresponding recording.
+- For public access, set each video's sharing permission to **Anyone with the link — Viewer**.
+
+---
+
+**Project:** Aero Drop – Smart Drone Delivery System  
+**Purpose:** Prototype development and flight testing for a drone-based delivery system.
 
 
 ## 🔍 How It Works
