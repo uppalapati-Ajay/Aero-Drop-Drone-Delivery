@@ -206,6 +206,29 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 > **Note:** Confirm the component list and exact connections against your actual prototype before using this table as a technical specification.
 
 
+---
+
+<h2 align="center">🧭 Obstacle Avoidance Workflow</h2>
+
+<p align="center">
+  <em>Sensor-based obstacle detection and avoidance in the Aero Drop drone system.</em>
+</p>
+
+<p align="center">
+  <img src="./obstacle-avoidance-workflow.png"
+       alt="Aero Drop obstacle avoidance workflow diagram"
+       width="100%">
+</p>
+
+### How It Works
+
+1. **Sensor Reading:** The ESP32 reads distance measurements from the front, left and right ToF sensors.
+2. **Obstacle Detection:** Sensor readings are checked against the configured distance threshold.
+3. **Path Adjustment:** The avoidance logic selects a direction based on available clearance.
+4. **Path Verification:** Sensor readings are checked again to determine whether the route is clear.
+5. **Mission Resumption:** The drone can resume waypoint navigation when the implemented control logic determines it is safe.
+
+> **Engineering note:** The diagram is conceptual. Verify the thresholds, movement directions and MAVLink commands against your actual firmware before presenting them as implemented behavior.
 
 ## 📚 Contents
 
