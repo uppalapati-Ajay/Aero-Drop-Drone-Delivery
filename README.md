@@ -21,6 +21,30 @@
 
 ---
 
+## 🧭 Quick Navigation
+
+- [Project Overview](#-project-overview)
+- [Project at a Glance](#-project-at-a-glance)
+- [System Architecture](#-system-architecture)
+- [Prototype Gallery](#-aero-drop--prototype-gallery)
+- [Hardware Components](#-hardware-components)
+- [Software and Technologies](#-software-and-technologies)
+- [Mission Planner Navigation](#-autonomous-navigation-with-mission-planner)
+- [Obstacle Avoidance](#-real-time-obstacle-avoidance)
+- [Payload Delivery](#-payload-delivery)
+- [MAVLink Communication](#-mavlink-communication)
+- [ESP32 Web Dashboard](#-esp32-web-dashboard)
+- [Testing and Validation](#-testing-and-validation)
+- [Field Testing Photos](#-field-testing--outdoor-demonstration)
+- [Flight Test Videos](#-flight-test-videos)
+- [Known Limitations and Safety](#-known-limitations)
+- [Installation and Reproduction](#-installation-and-reproduction)
+- [Project Team](#-project-team)
+- [Engineering Appendix](#-engineering-appendix-detailed-review-and-verification)
+
+---
+
+
 <h2 align="center">🛰️ Aero Drop — System Architecture</h2>
 
 <p align="center">
@@ -122,38 +146,9 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 
 ## 🎬 Flight Demonstration
 
-<p align="center">
-  <strong>Aero Drop — Smart Drone System for Medical & Essentials Delivery</strong>
-  <br>
-  <em>Prototype flight testing and system demonstration.</em>
-</p>
+The project includes six flight-test recordings hosted on Google Drive. Use the links in the [Flight Test Videos section](#-flight-test-videos) to open each recording.
 
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <h3>🚁 Flight Test — 01</h3>
-      <a href="flying%20video%20-%20Copy.mp4">
-        <img src="prototype%201%20-%20Copy.jpeg"
-             alt="Open Aero Drop flight demonstration video 1"
-             width="100%">
-      </a>
-      <br>
-      <a href="flying%20video%20-%20Copy.mp4">▶ View Flight Demonstration 01</a>
-    </td>
-    <td align="center" width="50%">
-      <h3>🛰️ Flight Test — 02</h3>
-      <a href="flying%20video%201%20-%20Copy.mp4">
-        <img src="prototype%203%20-%20Copy.jpeg"
-             alt="Open Aero Drop flight demonstration video 2"
-             width="100%">
-      </a>
-      <br>
-      <a href="flying%20video%201%20-%20Copy.mp4">▶ View Flight Demonstration 02</a>
-    </td>
-  </tr>
-</table>
-
-> **Note:** Select a preview image to open the corresponding video file in GitHub.
+> **Video access:** Each recording must be shared as **Anyone with the link — Viewer** for visitors to open it. GitHub README pages do not reliably embed Google Drive video players, so the links open the videos in Google Drive.
 
 
 ---
@@ -205,8 +200,6 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 
 > **Note:** Confirm the component list and exact connections against your actual prototype before using this table as a technical specification.
 
-
----
 
 ---
 
