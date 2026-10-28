@@ -76,57 +76,39 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 <h2 align="center">🚁 Aero Drop — Prototype Gallery</h2>
 
 <p align="center">
-  <strong>Real Prototype | Hardware Integration | Payload Delivery</strong>
-  <br>
-  <em>Photographs from the Aero Drop Smart Drone System project.</em>
+  <em>Real photographs of our drone delivery prototype.</em>
 </p>
 
 <table>
   <tr>
     <td align="center" width="50%">
-      <img src="prototype%201%20-%20Copy.jpeg"
+      <img src="./prototype%201%20-%20Copy.jpeg"
            alt="Aero Drop prototype overview"
            width="100%">
-      <br>
-      <strong>🚁 Prototype Overview</strong>
-      <br>
-      <sub>Drone frame and onboard electronics</sub>
+      <br><strong>Prototype Overview</strong>
     </td>
     <td align="center" width="50%">
-      <img src="prototype1(1).jpeg"
+      <img src="./prototype%201%281%29.jpeg"
            alt="Aero Drop drone assembly"
            width="100%">
-      <br>
-      <strong>🔧 Drone Assembly</strong>
-      <br>
-      <sub>Prototype structure and component arrangement</sub>
+      <br><strong>Drone Assembly</strong>
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
-      <img src="prototype2(1).jpeg"
+      <img src="./prototype2%281%29.jpeg"
            alt="Aero Drop hardware integration"
            width="100%">
-      <br>
-      <strong>⚙️ Hardware Integration</strong>
-      <br>
-      <sub>Embedded electronics and wiring arrangement</sub>
+      <br><strong>Hardware Integration</strong>
     </td>
     <td align="center" width="50%">
-      <img src="prototype%203%20-%20Copy.jpeg"
-           alt="Aero Drop payload delivery prototype"
+      <img src="./prototype%203%20-%20Copy.jpeg"
+           alt="Aero Drop payload prototype"
            width="100%">
-      <br>
-      <strong>📦 Payload Delivery Prototype</strong>
-      <br>
-      <sub>Drone frame and payload box arrangement</sub>
+      <br><strong>Payload Prototype</strong>
     </td>
   </tr>
 </table>
-
-<p align="center">
-  <em>Prototype photographs document the physical implementation of Aero Drop.</em>
-</p>
 
 
 
