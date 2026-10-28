@@ -118,6 +118,45 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 
 
 
+---
+
+## 🎬 Flight Demonstration
+
+<p align="center">
+  <strong>Aero Drop — Smart Drone System for Medical & Essentials Delivery</strong>
+  <br>
+  <em>Prototype flight testing and system demonstration.</em>
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <h3>🚁 Flight Test — 01</h3>
+      <a href="flying%20video%20-%20Copy.mp4">
+        <img src="prototype%201%20-%20Copy.jpeg"
+             alt="Open Aero Drop flight demonstration video 1"
+             width="100%">
+      </a>
+      <br>
+      <a href="flying%20video%20-%20Copy.mp4">▶ View Flight Demonstration 01</a>
+    </td>
+    <td align="center" width="50%">
+      <h3>🛰️ Flight Test — 02</h3>
+      <a href="flying%20video%201%20-%20Copy.mp4">
+        <img src="prototype%203%20-%20Copy.jpeg"
+             alt="Open Aero Drop flight demonstration video 2"
+             width="100%">
+      </a>
+      <br>
+      <a href="flying%20video%201%20-%20Copy.mp4">▶ View Flight Demonstration 02</a>
+    </td>
+  </tr>
+</table>
+
+> **Note:** Select a preview image to open the corresponding video file in GitHub.
+
+
+
 ## 📚 Contents
 
 - [Project Overview](#-project-overview)
