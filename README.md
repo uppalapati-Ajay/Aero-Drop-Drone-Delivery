@@ -254,6 +254,44 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 </table>
 
 
+<h2 align="center">🎬 Flight Demonstration Videos</h2>
+
+<p align="center">
+  <em>Recorded flight-test videos from the Aero Drop project.</em>
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <a href="./flight-test-01.mp4">▶️ Watch Flight Test 01</a>
+    </td>
+    <td align="center" width="50%">
+      <a href="./flight-test-02.mp4">▶️ Watch Flight Test 02</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <a href="./flight-test-03.mp4">▶️ Watch Flight Test 03</a>
+    </td>
+    <td align="center" width="50%">
+      <a href="./flight-test-04.mp4">▶️ Watch Flight Test 04</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <a href="./flight-test-05.mp4">▶️ Watch Flight Test 05</a>
+    </td>
+    <td align="center" width="50%">
+      <a href="./flight-test-06.mp4">▶️ Watch Flight Test 06</a>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <sub>Select a video link to open the corresponding MP4 file in GitHub.</sub>
+</p>
+
+
 ## 🔍 How It Works
 
 ### 1. Sensor Reading
