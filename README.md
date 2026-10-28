@@ -222,6 +222,38 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
        width="100%">
 </p>
 
+---
+
+<h2 align="center">🛫 Field Testing & Outdoor Demonstration</h2>
+
+<p align="center">
+  <em>Outdoor testing, drone preparation and flight demonstration of the Aero Drop prototype.</em>
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="./field-test-preparation.jpeg"
+           alt="Preparing the Aero Drop drone for field testing"
+           width="100%">
+      <br><strong>🔧 Field Test Preparation</strong>
+    </td>
+    <td align="center" width="33%">
+      <img src="./drone-field-test.jpeg"
+           alt="Aero Drop drone on the outdoor test field"
+           width="100%">
+      <br><strong>🚁 Outdoor Drone Test</strong>
+    </td>
+    <td align="center" width="33%">
+      <img src="./team-flight-demonstration.jpeg"
+           alt="Aero Drop team during flight demonstration"
+           width="100%">
+      <br><strong>👥 Project Demonstration</strong>
+    </td>
+  </tr>
+</table>
+
+
 ## 🔍 How It Works
 
 ### 1. Sensor Reading
