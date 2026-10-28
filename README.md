@@ -72,6 +72,7 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 ---
 
 
+
 <h2 align="center">🚁 Aero Drop — Prototype Gallery</h2>
 
 <p align="center">
@@ -82,28 +83,29 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
   <tr>
     <td align="center" width="50%">
       <img src="prototype%201%20-%20Copy.jpeg"
-           alt="Aero Drop prototype view 1" width="100%">
-      <br><b>Prototype — Overview</b>
+           alt="Aero Drop prototype overview" width="100%">
+      <br><b>Prototype Overview</b>
     </td>
     <td align="center" width="50%">
-      <img src="prototype1(1).jpeg"
-           alt="Aero Drop prototype view 2" width="100%">
+      <img src="prototype%201(1).jpeg"
+           alt="Aero Drop drone assembly" width="100%">
       <br><b>Drone Assembly</b>
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
       <img src="prototype2(1).jpeg"
-           alt="Aero Drop prototype view 3" width="100%">
+           alt="Aero Drop hardware integration" width="100%">
       <br><b>Hardware Integration</b>
     </td>
     <td align="center" width="50%">
       <img src="prototype%203%20-%20Copy.jpeg"
-           alt="Aero Drop prototype view 4" width="100%">
+           alt="Aero Drop prototype details" width="100%">
       <br><b>Prototype Details</b>
     </td>
   </tr>
 </table>
+
 
 
 ## 📚 Contents
