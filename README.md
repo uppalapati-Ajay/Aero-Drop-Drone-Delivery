@@ -76,7 +76,9 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 <h2 align="center">🚁 Aero Drop — Prototype Gallery</h2>
 
 <p align="center">
-  <em>Real photographs of our drone delivery prototype.</em>
+  <strong>Real Prototype | Hardware Integration | Payload Delivery</strong>
+  <br>
+  <em>Photographs from the Aero Drop Smart Drone System project.</em>
 </p>
 
 <table>
@@ -85,13 +87,19 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
       <img src="./prototype%201%20-%20Copy.jpeg"
            alt="Aero Drop prototype overview"
            width="100%">
-      <br><strong>Prototype Overview</strong>
+      <br>
+      <strong>🚁 Prototype Overview</strong>
+      <br>
+      <sub>Drone frame and onboard electronics</sub>
     </td>
     <td align="center" width="50%">
       <img src="./prototype%201%281%29.jpeg"
            alt="Aero Drop drone assembly"
            width="100%">
-      <br><strong>Drone Assembly</strong>
+      <br>
+      <strong>🔧 Drone Assembly</strong>
+      <br>
+      <sub>Prototype structure and component arrangement</sub>
     </td>
   </tr>
   <tr>
@@ -99,16 +107,27 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
       <img src="./prototype2%281%29.jpeg"
            alt="Aero Drop hardware integration"
            width="100%">
-      <br><strong>Hardware Integration</strong>
+      <br>
+      <strong>⚙️ Hardware Integration</strong>
+      <br>
+      <sub>Embedded electronics and wiring arrangement</sub>
     </td>
     <td align="center" width="50%">
       <img src="./prototype%203%20-%20Copy.jpeg"
-           alt="Aero Drop payload prototype"
+           alt="Aero Drop payload delivery prototype"
            width="100%">
-      <br><strong>Payload Prototype</strong>
+      <br>
+      <strong>📦 Payload Delivery Prototype</strong>
+      <br>
+      <sub>Drone frame and payload box arrangement</sub>
     </td>
   </tr>
 </table>
+
+<p align="center">
+  <em>A visual record of the Aero Drop prototype development.</em>
+</p>
+
 
 
 
