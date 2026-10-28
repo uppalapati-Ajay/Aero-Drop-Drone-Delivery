@@ -208,6 +208,8 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 
 ---
 
+---
+
 <h2 align="center">🧭 Obstacle Avoidance Workflow</h2>
 
 <p align="center">
@@ -215,49 +217,52 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 </p>
 
 <p align="center">
-  <img src="./obstacle-avoidance-workflow.png"
+  <img src="./Obstacle%20Avoidance%20Workflow%20.png"
        alt="Aero Drop obstacle avoidance workflow diagram"
        width="100%">
 </p>
 
-### How It Works
+## 🔍 How It Works
 
-1. **Sensor Reading:** The ESP32 reads distance measurements from the front, left and right ToF sensors.
-2. **Obstacle Detection:** Sensor readings are checked against the configured distance threshold.
-3. **Path Adjustment:** The avoidance logic selects a direction based on available clearance.
-4. **Path Verification:** Sensor readings are checked again to determine whether the route is clear.
-5. **Mission Resumption:** The drone can resume waypoint navigation when the implemented control logic determines it is safe.
+### 1. Sensor Reading
+The ESP32 reads distance measurements from the front, left and right Time-of-Flight (ToF) sensors.
 
-> **Engineering note:** The diagram is conceptual. Verify the thresholds, movement directions and MAVLink commands against your actual firmware before presenting them as implemented behavior.
+### 2. Obstacle Detection
+The sensor readings are checked against the configured distance threshold to determine whether an obstacle is nearby.
 
-## 📚 Contents
+### 3. Path Adjustment
+When an obstacle is detected, the avoidance logic evaluates the available clearance and selects a direction according to the implemented control logic.
 
-- [Project Overview](#-project-overview)
-- [Problem Statement](#-problem-statement)
-- [Objectives](#-project-objectives)
-- [What Makes Aero Drop Special](#-what-makes-aero-drop-special)
-- [System Architecture](#-system-architecture)
-- [Hardware Components](#-hardware-components)
-- [Software and Technologies](#-software-and-technologies)
-- [Autonomous Navigation](#-autonomous-navigation-with-mission-planner)
-- [Real-Time Obstacle Avoidance](#-real-time-obstacle-avoidance)
-- [Payload Delivery](#-payload-delivery)
-- [MAVLink Communication](#-mavlink-communication)
-- [ESP32 Web Dashboard](#-esp32-web-dashboard)
-- [FreeRTOS Task Design](#-freertos-task-design)
-- [End-to-End Mission](#-end-to-end-mission-workflow)
-- [Electrical and Mechanical Integration](#-electrical-and-mechanical-integration)
-- [Testing and Validation](#-testing-and-validation)
-- [Known Limitations](#-known-limitations)
-- [Safety](#-safety-considerations)
-- [Installation and Reproduction](#-installation-and-reproduction)
-- [Repository Structure](#-repository-structure)
-- [Future Work](#-future-work)
-- [Project Team](#-project-team)
-- [Glossary](#-glossary)
-- [Engineering Checklists](#-engineering-checklists)
+### 4. Path Verification
+The sensors are checked again to assess whether the path ahead is clear.
 
----
+### 5. Mission Resumption
+When the obstacle has been cleared, the drone can resume waypoint navigation according to the implemented flight-control logic.
+
+## ✨ Key Features
+
+- Real-time distance measurements from ToF sensors
+- Front, left and right obstacle sensing
+- Threshold-based obstacle detection
+- Sensor-guided avoidance decisions
+- Integration with waypoint-based mission navigation
+
+## 🔄 Workflow Summary
+
+<p align="center">
+  <strong>Read Sensor Data</strong>
+  &nbsp; ➜ &nbsp;
+  <strong>Detect Obstacle</strong>
+  &nbsp; ➜ &nbsp;
+  <strong>Choose Direction</strong>
+  &nbsp; ➜ &nbsp;
+  <strong>Verify Path</strong>
+  &nbsp; ➜ &nbsp;
+  <strong>Resume Mission</strong>
+</p>
+
+> **Engineering note:** This workflow is a conceptual explanation. Verify the sensor thresholds, movement commands, and mission-resumption behavior against your actual firmware before describing them as confirmed implementation details.
+
 
 # 🌍 Project Overview
 
