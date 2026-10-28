@@ -21,6 +21,15 @@
 
 ---
 
+<h2 align="center">🛰️ Aero Drop — System Architecture</h2>
+
+<p align="center">
+  <img src="Aero%20Drop%20Drone%20Delivery%20Architecture.png"
+       alt="Aero Drop Drone Delivery System Architecture"
+       width="100%">
+</p>
+
+
 ## 🌌 Project at a Glance
 
 <table>
