@@ -156,6 +156,56 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 > **Note:** Select a preview image to open the corresponding video file in GitHub.
 
 
+---
+
+<h2 align="center">⚙️ Hardware Components</h2>
+
+<p align="center">
+  <em>Key hardware modules used in the Aero Drop drone delivery prototype.</em>
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="components%20-%20Copy.jpeg"
+           alt="Aero Drop hardware components"
+           width="100%">
+      <br><strong>🧩 Hardware Assembly</strong>
+      <br><sub>Integrated electronics and modules</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="components%201%20-%20Copy.jpeg"
+           alt="Aero Drop electronic components"
+           width="100%">
+      <br><strong>🔌 Electronic Components</strong>
+      <br><sub>Wiring and embedded hardware</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="components(1).jpeg"
+           alt="Aero Drop component details"
+           width="100%">
+      <br><strong>🛠️ Component Details</strong>
+      <br><sub>Hardware used in the prototype</sub>
+    </td>
+  </tr>
+</table>
+
+### Main Hardware Modules
+
+| Component | Purpose |
+|---|---|
+| Pixhawk 2.4.8 | Flight control and mission execution |
+| NEO-8M GPS | Positioning and waypoint navigation |
+| ESP32 | Companion subsystem and sensor processing |
+| VL53L0X ToF sensors | Short-range obstacle distance measurement |
+| BLDC motors and ESCs | Drone propulsion and motor speed control |
+| Servo motor | Payload release mechanism |
+| LiPo battery | Main power source |
+| Payload box | Carries the delivery item |
+
+> **Note:** Confirm the component list and exact connections against your actual prototype before using this table as a technical specification.
+
+
 
 ## 📚 Contents
 
