@@ -1,4 +1,4 @@
-# Package status and provenance
+# Aero Drop — Project Implementation Status
 
 This package was assembled from the user's supplied project process document, two PowerPoint presentations, prototype/component photographs, and flight videos, plus project details previously shared in conversation.
 
