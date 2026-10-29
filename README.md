@@ -59,6 +59,30 @@
 
 ## 🌌 Project at a Glance
 
+### 🎨 Visual System Map
+
+```mermaid
+flowchart LR
+    A["🗺️ Mission Planning<br/>Mission Planner"] --> B["🧭 Navigation<br/>Pixhawk + GPS"]
+    B --> C["🚁 Flight Platform<br/>Motors + ESCs"]
+    D["📏 Distance Sensing<br/>3 × VL53L0X"] --> E["🧠 Embedded Logic<br/>ESP32"]
+    E <--> F["📡 MAVLink<br/>Telemetry / supported commands"]
+    F <--> B
+    E --> G["🌐 Web Dashboard"]
+    B --> H["📦 Payload Release<br/>Servo mechanism"]
+    classDef plan fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef control fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:2px;
+    classDef sense fill:#ffedd5,stroke:#ea580c,color:#7c2d12,stroke-width:2px;
+    classDef monitor fill:#f3e8ff,stroke:#9333ea,color:#581c87,stroke-width:2px;
+    class A,B plan;
+    class C,H control;
+    class D,E sense;
+    class F,G monitor;
+```
+
+> **Diagram key:** Blue = mission/navigation, green = aircraft actuation, orange = sensing/embedded logic, purple = communication/monitoring. This is a conceptual overview; actual wiring and message paths must be checked against the build.
+
+
 <table>
 <tr>
 <td width="50%">
@@ -468,6 +492,35 @@ flowchart TB
 
 ## Architecture Layers
 
+### 🔁 Information and Control Flow
+
+```mermaid
+flowchart TD
+    S["📏 ToF sensor measurements"] --> V{"Readings valid and fresh?"}
+    V -- "No" --> X["⚠️ Apply configured fault response"]
+    V -- "Yes" --> O{"Front obstacle condition met?"}
+    O -- "No" --> N["🧭 Continue configured mission behavior"]
+    O -- "Yes" --> C["↔️ Compare side clearance"]
+    C --> Q{"Usable direction identified?"}
+    Q -- "No" --> X
+    Q -- "Yes" --> M["📡 Send supported control message"]
+    M --> R["🔎 Observe vehicle response"]
+    R --> K{"Recovery conditions met?"}
+    K -- "No" --> R
+    K -- "Yes" --> N
+    classDef input fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef action fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:2px;
+    classDef warning fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    class S,M,R input;
+    class V,O,Q,K decision;
+    class C,N action;
+    class X warning;
+```
+
+**Interpretation:** this diagram visualizes the documented design logic, not a verified firmware state machine. Confirm the real fault handling, command path, and recovery conditions before flight testing.
+
+
 ### Ground-station layer
 
 Mission Planner is used to create, review, upload, and monitor supported missions. The ground station can display telemetry provided by the configured autopilot and telemetry link.
@@ -752,6 +805,31 @@ The Aero Drop concept uses front, left, and right ToF measurements to support a 
 
 The diagram shows intended directions, not exact mounting dimensions or fields of view.
 
+### 🧭 Sensor Placement — Concept View
+
+```mermaid
+flowchart TB
+    F["🔶 FRONT SENSOR<br/>VL53L0X<br/>Forward distance"]
+    L["🟦 LEFT SENSOR<br/>VL53L0X<br/>Left clearance"]
+    D["🚁 DRONE / ESP32<br/>Read • Validate • Compare"]
+    R["🟩 RIGHT SENSOR<br/>VL53L0X<br/>Right clearance"]
+    F --> D
+    L --> D
+    R --> D
+    D --> A["⚙️ Configured local response"]
+    classDef front fill:#ffedd5,stroke:#ea580c,color:#7c2d12,stroke-width:2px;
+    classDef left fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef right fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:2px;
+    classDef core fill:#f3e8ff,stroke:#9333ea,color:#581c87,stroke-width:2px;
+    class F front;
+    class L left;
+    class R right;
+    class D,A core;
+```
+
+*This is a conceptual placement diagram, not a dimensional mounting drawing or proof of full obstacle coverage.*
+
+
 ## Conceptual decision process
 
 1. Read front, left, and right measurements.
@@ -836,6 +914,30 @@ The feature should be described as local obstacle detection and response, with p
 # 📦 Payload Delivery
 
 The delivery subsystem consists of a payload box and a servo-operated release mechanism.
+
+### 📦 Payload Delivery — Sequence Diagram
+
+```mermaid
+flowchart LR
+    A["🔧 Secure payload"] --> B["🗺️ Verify mission + release configuration"]
+    B --> C["🚁 Conduct supervised mission"]
+    C --> D["📍 Reach configured delivery phase"]
+    D --> E["⚙️ Trigger supported servo output"]
+    E --> F{"Physical release observed?"}
+    F -- "Yes" --> G["📝 Record position + test evidence"]
+    F -- "No / unclear" --> H["🛑 Record failure or inconclusive result"]
+    G --> I["🔍 Inspect mechanism after landing"]
+    H --> I
+    classDef prep fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef act fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:2px;
+    classDef verify fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef fail fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    class A,B prep;
+    class C,D,E,I act;
+    class F,G verify;
+    class H fail;
+```
+
 
 ## Delivery sequence
 
@@ -928,6 +1030,17 @@ The ESP32-hosted web server presents selected information in a browser.
 
 The documented page-refresh interval is approximately **500 ms**. This describes the reported dashboard refresh behavior; it is not a guarantee that every sensor sample, telemetry message, or control action occurs at the same rate.
 
+### 🖥️ Dashboard Information Layout — Concept Mock-up
+
+| <span style="color:#2563eb">🛰️ FLIGHT STATUS</span> | <span style="color:#059669">📏 SENSOR STATUS</span> | <span style="color:#9333ea">📡 LINK STATUS</span> |
+|---|---|---|
+| Flight mode reported by autopilot | Front / left / right distance | MAVLink data availability |
+| Arming state reported by autopilot | Reading validity / age | Communication timeout state |
+| Mission progress if available | Obstacle state from implemented logic | Last update / diagnostic information |
+
+> This table is a visual design suggestion, not a screenshot of an existing dashboard. Display only values the firmware actually provides, and label invalid or stale data clearly.
+
+
 ## Monitoring value
 
 The dashboard can help developers observe sensor values and reported flight status during tests. It should clearly distinguish current values from stale or invalid values and should not be treated as a safety-critical pilot interface unless it has been designed and validated for that purpose.
@@ -947,6 +1060,28 @@ The project description identifies five task responsibilities.
 | Serial/debug task | Output diagnostic information | Avoid excessive logging or blocking critical work |
 
 ## Why task separation matters
+
+### 🧵 Embedded Task Interaction Map
+
+```mermaid
+flowchart TB
+    SENSOR["📏 Sensor Task"] --> SHARED[("🧠 Validated shared state")]
+    MAV["📡 MAVLink Task"] <--> SHARED
+    SHARED --> AVOID["🛡️ Avoidance Task"]
+    AVOID --> MAV
+    SHARED --> WEB["🌐 Web Server Task"]
+    DEBUG["🪵 Serial / Debug Task"] --> LOG["📝 Diagnostic output"]
+    SHARED -. "diagnostic snapshot" .-> DEBUG
+    classDef task fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef shared fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef diag fill:#f3e8ff,stroke:#9333ea,color:#581c87,stroke-width:2px;
+    class SENSOR,MAV,AVOID,WEB task;
+    class SHARED shared;
+    class DEBUG,LOG diag;
+```
+
+**Implementation note:** task names and data sharing here reflect the documented design. Verify actual task creation, priorities, synchronization, and control ownership in the source code.
+
 
 Separating communication, sensor acquisition, decision logic, web serving, and diagnostics can make firmware easier to maintain and reason about.
 
@@ -1031,6 +1166,44 @@ Project history describes autonomous mission flights, Loiter-mode hovering, obst
 These observations are preliminary and do not constitute a complete quantitative validation dataset.
 
 ## Test matrix
+
+### 🧪 Validation Pipeline
+
+```mermaid
+flowchart TD
+    A["1. Inspect configuration"] --> B["2. Bench-test sensors"]
+    B --> C["3. Test decision logic without propellers"]
+    C --> D["4. Verify MAVLink and fault handling"]
+    D --> E["5. Test servo mechanism on bench"]
+    E --> F["6. Conduct controlled, supervised flight test"]
+    F --> G["7. Save flight logs and observations"]
+    G --> H["8. Compare results against criteria set beforehand"]
+    H --> I{"Evidence sufficient?"}
+    I -- "No" --> J["🛠️ Fix gaps and repeat test"]
+    J --> B
+    I -- "Yes" --> K["📊 Report measured result + limitations"]
+    classDef stage fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef review fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef result fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:2px;
+    class A,B,C,D,E,F,G,H stage;
+    class I,J review;
+    class K result;
+```
+
+### 📈 Results Graphs — Add Real Data Before Plotting
+
+Aero Drop can be documented with useful engineering plots once measurements are available. Do **not** plot invented values. Recommended graphs:
+
+| Graph | X-axis | Y-axis | Data required |
+|---|---|---|---|
+| Sensor accuracy | Reference distance (cm) | Sensor reading (cm) | Paired reference and sensor measurements |
+| Delivery deviation | Trial number | Target deviation (m) | Measured target and drop positions |
+| Flight endurance | Payload mass (g) | Flight duration (min) | Repeated controlled endurance tests |
+| Battery behavior | Time (s or min) | Voltage (V) / current (A) | Flight log or power measurements |
+| Obstacle response | Time (s) | Front/left/right distance (cm) | Timestamped sensor log |
+
+When you have the CSV or test log, these can become real charts in the README with labeled axes, units, test conditions, and sample counts.
+
 
 | Test | Objective | Evidence |
 |---|---|---|
@@ -1207,6 +1380,26 @@ This is a proposed structure. Populate folders with actual source files, photos,
 ---
 
 # 🚀 Future Enhancements
+
+### 🗺️ Engineering Roadmap — Conceptual View
+
+```mermaid
+flowchart LR
+    A["📚 Document current build"] --> B["🧩 Publish verified firmware"]
+    B --> C["🧪 Capture repeatable test data"]
+    C --> D["📊 Add measured graphs"]
+    D --> E["🛡️ Validate fault handling"]
+    E --> F["🚀 Evaluate future sensing / planning upgrades"]
+    classDef current fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef validate fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef future fill:#f3e8ff,stroke:#9333ea,color:#581c87,stroke-width:2px;
+    class A,B current;
+    class C,D,E validate;
+    class F future;
+```
+
+*This roadmap is a proposed sequence of work, not a statement that these milestones are complete.*
+
 
 - Expand obstacle coverage using suitable additional sensing hardware.
 - Improve filtering and validity checks for distance readings.
