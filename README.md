@@ -1142,36 +1142,42 @@ The precise build procedure depends on the actual source code, board variant, li
 
 ---
 
-# 📁 Recommended Repository Layout
+
+---
+
+## 📁 Current Repository Structure
+
+The repository keeps the main project overview, technical documentation, and project media accessible from the root directory. Dedicated folders are provided for documentation, firmware development, and test records.
 
 ```text
-Aero-Drop-Drone-System/
+Aero-Drop-Drone-Delivery/
 ├── README.md
-├── LICENSE
-├── .gitignore
-├── PROJECT_STATUS.md
 ├── docs/
-│   ├── system-architecture.md
-│   ├── hardware-components.md
-│   ├── autonomous-mission-planning.md
-│   ├── obstacle-avoidance.md
-│   ├── payload-delivery.md
-│   ├── mavlink-communication.md
-│   ├── freertos-task-design.md
-│   ├── testing-and-results.md
-│   └── safety-and-limitations.md
-├── firmware/
-│   ├── esp32/
 │   └── README.md
-├── hardware/
-│   ├── components-list.md
-│   └── wiring-and-interfaces.md
-├── media/
-│   ├── images/
-│   └── mission-planner/
-└── test-results/
-    └── README.md
+├── firmware/
+│   └── README.md
+├── test-results/
+│   └── README.md
+├── SYSTEM_ARCHITECTURE.md
+├── OBSTACLE_AVOIDANCE.md
+├── PROJECT_STATUS.md
+└── Existing images, diagrams, and project media
 ```
+
+### Folder Guide
+
+| Folder or File | Purpose |
+|---|---|
+| [`docs/`](docs/README.md) | Technical documentation overview |
+| [`firmware/`](firmware/README.md) | Planned location for ESP32 firmware source code and development instructions |
+| [`test-results/`](test-results/README.md) | Planned location for test records and validation reports |
+| `SYSTEM_ARCHITECTURE.md` | System architecture documentation |
+| `OBSTACLE_AVOIDANCE.md` | Obstacle avoidance documentation |
+| `PROJECT_STATUS.md` | Project status documentation |
+
+**Note:** The firmware and test-results folders currently contain introductory documentation. Add actual source code and test reports when available.
+
+Existing project images, diagrams, and video links remain in their current locations.
 
 This is a proposed structure. Populate folders with actual source files, photos, wiring diagrams, mission screenshots, and test data when available.
 
