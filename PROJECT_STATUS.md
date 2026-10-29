@@ -2,6 +2,7 @@
 
 This document summarizes the current contents and verification status of the Aero Drop drone-delivery project repository. It distinguishes available project documentation and media from firmware, configuration details, and test evidence that have not yet been provided or independently verified.
 
+
 ## Status Summary
 
 | Area | Current Status |
