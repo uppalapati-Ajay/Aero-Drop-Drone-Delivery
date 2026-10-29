@@ -1145,6 +1145,26 @@ The precise build procedure depends on the actual source code, board variant, li
 
 ---
 
+## 🚧 Project Status
+
+Aero Drop is an academic drone-delivery prototype project focused on medical and essential-supply delivery concepts.
+
+### Available in This Repository
+- Project overview and technical documentation
+- System architecture and obstacle-avoidance documentation
+- Prototype photographs, diagrams, and project videos
+- Repository organization and documentation guides
+
+### Planned Repository Additions
+- ESP32 firmware source code and build instructions
+- Detailed test records and validation reports
+- Additional implementation evidence and reproducible setup instructions
+
+### Important Notes
+- Documentation does not by itself establish that every described feature has been implemented or validated.
+- Actual firmware and test evidence will be added when available.
+- Performance claims should be supported by documented measurements and test conditions.
+
 ## 📁 Current Repository Structure
 
 The repository keeps the main project overview, technical documentation, and project media accessible from the root directory. Dedicated folders are provided for documentation, firmware development, and test records.
