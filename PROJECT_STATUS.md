@@ -1,83 +1,173 @@
 
-# Aero Drop — Project Implementation Status
+<div align="center">
 
-## Overview
+# 🚁 AERO DROP
 
-Aero Drop is an academic drone-delivery project focused on the delivery of medical supplies and essential items. This document summarizes the project materials available in the repository and identifies implementation details and test evidence that are not yet included or independently verified.
+### Project Implementation & Engineering Status
 
-## Status Summary
+**SMART DRONE SYSTEM FOR MEDICAL & ESSENTIALS DELIVERY**
 
-| Area | Current Status |
-|---|---|
-| Project overview and technical documentation | Available in repository |
-| System architecture documentation and diagram | Available in repository |
-| Obstacle-avoidance documentation and workflow diagram | Available in repository |
-| Prototype and hardware photographs | Available in repository |
-| Flight-test videos | Available through linked Google Drive videos |
-| ESP32 firmware source code | Not included |
-| Exact hardware pin mapping and UART configuration | Not verified |
-| Dependency versions and reproducible firmware build instructions | Not included |
-| Pixhawk parameter export and validated failsafe configuration | Not included |
-| Raw flight logs and complete numerical test dataset | Not included |
-| Independent verification of performance claims | Not completed |
+[![Project](https://img.shields.io/badge/Project-Aero%20Drop-2563EB?style=for-the-badge)](../)
+[![Domain](https://img.shields.io/badge/Domain-Embedded%20Systems-0F766E?style=for-the-badge)](#-project-overview)
+[![Status](https://img.shields.io/badge/Status-Academic%20Prototype-7C3AED?style=for-the-badge)](#-implementation-dashboard)
 
-## Included in This Repository
+*Documentation • Flight-control concepts • Obstacle sensing • Payload delivery*
 
-- Main project README and technical documentation
+</div>
+
+---
+
+## 📌 Project Overview
+
+Aero Drop is an academic drone-delivery project exploring the delivery of medical supplies and essential items using waypoint navigation, embedded sensing, flight-control hardware, and a servo-operated payload mechanism.
+
+This page summarizes the materials currently available in the repository and separates documented project information from implementation details and test evidence that are not yet available or independently verified.
+
+---
+
+## 📊 Implementation Dashboard
+
+| Engineering Area | Status | Evidence / Notes |
+|---|---|---|
+| 📚 Project documentation | 🟢 Available | Main README and technical documents |
+| 🏗️ System architecture | 🟢 Available | Architecture documentation and diagram |
+| 🛡️ Obstacle avoidance | 🟢 Documented | Workflow diagram and technical document |
+| 📷 Prototype and hardware photos | 🟢 Available | Images in the repository |
+| 🎥 Flight-test media | 🟢 Available | Links to Google Drive videos |
+| 💻 ESP32 firmware source | ⚪ Not included | Source tree has not been uploaded |
+| 🔌 Exact pin mapping and UART settings | 🟡 Not verified | Detailed configuration evidence needed |
+| ⚙️ Reproducible firmware build | ⚪ Not documented | Source, dependencies, and build steps needed |
+| 🧭 Pixhawk parameters and failsafe validation | 🟡 Not verified | Parameter export and validation evidence needed |
+| 📈 Raw telemetry and numerical test dataset | ⚪ Not included | Logs and structured measurements needed |
+| 🧪 Independent performance verification | ⚪ Not completed | Reproducible test evidence needed |
+
+### 🗂️ Status Legend
+
+- 🟢 **Available** — Supporting documentation or media is present.
+- 🟡 **Not verified** — Supporting evidence is insufficient to confirm the implementation or configuration.
+- ⚪ **Not included / not completed** — The relevant source files, records, or validation have not been provided.
+
+> These status indicators are manually maintained descriptions, not automated test results or CI checks.
+
+---
+
+## 📦 What Is Included?
+
+<details>
+<summary><strong>📚 Documentation and engineering references</strong></summary>
+
+- Main project README
 - System architecture documentation
 - Obstacle-avoidance documentation
 - Project status documentation
-- Prototype and hardware photographs
-- Architecture and obstacle-avoidance diagrams
-- Flight-test video links
-- Introductory documentation for the `docs/`, `firmware/`, and `test-results/` folders
+- Supporting diagrams and project explanations
 
-## Not Included or Not Verified
+</details>
 
-The following items should not be considered complete or verified unless supporting files and evidence are added:
+<details>
+<summary><strong>📷 Prototype and demonstration media</strong></summary>
 
-- Complete ESP32 firmware source tree
-- Exact ESP32 GPIO assignments and sensor interface wiring
-- UART configuration and communication settings
-- Required library versions and firmware build instructions
-- Exported Pixhawk parameters and validated failsafe settings
-- Raw flight telemetry logs and a complete numerical test dataset
-- Reproducible test procedures and independently verified performance measurements
+- Prototype photographs
+- Hardware and component photographs
+- System architecture diagram
+- Obstacle-avoidance workflow diagram
+- Flight-test videos linked through Google Drive
 
-## Testing and Validation
+</details>
 
-Prototype photographs and flight-test videos are available as project media. Their availability alone does not establish quantitative performance, successful completion of every autonomous function, or independent validation.
+<details>
+<summary><strong>🗂️ Repository documentation folders</strong></summary>
 
-Future test reports should document, where applicable:
+- `docs/` — Documentation overview
+- `firmware/` — Firmware development placeholder
+- `test-results/` — Test record placeholder
 
-- Test date and location
-- Hardware and software configuration
-- Test objectives and procedure
-- Environmental and operating conditions
-- Measured results and units
-- Observed failures, limitations, and corrective actions
-- Supporting photographs, telemetry logs, or other evidence
+These folders provide organization for future work; their existence does not imply that firmware source or completed test reports are present.
 
-Any reported delivery accuracy, payload capacity, flight time, obstacle-detection range, or other performance measurement should be supported by documented test conditions and actual observations.
+</details>
 
-## Planned Improvements
+---
 
-1. Add the actual ESP32 firmware source code.
-2. Document hardware pin mapping, sensor interfaces, and communication settings.
-3. Provide reproducible build and upload instructions.
-4. Document the relevant Pixhawk parameters and failsafe configuration.
-5. Add test procedures, telemetry logs, and measured results when available.
-6. Distinguish preliminary observations from verified test outcomes.
-7. Update this status document as implementation evidence becomes available.
+## ⚠️ Outstanding Engineering Evidence
 
-## Repository and Publication Notes
+The following items remain outstanding or unverified in the current repository:
 
-The existing root-level documentation, images, diagrams, and media links should remain in their current locations unless their links are updated and verified.
+- [ ] Complete ESP32 firmware source tree
+- [ ] Exact GPIO assignments and sensor interface wiring
+- [ ] UART configuration and communication settings
+- [ ] Dependency versions and reproducible firmware build instructions
+- [ ] Exported Pixhawk parameters and validated failsafe settings
+- [ ] Raw flight telemetry and a structured numerical test dataset
+- [ ] Reproducible test procedures with documented conditions
+- [ ] Independent verification of performance claims
 
-Before publishing additional project materials, review team-member permissions, image and video privacy, licensing requirements, and whether any supplied presentation or document contains material that should remain private.
+A listed item should only be marked complete after the corresponding source files or evidence are available and reviewed.
 
-## Status Disclaimer
+---
 
-This document describes the contents and evidence status of the project repository. It does not claim that undocumented features have been implemented, that firmware builds successfully, or that project performance has been independently verified.
+## 🧪 Testing & Validation Framework
 
-Update this file when new source code, configuration files, or test evidence are added.
+Future test reports should record the following details whenever applicable:
+
+| Test Record | Information to Capture |
+|---|---|
+| 📅 Test identification | Date, location, and test identifier |
+| 🧰 Configuration | Hardware, firmware version, and parameter settings |
+| 🎯 Objective | Feature or behavior being evaluated |
+| 🌦️ Conditions | Environment and operating conditions |
+| 📏 Measurements | Actual values, units, and measurement method |
+| 📝 Observations | Expected behavior, actual behavior, and failures |
+| 📎 Evidence | Photos, telemetry logs, and supporting records |
+
+**Engineering rule:** Photographs and videos demonstrate that media exists; they do not, by themselves, establish quantitative flight performance or independent validation.
+
+---
+
+## 🛣️ Development Roadmap
+
+| Phase | Planned Improvement | Completion Evidence |
+|---|---|---|
+| `01` | 📁 Add ESP32 firmware | Actual source files committed |
+| `02` | 🔌 Document hardware interfaces | Verified pin map and communication settings |
+| `03` | ⚙️ Document build procedure | Dependencies and reproducible build instructions |
+| `04` | 🧭 Record flight-controller configuration | Parameter export and documented failsafe checks |
+| `05` | 📊 Organize test records | Test procedures, logs, and measured results |
+| `06` | 🧪 Validate performance claims | Repeatable tests with documented conditions |
+
+*Roadmap items are planned work, not claims of completed implementation.*
+
+---
+
+## 🔗 Project Documentation
+
+| Resource | Description |
+|---|---|
+| [🏠 Main README](../README.md) | Project overview, gallery, and demonstrations |
+| [🏗️ System Architecture](SYSTEM_ARCHITECTURE.md) | Architecture documentation |
+| [🛡️ Obstacle Avoidance](OBSTACLE_AVOIDANCE.md) | Obstacle-avoidance documentation |
+| [📁 Documentation Folder](docs/README.md) | Documentation overview |
+| [💻 Firmware Folder](firmware/README.md) | Firmware development placeholder |
+| [🧪 Test Results Folder](test-results/README.md) | Test records placeholder |
+
+---
+
+## 🔐 Publication & Safety Checklist
+
+Before releasing additional project materials:
+
+- [ ] Review team-member permissions and attribution.
+- [ ] Check image and video privacy.
+- [ ] Confirm licensing and permissions for supplied documents.
+- [ ] Remove private credentials or sensitive configuration data.
+- [ ] Verify that newly added files and links work.
+- [ ] Ensure that claims match the available implementation and test evidence.
+
+---
+
+<div align="center">
+
+### 🚁 Aero Drop — Build, Document, Validate
+
+*Accurate documentation. Reproducible engineering. Evidence-based results.*
+
+</div>
