@@ -1,6 +1,6 @@
 # Aero Drop — Project Implementation Status
 
-This package was assembled from the user's supplied project process document, two PowerPoint presentations, prototype/component photographs, and flight videos, plus project details previously shared in conversation.
+This document summarizes the current contents and verification status of the Aero Drop drone-delivery project repository. It distinguishes available project documentation and media from firmware, configuration details, and test evidence that have not yet been provided or independently verified.
 
 ## Included
 - README and technical documentation
