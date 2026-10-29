@@ -59,6 +59,8 @@
 
 ## 🌌 Project at a Glance
 
+<p><img src="https://img.shields.io/badge/OVERVIEW-0EA5E9?style=for-the-badge" alt="Overview"/> <img src="https://img.shields.io/badge/NAVIGATION-6366F1?style=for-the-badge" alt="Navigation"/> <img src="https://img.shields.io/badge/SENSING-F97316?style=for-the-badge" alt="Sensing"/> <img src="https://img.shields.io/badge/PAYLOAD-16A34A?style=for-the-badge" alt="Payload"/></p>
+
 ### 🎨 Visual System Map
 
 ```mermaid
@@ -306,6 +308,8 @@ These recordings document practical testing of the drone prototype and its fligh
 
 ## 🔍 How It Works
 
+<p><img src="https://img.shields.io/badge/01%20SENSE-0EA5E9?style=for-the-badge" alt="Sense"/> <img src="https://img.shields.io/badge/02%20DECIDE-F97316?style=for-the-badge" alt="Decide"/> <img src="https://img.shields.io/badge/03%20RESPOND-16A34A?style=for-the-badge" alt="Respond"/> <img src="https://img.shields.io/badge/04%20VERIFY-8B5CF6?style=for-the-badge" alt="Verify"/></p>
+
 ### 1. Sensor Reading
 The ESP32 reads distance measurements from the front, left and right Time-of-Flight (ToF) sensors.
 
@@ -331,6 +335,21 @@ When the obstacle has been cleared, the drone can resume waypoint navigation acc
 
 ## 🔄 Workflow Summary
 
+### 🌈 Five-Step Mission Flow — Visual View
+
+```mermaid
+flowchart LR
+    A["📡 Read sensors"] --> B["🔎 Check threshold"] --> C["🧠 Choose response"] --> D["✅ Verify clearance"] --> E["🧭 Continue mission"]
+    classDef blue fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef orange fill:#ffedd5,stroke:#ea580c,color:#7c2d12,stroke-width:2px;
+    classDef green fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:2px;
+    class A,B blue;
+    class C orange;
+    class D,E green;
+```
+
+
+
 <p align="center">
   <strong>Read Sensor Data</strong>
   &nbsp; ➜ &nbsp;
@@ -347,6 +366,8 @@ When the obstacle has been cleared, the drone can resume waypoint navigation acc
 
 
 # 🌍 Project Overview
+
+<p><img src="https://img.shields.io/badge/PROJECT-AERO%20DROP-0284C7?style=for-the-badge" alt="Aero Drop"/> <img src="https://img.shields.io/badge/FOCUS-EMBEDDED%20SYSTEMS-7C3AED?style=for-the-badge" alt="Embedded systems"/> <img src="https://img.shields.io/badge/TYPE-ACADEMIC%20PROTOTYPE-059669?style=for-the-badge" alt="Academic prototype"/></p>
 
 **Aero Drop** is an academic drone-delivery prototype created to explore the use of autonomous flight and embedded sensing for the transportation of medical supplies and essential items.
 
@@ -492,6 +513,8 @@ flowchart TB
 
 ## Architecture Layers
 
+<p><img src="https://img.shields.io/badge/GROUND%20STATION-2563EB?style=for-the-badge" alt="Ground station"/> <img src="https://img.shields.io/badge/FLIGHT%20CONTROL-7C3AED?style=for-the-badge" alt="Flight control"/> <img src="https://img.shields.io/badge/EMBEDDED%20LOGIC-059669?style=for-the-badge" alt="Embedded logic"/> <img src="https://img.shields.io/badge/TELEMETRY-DB2777?style=for-the-badge" alt="Telemetry"/></p>
+
 ### 🔁 Information and Control Flow
 
 ```mermaid
@@ -558,6 +581,8 @@ The ESP32 web server provides selected information in a browser. It is a develop
 # 🔩 Hardware Components
 
 ## Hardware Summary
+
+<p><img src="https://img.shields.io/badge/FLIGHT%20CONTROL-364FC7?style=for-the-badge" alt="Flight control"/> <img src="https://img.shields.io/badge/EMBEDDED-16A34A?style=for-the-badge" alt="Embedded"/> <img src="https://img.shields.io/badge/SENSORS-F97316?style=for-the-badge" alt="Sensors"/> <img src="https://img.shields.io/badge/POWER-EAB308?style=for-the-badge" alt="Power"/></p>
 
 | Component | Documented specification | Main role |
 |---|---|---|
@@ -738,6 +763,21 @@ Autonomous waypoint navigation does not mean that the aircraft can safely naviga
 
 ## Mission preparation
 
+### 🗺️ Mission Preparation — Checkpoint Map
+
+```mermaid
+flowchart TD
+    A["🔋 Power and hardware checks"] --> B["📡 Connect ground station"] --> C["🗺️ Review waypoint route"] --> D["⚙️ Check mission actions"] --> E["⬆️ Upload and verify"] --> F["👀 Supervised test and telemetry review"]
+    classDef prep fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef verify fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef test fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:2px;
+    class A,B,C prep;
+    class D,E verify;
+    class F test;
+```
+
+
+
 ### 1. Connect the ground station
 
 Connect Mission Planner to the configured flight-controller interface and confirm that telemetry is being received.
@@ -784,6 +824,8 @@ Exact behavior depends on the installed autopilot firmware, parameters, vehicle 
 ---
 
 # 🛡️ Real-Time Obstacle Avoidance
+
+<p><img src="https://img.shields.io/badge/FRONT%20SENSOR-F97316?style=for-the-badge" alt="Front sensor"/> <img src="https://img.shields.io/badge/LEFT%20SENSOR-2563EB?style=for-the-badge" alt="Left sensor"/> <img src="https://img.shields.io/badge/RIGHT%20SENSOR-16A34A?style=for-the-badge" alt="Right sensor"/></p>
 
 ## Why local sensing is included
 
@@ -913,6 +955,8 @@ The feature should be described as local obstacle detection and response, with p
 
 # 📦 Payload Delivery
 
+<p><img src="https://img.shields.io/badge/MECHANISM-SERVO-16A34A?style=for-the-badge" alt="Servo mechanism"/> <img src="https://img.shields.io/badge/PROCESS-CONFIGURE%20%7C%20TEST%20%7C%20VERIFY-0EA5E9?style=for-the-badge" alt="Configure test verify"/></p>
+
 The delivery subsystem consists of a payload box and a servo-operated release mechanism.
 
 ### 📦 Payload Delivery — Sequence Diagram
@@ -1018,6 +1062,17 @@ Sending a command does not prove that the autopilot accepted it or that the airc
 The ESP32-hosted web server presents selected information in a browser.
 
 ## Intended dashboard fields
+
+### 🎨 Dashboard Signal Categories
+
+| Visual group | Example information | Meaning |
+|---|---|---|
+| <img src="https://img.shields.io/badge/FLIGHT-2563EB?style=flat-square" alt="Flight"/> | Flight mode / mission state | Flight-controller status, when available |
+| <img src="https://img.shields.io/badge/SENSORS-F97316?style=flat-square" alt="Sensors"/> | Front / left / right distance | Local distance readings |
+| <img src="https://img.shields.io/badge/LINK-7C3AED?style=flat-square" alt="Link"/> | Communication state | Link status, if implemented |
+| <img src="https://img.shields.io/badge/PAYLOAD-16A34A?style=flat-square" alt="Payload"/> | Release state | Only show if the firmware exposes a verified state |
+
+
 
 | Field | Meaning |
 |---|---|
@@ -1161,6 +1216,8 @@ Exact pin numbers, wire colors, voltages, and connectors are intentionally not i
 
 # 🧪 Testing and Validation
 
+<p><img src="https://img.shields.io/badge/TESTING-BENCH%20%2B%20FIELD-2563EB?style=for-the-badge" alt="Bench and field testing"/> <img src="https://img.shields.io/badge/DATA-REAL%20MEASUREMENTS%20ONLY-F97316?style=for-the-badge" alt="Real measurements only"/> <img src="https://img.shields.io/badge/REPORTING-TRACEABLE%20EVIDENCE-7C3AED?style=for-the-badge" alt="Traceable evidence"/></p>
+
 Project history describes autonomous mission flights, Loiter-mode hovering, obstacle-detection tests, and payload-delivery trials. Previously reported observations include obstacle detection followed by an avoidance response and mission resumption under tested conditions. A delivery deviation of approximately 2–3 metres was also reported.
 
 These observations are preliminary and do not constitute a complete quantitative validation dataset.
@@ -1191,6 +1248,24 @@ flowchart TD
 ```
 
 ### 📈 Results Graphs — Add Real Data Before Plotting
+
+### 🧩 Which Graph Answers Which Question?
+
+```mermaid
+flowchart LR
+    A["📏 Sensor log"] --> B["Accuracy / distance plot"]
+    C["📍 Target + drop coordinates"] --> D["Delivery deviation plot"]
+    E["🔋 Timestamped battery log"] --> F["Voltage / current over time"]
+    G["⏱️ Timestamped ToF log"] --> H["Obstacle response over time"]
+    classDef input fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef plot fill:#f3e8ff,stroke:#9333ea,color:#581c87,stroke-width:2px;
+    class A,C,E,G input;
+    class B,D,F,H plot;
+```
+
+*These are chart-planning links, not measured result charts. Populate plots only after collecting the corresponding data.*
+
+
 
 Aero Drop can be documented with useful engineering plots once measurements are available. Do **not** plot invented values. Recommended graphs:
 
