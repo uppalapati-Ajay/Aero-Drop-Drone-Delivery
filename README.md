@@ -41,6 +41,9 @@
 - [Installation and Reproduction](#-installation-and-reproduction)
 - [Project Team](#-project-team)
 - [Engineering Appendix](#-engineering-appendix-detailed-review-and-verification)
+- [Project Status](#-project-status)
+- [Current Repository Structure](#-current-repository-structure)
+
 
 ---
 
