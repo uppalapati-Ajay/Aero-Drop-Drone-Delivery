@@ -62,6 +62,44 @@
 
 <p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
+<h2 align="center">🎞️ Watch It Work — Live Mission Simulation</h2>
+
+<p align="center"><img src="./aero-drop-mission-live.svg" alt="Animated mission simulation: takeoff, cruise, obstacle detection, avoidance, resume, payload release" width="100%"/></p>
+
+<div align="center">
+
+| 🕒 Phase | 🧭 Pixhawk / GPS | 🧠 ESP32 | 📏 ToF sensors | 📦 Payload |
+|---|---|---|---|---|
+| **1 · Pre-flight** | Mission uploaded and checked in Mission Planner | Boots, starts monitoring page | Readings checked | Secured in box |
+| **2 · Takeoff** | Armed, flight controller manages flight | Streams status | Idle readings | Held by mechanism |
+| **3 · Cruise** | Follows GPS waypoints | Reads sensors continuously | Front / left / right clear | Held |
+| **4 · Obstacle** | Continues to manage the aircraft | Detects distance below threshold | Front reading drops | Held |
+| **5 · Avoid** | Executes supported commands | Chooses clearer direction | Compares side clearance | Held |
+| **6 · Verify & resume** | Returns to waypoint navigation | Re-checks path ahead | Front clear again | Held |
+| **7 · Delivery** | Reaches delivery phase | Shows status | — | Servo releases item |
+| **8 · After flight** | Flight log reviewed | Logs / dashboard reviewed | — | Position and deviation recorded |
+
+<sub>Conceptual walkthrough based on the project description. Real thresholds, commands and timing must come from the actual firmware and tests.</sub>
+
+</div>
+
+### 📋 Quick Facts
+
+| Item | Detail |
+|---|---|
+| 🎓 **Type** | Academic drone-delivery prototype (not a certified commercial platform) |
+| 🧭 **Autopilot / GPS** | Pixhawk 2.4.8 + NEO-8M |
+| 🧠 **Embedded controller** | ESP32 with FreeRTOS tasks |
+| 📏 **Local sensing** | 3 × VL53L0X Time-of-Flight (front, left, right) |
+| 🚁 **Propulsion / power** | EMAX 930KV BLDC motors · ReadyToSky 30A ESCs · 5200 mAh LiPo |
+| 📡 **Communication** | MAVLink telemetry and supported commands |
+| 🌐 **Monitoring** | ESP32-hosted web dashboard, ~500 ms refresh (per project description) |
+| 📦 **Payload** | Servo-operated release; maximum capacity not yet verified |
+| 🎥 **Evidence available** | Photos, diagrams and 6 flight-test videos |
+| 🔜 **Planned additions** | Firmware source, test records, validation reports |
+| 🏫 **Institution** | Sir C. R. Reddy College of Engineering (Autonomous), ECE |
+
+
 ## 🧭 Quick Navigation
 
 - [Project Overview](#-project-overview)
@@ -1087,6 +1125,8 @@ The feature should be described as local obstacle detection and response, with p
 
 The delivery subsystem consists of a payload box and a servo-operated release mechanism.
 
+<p align="center"><img src="./aero-drop-payload.svg" alt="Animated payload release sequence" width="100%"/></p>
+
 ### 📦 Payload Delivery — Sequence Diagram
 
 ```mermaid
@@ -1247,6 +1287,8 @@ The project description identifies five task responsibilities.
 | Avoidance task | Evaluate obstacle conditions and coordinate response | Validity checks, state transitions, safe recovery |
 | Web-server task | Serve the dashboard and system information | Request handling, responsiveness, stale-data display |
 | Serial/debug task | Output diagnostic information | Avoid excessive logging or blocking critical work |
+
+<p align="center"><img src="./aero-drop-tasks.svg" alt="Animated FreeRTOS task interaction map" width="100%"/></p>
 
 ## Why task separation matters
 
@@ -1729,6 +1771,59 @@ These are future possibilities, not claims that the current prototype already im
 - [ ] Record follow-up actions.
 
 <p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
+
+# ❓ Frequently Asked Questions
+
+<p><img src="https://img.shields.io/badge/SECTION-FAQ-0EA5E9?style=flat-square" alt="FAQ"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
+
+<details>
+<summary><b>🚁 What is Aero Drop?</b></summary>
+
+An academic drone-delivery prototype that combines GPS waypoint missions, local distance sensing, embedded decision logic, MAVLink communication, a servo payload release, and a web dashboard.
+</details>
+
+<details>
+<summary><b>🧠 Why is an ESP32 used alongside the Pixhawk?</b></summary>
+
+The Pixhawk handles flight control and navigation. The ESP32 reads the distance sensors, evaluates the obstacle-response logic, exchanges supported messages with the autopilot, and hosts the monitoring page.
+</details>
+
+<details>
+<summary><b>📏 How do the Time-of-Flight sensors work?</b></summary>
+
+A ToF sensor measures distance from the time emitted light takes to return after bouncing off a surface. Three VL53L0X sensors are used for short-range front, left and right clearance.
+</details>
+
+<details>
+<summary><b>🛡️ Does it detect obstacles in every direction?</b></summary>
+
+No. Three sensors cover three directions only, with limited range. The project does not claim full 360-degree detection. See **Known Limitations**.
+</details>
+
+<details>
+<summary><b>📦 How much can it carry, and how accurate is delivery?</b></summary>
+
+Maximum payload and delivery accuracy are **not verified** in the available records. They should only be quoted after repeated, documented tests.
+</details>
+
+<details>
+<summary><b>🏭 Is this a commercial delivery product?</b></summary>
+
+No. It is an academic prototype for demonstration and controlled experimentation, not a certified platform or a guarantee of safe operation in uncontrolled environments.
+</details>
+
+<details>
+<summary><b>💾 Where is the firmware and test data?</b></summary>
+
+ESP32 firmware source, detailed test records and validation reports are listed under **Planned Repository Additions**. The `firmware/` and `test-results/` folders currently hold introductory documentation.
+</details>
+
+<details>
+<summary><b>🎥 Where can I see it flying?</b></summary>
+
+See **Flight Test Videos** for six recordings hosted on Google Drive, plus the field-testing photos.
+</details>
+
 
 # 🏁 Conclusion
 
