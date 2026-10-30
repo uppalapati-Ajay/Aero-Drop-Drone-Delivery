@@ -1,7 +1,7 @@
 <a id="top"></a>
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=230&section=header&text=AERO%20DROP&fontSize=72&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Smart%20Drone%20System%20for%20Medical%20%26%20Essentials%20Delivery&descSize=20&descAlignY=58" alt="Aero Drop banner" width="100%"/>
+<img src="./aero-drop-banner.svg" alt="Aero Drop banner" width="100%"/>
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=3200&pause=900&color=0EA5E9&center=true&vCenter=true&width=760&lines=%F0%9F%9B%B0%EF%B8%8F+Autonomous+Waypoint+Navigation;%F0%9F%9B%A1%EF%B8%8F+Embedded+Obstacle+Response+with+3+%C3%97+ToF+Sensors;%F0%9F%93%A6+Servo-Operated+Payload+Release;%F0%9F%93%A1+ESP32+%2B+Pixhawk+%2B+MAVLink+Telemetry;%F0%9F%8C%90+Live+ESP32+Web+Dashboard" alt="Typing animation"/>
 
@@ -43,20 +43,7 @@
 
 ### 📊 Project Dashboard
 
-<table>
-<tr>
-<td align="center" width="25%"><h1>3</h1><b>🛡️ ToF Sensors</b><br/><sub>Front · Left · Right</sub></td>
-<td align="center" width="25%"><h1>5</h1><b>🔄 Step Avoidance Flow</b><br/><sub>Sense → Resume</sub></td>
-<td align="center" width="25%"><h1>6</h1><b>🎬 Flight Test Videos</b><br/><sub>Hosted on Google Drive</sub></td>
-<td align="center" width="25%"><h1>~500 ms</h1><b>🌐 Dashboard Refresh</b><br/><sub>Per project description</sub></td>
-</tr>
-<tr>
-<td align="center"><h1>5200</h1><b>🔋 mAh LiPo</b><br/><sub>Main power source</sub></td>
-<td align="center"><h1>930 KV</h1><b>🌀 EMAX BLDC Motors</b><br/><sub>Propulsion</sub></td>
-<td align="center"><h1>30 A</h1><b>🎛️ ReadyToSky ESCs</b><br/><sub>Motor-speed control</sub></td>
-<td align="center"><h1>2.4.8</h1><b>🧠 Pixhawk</b><br/><sub>Flight controller</sub></td>
-</tr>
-</table>
+<img src="./aero-drop-stats.svg" alt="Aero Drop project dashboard: 3 ToF sensors, 5-step avoidance flow, 6 flight videos, ~500 ms refresh, 5200 mAh battery, 930KV motors, 30A ESCs, Pixhawk 2.4.8" width="100%"/>
 
 ### 🧩 Subsystems at a Glance
 
@@ -73,7 +60,7 @@
 
 </div>
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## 🧭 Quick Navigation
 
@@ -99,7 +86,7 @@
 - [Current Repository Structure](#-current-repository-structure)
 
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 
 <h2 align="center">🛰️ Aero Drop — System Architecture</h2>
@@ -178,7 +165,7 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 > [!IMPORTANT]
 > **Evidence note:** This repository describes the project based on the available project material. Exact firmware behavior, measured performance, payload capacity, wiring, and build configuration must be verified against the actual implementation. Unknown values are marked as unverified instead of being guessed.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 
 
@@ -227,7 +214,7 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 
 
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## 🎬 Flight Demonstration
 
@@ -237,7 +224,7 @@ The project includes six flight-test recordings hosted on Google Drive. Use the 
 > **Video access:** Each recording must be shared as **Anyone with the link — Viewer** for visitors to open it. GitHub README pages do not reliably embed Google Drive video players, so the links open the videos in Google Drive.
 
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 <h2 align="center">⚙️ Hardware Components</h2>
 
@@ -288,7 +275,7 @@ The project includes six flight-test recordings hosted on Google Drive. Use the 
 > **Note:** Confirm the component list and exact connections against your actual prototype before using this table as a technical specification.
 
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 <h2 align="center">🧭 Obstacle Avoidance Workflow</h2>
 
@@ -302,7 +289,7 @@ The project includes six flight-test recordings hosted on Google Drive. Use the 
        width="100%">
 </p>
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 <h2 align="center">🛫 Field Testing & Outdoor Demonstration</h2>
 
@@ -361,7 +348,7 @@ These recordings document practical testing of the drone prototype and its fligh
 - Click **Watch Video** to open the corresponding recording.
 - For public access, set each video's sharing permission to **Anyone with the link — Viewer**.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 **Project:** Aero Drop – Smart Drone Delivery System  
 **Purpose:** Prototype development and flight testing for a drone-based delivery system.
@@ -525,7 +512,7 @@ The prototype is intended for academic demonstration and controlled experimentat
 
 It is **not represented as a certified commercial delivery platform** or as a guarantee of safe operation in uncontrolled environments.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🧩 Problem Statement
 
@@ -560,7 +547,7 @@ The project addresses the following design questions:
 - Organize embedded activities into tasks as described by the FreeRTOS-based design.
 - Document the evidence needed to measure repeatability, delivery deviation, payload capability, and flight endurance.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # ✨ What Makes Aero Drop Special?
 
@@ -596,7 +583,7 @@ The project creates concrete areas for validation: sensor range, threshold behav
 <tr><td>FreeRTOS task design</td><td>Separation of embedded activities</td><td>Task definitions and timing notes</td></tr>
 </table>
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🏗️ System Architecture
 
@@ -697,7 +684,7 @@ The propulsion system is driven through the flight controller and ESCs. The serv
 
 The ESP32 web server provides selected information in a browser. It is a development and monitoring aid, not a replacement for a safety system or pilot-control interface.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🔩 Hardware Components
 
@@ -858,7 +845,7 @@ The frame supports the flight controller, battery, motors, sensors, payload mech
 
 Inspect the frame for cracks, loose fasteners, sensor movement, and payload interference. Never handle spinning propellers during powered tests.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 💻 Software and Technologies
 
@@ -876,7 +863,7 @@ Inspect the frame for cracks, loose fasteners, sensor movement, and payload inte
 
 The exact ESP32 framework, source files, libraries, software versions, and build procedure must be documented from the actual implementation. This README does not assume a particular framework or invent library versions.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🗺️ Autonomous Navigation with Mission Planner
 
@@ -948,7 +935,7 @@ Compare the actual flight with the planned route and record any deviations, warn
 
 Exact behavior depends on the installed autopilot firmware, parameters, vehicle setup, and telemetry configuration.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🛡️ Real-Time Obstacle Avoidance
 
@@ -1080,7 +1067,7 @@ Three directional ToF sensors do not provide full 360-degree coverage or a compl
 
 The feature should be described as local obstacle detection and response, with performance verified through controlled testing.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 📦 Payload Delivery
 
@@ -1157,7 +1144,7 @@ The project history includes a previously reported delivery deviation of approxi
 
 Recommended records include the intended target, actual delivery position, measurement method, payload mass, GPS conditions, and number of trials.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 📡 MAVLink Communication
 
@@ -1188,7 +1175,7 @@ MAVLink is used by many autopilot systems to exchange telemetry and commands. In
 
 Sending a command does not prove that the autopilot accepted it or that the aircraft performed the requested action. Verify command handling through supported acknowledgements and actual state feedback.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🌐 ESP32 Web Dashboard
 
@@ -1235,7 +1222,7 @@ The documented page-refresh interval is approximately **500 ms**. This describes
 
 The dashboard can help developers observe sensor values and reported flight status during tests. It should clearly distinguish current values from stale or invalid values and should not be treated as a safety-critical pilot interface unless it has been designed and validated for that purpose.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # ⚙️ FreeRTOS Task Design
 
@@ -1279,7 +1266,7 @@ Separating communication, sensor acquisition, decision logic, web serving, and d
 
 Actual real-time behavior depends on task priorities, execution time, stack allocation, shared-data protection, and interface behavior. The final repository should document those details from the actual source code rather than assuming default values.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🔄 End-to-End Mission Workflow
 
@@ -1312,7 +1299,7 @@ flowchart TD
 
 This flowchart describes the intended concept, not a guarantee of the exact firmware state machine. The implementation may abort or follow a different transition when faults or safety conditions occur.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🔌 Electrical and Mechanical Integration
 
@@ -1353,7 +1340,7 @@ This flowchart describes the intended concept, not a guarantee of the exact firm
 
 Exact pin numbers, wire colors, voltages, and connectors are intentionally not invented here. Add them only after checking the actual build.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🧪 Testing and Validation
 
@@ -1462,7 +1449,7 @@ For every test, record:
 
 Do not publish a sensor success rate, payload capacity, flight duration, avoidance success percentage, or delivery-accuracy guarantee unless the value is supported by a recorded measurement and a clearly described test method.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # ⚠️ Known Limitations
 
@@ -1479,7 +1466,7 @@ Do not publish a sensor success rate, payload capacity, flight duration, avoidan
 9. **Incomplete quantitative dataset:** The available information does not establish comprehensive performance statistics.
 10. **Prototype status:** The system is an academic prototype, not a certified delivery platform.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🛡️ Safety Considerations
 
@@ -1497,7 +1484,7 @@ Do not publish a sensor success rate, payload capacity, flight duration, avoidan
 - Define a safe response for invalid sensor readings and communication loss.
 - Do not rely on the web dashboard as a safety-critical control interface.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🛠️ Installation and Reproduction
 
@@ -1540,10 +1527,10 @@ The precise build procedure depends on the actual source code, board variant, li
 
 **Build status:** Do not claim reproducible firmware compilation until the real source code and tested build instructions are included.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## 🚧 Project Status
 
@@ -1608,7 +1595,7 @@ Existing project images, diagrams, and video links remain in their current locat
 
 This is a proposed structure. Populate folders with actual source files, photos, wiring diagrams, mission screenshots, and test data when available.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🚀 Future Enhancements
 
@@ -1649,7 +1636,7 @@ flowchart LR
 
 These are future possibilities, not claims that the current prototype already implements them.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 👥 Project Team
 
@@ -1668,7 +1655,7 @@ These are future possibilities, not claims that the current prototype already im
 | S. Venkata Srikanth | `22B81A04G0` |
 | T. Sai Ganesh | `22B81A04H0` |
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 📖 Glossary
 
@@ -1689,7 +1676,7 @@ These are future possibilities, not claims that the current prototype already im
 | ToF | Time of Flight |
 | Waypoint | Geographic position used as part of a planned route |
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # ✅ Engineering Checklists
 
@@ -1731,7 +1718,7 @@ These are future possibilities, not claims that the current prototype already im
 - [ ] Document pass, fail, or inconclusive outcomes.
 - [ ] Record follow-up actions.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🏁 Conclusion
 
@@ -1751,7 +1738,7 @@ The next stage is to strengthen reproducibility and evidence: include the real f
 </div>
 
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 # 🧰 Engineering Appendix: Detailed Review and Verification
 
@@ -1827,7 +1814,7 @@ Create one configuration record for every tested aircraft setup.
 - [ ] Flight log can be matched to this test.
 - [ ] No credentials or private network secrets are included in public files.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## B. Sensor Validation Protocol
 
@@ -1875,7 +1862,7 @@ Set acceptance criteria before running the test. Do not choose a tolerance after
 - Decision:
 - Evidence file:
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## C. Obstacle-Response Test Protocol
 
@@ -1936,7 +1923,7 @@ A logic decision is not the same as a successful physical maneuver. Record separ
 - Loss of telemetry during the response.
 - Mission resumption while the obstacle remains present.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## D. Mission Planner Review Protocol
 
@@ -1972,7 +1959,7 @@ A logic decision is not the same as a successful physical maneuver. Record separ
 | Test notes | Add filename | Yes/No |
 | Delivery measurement | Add filename | Yes/No |
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## E. Payload Release Validation
 
@@ -2008,7 +1995,7 @@ If coordinates are used, document how the distance was calculated and the qualit
 ### E.4 Release reliability
 A single successful release does not establish a reliable release rate. Record each attempt, including unsuccessful and inconclusive attempts, and describe the number of trials.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## F. Battery and Endurance Test Record
 
@@ -2045,7 +2032,7 @@ A single successful release does not establish a reliable release rate. Record e
 ### F.4 Reporting
 Report endurance with the configuration and conditions. Do not present one flight duration as a universal value for every payload, battery condition, or environment.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## G. Telemetry and Dashboard Validation
 
@@ -2073,7 +2060,7 @@ The project description records an approximately 500 ms web-page refresh interva
 - [ ] Serial interface interruption.
 - [ ] Recovery after communication returns.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## H. Firmware Review Checklist
 
@@ -2110,7 +2097,7 @@ The project description records an approximately 500 ms web-page refresh interva
 
 Fill these values from the actual source code and verified tests. Do not infer them from this documentation template.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## I. Release Checklist for the GitHub Repository
 
@@ -2142,7 +2129,7 @@ Fill these values from the actual source code and verified tests. Do not infer t
 - [ ] Do not claim a successful build if the source has not been compiled.
 - [ ] Distinguish designed behavior from observed behavior.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## J. Viva and Technical Discussion Preparation
 
@@ -2198,7 +2185,7 @@ These questions can help explain the design during a project review. Answers sho
 5. What are the known limitations?
 6. What would be the next improvement?
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## K. Evidence Inventory
 
@@ -2215,7 +2202,7 @@ Keep an inventory of every image, log, video, mission file, and measurement used
 
 Only assign an evidence ID after the corresponding artifact has been added and checked.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## L. Project Status Definitions
 
@@ -2246,7 +2233,7 @@ flowchart LR
 
 These labels prevent planned functionality from being confused with verified performance.
 
-<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
+<p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
 ## M. Final Documentation Quality Gate
 
@@ -2278,6 +2265,6 @@ Before sharing the repository with a supervisor, recruiter, or reviewer:
 
 <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86%EF%B8%8F-BACK%20TO%20TOP-334155?style=for-the-badge" alt="Back to top"/></a>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=150&section=footer" alt="footer" width="100%"/>
+<img src="./aero-drop-footer.svg" alt="Aero Drop footer" width="100%"/>
 
 </div>
