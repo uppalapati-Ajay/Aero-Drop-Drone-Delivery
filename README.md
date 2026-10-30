@@ -406,6 +406,8 @@ stateDiagram-v2
 
 ## 🔄 Workflow Summary
 
+<p align="center"><img src="./aero-drop-flow.svg" alt="Animated five-step mission flow" width="100%"/></p>
+
 ### 🌈 Five-Step Mission Flow — Visual View
 
 ```mermaid
@@ -553,6 +555,8 @@ The project addresses the following design questions:
 
 <p><img src="https://img.shields.io/badge/SECTION-HIGHLIGHTS-D97706?style=flat-square" alt="HIGHLIGHTS"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
+<p align="center"><img src="./aero-drop-special.svg" alt="Five reasons Aero Drop is special" width="100%"/></p>
+
 ## 1. A combined flight-and-embedded architecture
 
 The project does not treat the flight controller and ESP32 as interchangeable. The autopilot handles its configured flight-control functions, while the ESP32 subsystem is intended to handle local distance sensing, decision logic, communication, and monitoring.
@@ -618,6 +622,8 @@ flowchart TB
     SERVO --> BOX
     ESP --> WEB
 ```
+
+<p align="center"><img src="./aero-drop-architecture.svg" alt="Animated Aero Drop system architecture" width="100%"/></p>
 
 ## Architecture Layers
 
@@ -689,6 +695,8 @@ The ESP32 web server provides selected information in a browser. It is a develop
 # 🔩 Hardware Components
 
 <p><img src="https://img.shields.io/badge/SECTION-HARDWARE-EAB308?style=flat-square" alt="HARDWARE"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
+
+<p align="center"><img src="./aero-drop-hardware.svg" alt="Aero Drop hardware cards" width="100%"/></p>
 
 ## Hardware Summary
 
@@ -942,6 +950,8 @@ Exact behavior depends on the installed autopilot firmware, parameters, vehicle 
 <p><img src="https://img.shields.io/badge/SECTION-SENSING-F97316?style=flat-square" alt="SENSING"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 <p><img src="https://img.shields.io/badge/FRONT%20SENSOR-F97316?style=for-the-badge" alt="Front sensor"/> <img src="https://img.shields.io/badge/LEFT%20SENSOR-2563EB?style=for-the-badge" alt="Left sensor"/> <img src="https://img.shields.io/badge/RIGHT%20SENSOR-16A34A?style=for-the-badge" alt="Right sensor"/></p>
+
+<p align="center"><img src="./aero-drop-sensors.svg" alt="Top-down view of front, left and right ToF sensor cones" width="100%"/></p>
 
 ## Why local sensing is included
 
