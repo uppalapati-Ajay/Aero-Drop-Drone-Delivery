@@ -1,3 +1,12 @@
+<a id="top"></a>
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=230&section=header&text=AERO%20DROP&fontSize=72&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Smart%20Drone%20System%20for%20Medical%20%26%20Essentials%20Delivery&descSize=20&descAlignY=58" alt="Aero Drop banner" width="100%"/>
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=3200&pause=900&color=0EA5E9&center=true&vCenter=true&width=760&lines=%F0%9F%9B%B0%EF%B8%8F+Autonomous+Waypoint+Navigation;%F0%9F%9B%A1%EF%B8%8F+Embedded+Obstacle+Response+with+3+%C3%97+ToF+Sensors;%F0%9F%93%A6+Servo-Operated+Payload+Release;%F0%9F%93%A1+ESP32+%2B+Pixhawk+%2B+MAVLink+Telemetry;%F0%9F%8C%90+Live+ESP32+Web+Dashboard" alt="Typing animation"/>
+
+</div>
+
 <div align="center">
 
 # 🚁 A E R O  D R O P
@@ -19,7 +28,52 @@
 
 </div>
 
----
+<div align="center">
+
+<p>
+  <img src="https://img.shields.io/badge/ESP32-Embedded%20Controller-E7352C?style=flat-square&logo=espressif&logoColor=white" alt="ESP32"/>
+  <img src="https://img.shields.io/badge/Pixhawk-2.4.8-364FC7?style=flat-square" alt="Pixhawk"/>
+  <img src="https://img.shields.io/badge/ArduPilot-Mission%20Planner-0B6E99?style=flat-square&logo=ardupilot&logoColor=white" alt="Mission Planner"/>
+  <img src="https://img.shields.io/badge/MAVLink-Telemetry-0EA5E9?style=flat-square" alt="MAVLink"/>
+  <img src="https://img.shields.io/badge/FreeRTOS-Tasks-16A34A?style=flat-square" alt="FreeRTOS"/>
+  <img src="https://img.shields.io/badge/VL53L0X-ToF%20Ranging-F97316?style=flat-square" alt="VL53L0X"/>
+  <img src="https://img.shields.io/badge/NEO--8M-GPS-7C3AED?style=flat-square" alt="NEO-8M GPS"/>
+  <img src="https://img.shields.io/badge/Web-Dashboard-9333EA?style=flat-square&logo=html5&logoColor=white" alt="Web dashboard"/>
+</p>
+
+### 📊 Project Dashboard
+
+<table>
+<tr>
+<td align="center" width="25%"><h1>3</h1><b>🛡️ ToF Sensors</b><br/><sub>Front · Left · Right</sub></td>
+<td align="center" width="25%"><h1>5</h1><b>🔄 Step Avoidance Flow</b><br/><sub>Sense → Resume</sub></td>
+<td align="center" width="25%"><h1>6</h1><b>🎬 Flight Test Videos</b><br/><sub>Hosted on Google Drive</sub></td>
+<td align="center" width="25%"><h1>~500 ms</h1><b>🌐 Dashboard Refresh</b><br/><sub>Per project description</sub></td>
+</tr>
+<tr>
+<td align="center"><h1>5200</h1><b>🔋 mAh LiPo</b><br/><sub>Main power source</sub></td>
+<td align="center"><h1>930 KV</h1><b>🌀 EMAX BLDC Motors</b><br/><sub>Propulsion</sub></td>
+<td align="center"><h1>30 A</h1><b>🎛️ ReadyToSky ESCs</b><br/><sub>Motor-speed control</sub></td>
+<td align="center"><h1>2.4.8</h1><b>🧠 Pixhawk</b><br/><sub>Flight controller</sub></td>
+</tr>
+</table>
+
+### 🧩 Subsystems at a Glance
+
+| | Subsystem | Key hardware / tool | Role |
+|:-:|---|---|---|
+| 🗺️ | **Mission planning** | Mission Planner | Waypoints, supported mission actions, telemetry observation |
+| 🧭 | **Navigation & flight control** | Pixhawk 2.4.8 + NEO-8M GPS | Autopilot, GPS-assisted waypoint flight |
+| 📏 | **Local sensing** | 3 × VL53L0X (ToF) | Front / left / right short-range clearance |
+| 🧠 | **Embedded logic** | ESP32 (FreeRTOS tasks) | Obstacle-response decisions, supported MAVLink exchange |
+| 📦 | **Payload release** | Servo + payload box | Release of the carried item at the configured stage |
+| 🌐 | **Monitoring** | ESP32-hosted web page | Selected flight status and sensor information |
+
+<sub>⚠️ Figures are taken from the project description. Confirm them against the real build before using them as specifications.</sub>
+
+</div>
+
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
 
 ## 🧭 Quick Navigation
 
@@ -45,7 +99,7 @@
 - [Current Repository Structure](#-current-repository-structure)
 
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
 
 
 <h2 align="center">🛰️ Aero Drop — System Architecture</h2>
@@ -82,6 +136,7 @@ flowchart LR
     class F,G monitor;
 ```
 
+> [!TIP]
 > **Diagram key:** Blue = mission/navigation, green = aircraft actuation, orange = sensing/embedded logic, purple = communication/monitoring. This is a conceptual overview; actual wiring and message paths must be checked against the build.
 
 
@@ -120,9 +175,10 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 </tr>
 </table>
 
+> [!IMPORTANT]
 > **Evidence note:** This repository describes the project based on the available project material. Exact firmware behavior, measured performance, payload capacity, wiring, and build configuration must be verified against the actual implementation. Unknown values are marked as unverified instead of being guessed.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
 
 
 
@@ -171,16 +227,17 @@ An ESP32-hosted web dashboard displays selected flight status and sensor informa
 
 
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
 
 ## 🎬 Flight Demonstration
 
 The project includes six flight-test recordings hosted on Google Drive. Use the links in the [Flight Test Videos section](#-flight-test-videos) to open each recording.
 
+> [!NOTE]
 > **Video access:** Each recording must be shared as **Anyone with the link — Viewer** for visitors to open it. GitHub README pages do not reliably embed Google Drive video players, so the links open the videos in Google Drive.
 
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
 
 <h2 align="center">⚙️ Hardware Components</h2>
 
@@ -218,19 +275,20 @@ The project includes six flight-test recordings hosted on Google Drive. Use the 
 
 | Component | Purpose |
 |---|---|
-| Pixhawk 2.4.8 | Flight control and mission execution |
-| NEO-8M GPS | Positioning and waypoint navigation |
-| ESP32 | Companion subsystem and sensor processing |
-| VL53L0X ToF sensors | Short-range obstacle distance measurement |
-| BLDC motors and ESCs | Drone propulsion and motor speed control |
-| Servo motor | Payload release mechanism |
-| LiPo battery | Main power source |
-| Payload box | Carries the delivery item |
+| 🧠 Pixhawk 2.4.8 | Flight control and mission execution |
+| 🛰️ NEO-8M GPS | Positioning and waypoint navigation |
+| ⚡ ESP32 | Companion subsystem and sensor processing |
+| 📏 VL53L0X ToF sensors | Short-range obstacle distance measurement |
+| 🌀 BLDC motors and ESCs | Drone propulsion and motor speed control |
+| 🦾 Servo motor | Payload release mechanism |
+| 🔋 LiPo battery | Main power source |
+| 📦 Payload box | Carries the delivery item |
 
+> [!NOTE]
 > **Note:** Confirm the component list and exact connections against your actual prototype before using this table as a technical specification.
 
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
 
 <h2 align="center">🧭 Obstacle Avoidance Workflow</h2>
 
@@ -244,7 +302,7 @@ The project includes six flight-test recordings hosted on Google Drive. Use the 
        width="100%">
 </p>
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
 
 <h2 align="center">🛫 Field Testing & Outdoor Demonstration</h2>
 
@@ -279,6 +337,9 @@ The project includes six flight-test recordings hosted on Google Drive. Use the 
 
 ## 🎥 Flight Test Videos
 
+<p align="center"><img src="https://img.shields.io/badge/FLIGHT%20TESTS-6%20RECORDINGS-E7352C?style=for-the-badge&logo=googledrive&logoColor=white" alt="6 recordings"/> <img src="https://img.shields.io/badge/HOSTED%20ON-GOOGLE%20DRIVE-4285F4?style=for-the-badge" alt="Google Drive"/></p>
+
+
 The following videos demonstrate the prototype development and flight testing of the **Aero Drop – Smart Drone Delivery System**.
 
 These recordings document practical testing of the drone prototype and its flight demonstrations.
@@ -287,12 +348,12 @@ These recordings document practical testing of the drone prototype and its fligh
 
 | S. No. | Video | Watch |
 |---|---|---|
-| 1 | Flight Test 01 | [▶️ Watch Video](https://drive.google.com/file/d/1Fbjw1Pz-1gFRTSq7l7yDvbrRSLIZA7hu/view) |
-| 2 | Flight Test 02 | [▶️ Watch Video](https://drive.google.com/file/d/1XUPTdHZIBxy2QSfTNEFAJBH4Ilrn7chb/view) |
-| 3 | Flight Test 03 | [▶️ Watch Video](https://drive.google.com/file/d/1R1NiR6lLr082Um87en-610RGrQzF2w-g/view) |
-| 4 | Flight Test 04 | [▶️ Watch Video](https://drive.google.com/file/d/1Xy7SSq4uWVLR5EgGfu1jIaB7Bxmt4zyw/view) |
-| 5 | Flight Test 05 | [▶️ Watch Video](https://drive.google.com/file/d/13YNOyZcHwFSxX8AI5emh71bFJl_IKPMD/view) |
-| 6 | Flight Test 06 | [▶️ Watch Video](https://drive.google.com/file/d/1_g-dzM5s7iTkPrZjr3yRnYVc7PUF2DuK/view) |
+| 1 | 🎬 Flight Test 01 | [▶️ Watch Video](https://drive.google.com/file/d/1Fbjw1Pz-1gFRTSq7l7yDvbrRSLIZA7hu/view) |
+| 2 | 🎬 Flight Test 02 | [▶️ Watch Video](https://drive.google.com/file/d/1XUPTdHZIBxy2QSfTNEFAJBH4Ilrn7chb/view) |
+| 3 | 🎬 Flight Test 03 | [▶️ Watch Video](https://drive.google.com/file/d/1R1NiR6lLr082Um87en-610RGrQzF2w-g/view) |
+| 4 | 🎬 Flight Test 04 | [▶️ Watch Video](https://drive.google.com/file/d/1Xy7SSq4uWVLR5EgGfu1jIaB7Bxmt4zyw/view) |
+| 5 | 🎬 Flight Test 05 | [▶️ Watch Video](https://drive.google.com/file/d/13YNOyZcHwFSxX8AI5emh71bFJl_IKPMD/view) |
+| 6 | 🎬 Flight Test 06 | [▶️ Watch Video](https://drive.google.com/file/d/1_g-dzM5s7iTkPrZjr3yRnYVc7PUF2DuK/view) |
 
 ### 🔗 Video Access
 
@@ -300,7 +361,7 @@ These recordings document practical testing of the drone prototype and its fligh
 - Click **Watch Video** to open the corresponding recording.
 - For public access, set each video's sharing permission to **Anyone with the link — Viewer**.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
 
 **Project:** Aero Drop – Smart Drone Delivery System  
 **Purpose:** Prototype development and flight testing for a drone-based delivery system.
@@ -310,28 +371,51 @@ These recordings document practical testing of the drone prototype and its fligh
 
 <p><img src="https://img.shields.io/badge/01%20SENSE-0EA5E9?style=for-the-badge" alt="Sense"/> <img src="https://img.shields.io/badge/02%20DECIDE-F97316?style=for-the-badge" alt="Decide"/> <img src="https://img.shields.io/badge/03%20RESPOND-16A34A?style=for-the-badge" alt="Respond"/> <img src="https://img.shields.io/badge/04%20VERIFY-8B5CF6?style=for-the-badge" alt="Verify"/></p>
 
-### 1. Sensor Reading
+### 📡 1. Sensor Reading
 The ESP32 reads distance measurements from the front, left and right Time-of-Flight (ToF) sensors.
 
-### 2. Obstacle Detection
+### 🔎 2. Obstacle Detection
 The sensor readings are checked against the configured distance threshold to determine whether an obstacle is nearby.
 
-### 3. Path Adjustment
+### 🧭 3. Path Adjustment
 When an obstacle is detected, the avoidance logic evaluates the available clearance and selects a direction according to the implemented control logic.
 
-### 4. Path Verification
+### ✅ 4. Path Verification
 The sensors are checked again to assess whether the path ahead is clear.
 
-### 5. Mission Resumption
+### 🏁 5. Mission Resumption
 When the obstacle has been cleared, the drone can resume waypoint navigation according to the implemented flight-control logic.
+
+
+### 🧠 Behaviour View — Obstacle-Response State Diagram
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> Navigating: Waypoint mission
+    Navigating --> Sensing: Read front / left / right ToF
+    Sensing --> Navigating: Path clear
+    Sensing --> Avoiding: Distance below threshold
+    Avoiding --> Verifying: Direction selected
+    Verifying --> Avoiding: Still blocked
+    Verifying --> Resuming: Path clear
+    Resuming --> Navigating: Continue mission
+    classDef ok fill:#d1fae5,stroke:#059669,color:#064e3b
+    classDef warn fill:#ffedd5,stroke:#ea580c,color:#7c2d12
+    class Navigating,Resuming ok
+    class Avoiding,Verifying warn
+```
+
+> [!NOTE]
+> This state view is a conceptual illustration of the five steps above, not a record of the exact firmware states.
 
 ## ✨ Key Features
 
-- Real-time distance measurements from ToF sensors
-- Front, left and right obstacle sensing
-- Threshold-based obstacle detection
-- Sensor-guided avoidance decisions
-- Integration with waypoint-based mission navigation
+- 📏 Real-time distance measurements from ToF sensors
+- 👀 Front, left and right obstacle sensing
+- 🚧 Threshold-based obstacle detection
+- 🧠 Sensor-guided avoidance decisions
+- 🗺️ Integration with waypoint-based mission navigation
 
 ## 🔄 Workflow Summary
 
@@ -362,10 +446,13 @@ flowchart LR
   <strong>Resume Mission</strong>
 </p>
 
+> [!WARNING]
 > **Engineering note:** This workflow is a conceptual explanation. Verify the sensor thresholds, movement commands, and mission-resumption behavior against your actual firmware before describing them as confirmed implementation details.
 
 
 # 🌍 Project Overview
+
+<p><img src="https://img.shields.io/badge/SECTION-OVERVIEW-0284C7?style=flat-square" alt="OVERVIEW"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 <p><img src="https://img.shields.io/badge/PROJECT-AERO%20DROP-0284C7?style=for-the-badge" alt="Aero Drop"/> <img src="https://img.shields.io/badge/FOCUS-EMBEDDED%20SYSTEMS-7C3AED?style=for-the-badge" alt="Embedded systems"/> <img src="https://img.shields.io/badge/TYPE-ACADEMIC%20PROTOTYPE-059669?style=for-the-badge" alt="Academic prototype"/></p>
 
@@ -387,6 +474,34 @@ The project therefore brings several engineering areas into one demonstrator:
 - Web-based embedded monitoring.
 - Task separation using FreeRTOS, as described in the project material.
 - Test planning, observation, and documentation.
+
+
+### 🗺️ Project Mind Map
+
+```mermaid
+mindmap
+  root((🚁 Aero Drop))
+    🛰️ Flight
+      Pixhawk 2.4.8
+      NEO-8M GPS
+      Mission Planner
+    🧠 Embedded
+      ESP32
+      FreeRTOS tasks
+      Web dashboard
+    📏 Sensing
+      3 × VL53L0X
+      Front / Left / Right
+    📦 Payload
+      Servo release
+      Payload box
+    📡 Communication
+      MAVLink
+      Telemetry
+    🧪 Evidence
+      Testing
+      Documentation
+```
 
 ## 🎯 The Engineering Challenge
 
@@ -410,9 +525,11 @@ The prototype is intended for academic demonstration and controlled experimentat
 
 It is **not represented as a certified commercial delivery platform** or as a guarantee of safe operation in uncontrolled environments.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
 
 # 🧩 Problem Statement
+
+<p><img src="https://img.shields.io/badge/SECTION-PROBLEM-DC2626?style=flat-square" alt="PROBLEM"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 Moving small essential items to locations that are difficult to access can create logistical challenges. A drone may provide a useful research platform for exploring faster or more flexible transport, but a delivery drone must coordinate multiple systems.
 
@@ -443,9 +560,11 @@ The project addresses the following design questions:
 - Organize embedded activities into tasks as described by the FreeRTOS-based design.
 - Document the evidence needed to measure repeatability, delivery deviation, payload capability, and flight endurance.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
 
 # ✨ What Makes Aero Drop Special?
+
+<p><img src="https://img.shields.io/badge/SECTION-HIGHLIGHTS-D97706?style=flat-square" alt="HIGHLIGHTS"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 ## 1. A combined flight-and-embedded architecture
 
@@ -477,9 +596,11 @@ The project creates concrete areas for validation: sensor range, threshold behav
 <tr><td>FreeRTOS task design</td><td>Separation of embedded activities</td><td>Task definitions and timing notes</td></tr>
 </table>
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
 
 # 🏗️ System Architecture
+
+<p><img src="https://img.shields.io/badge/SECTION-ARCHITECTURE-364FC7?style=flat-square" alt="ARCHITECTURE"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 ```mermaid
 flowchart TB
@@ -576,9 +697,11 @@ The propulsion system is driven through the flight controller and ESCs. The serv
 
 The ESP32 web server provides selected information in a browser. It is a development and monitoring aid, not a replacement for a safety system or pilot-control interface.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
 
 # 🔩 Hardware Components
+
+<p><img src="https://img.shields.io/badge/SECTION-HARDWARE-EAB308?style=flat-square" alt="HARDWARE"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 ## Hardware Summary
 
@@ -586,19 +709,19 @@ The ESP32 web server provides selected information in a browser. It is a develop
 
 | Component | Documented specification | Main role |
 |---|---|---|
-| Flight controller | Pixhawk 2.4.8 | Autopilot and flight-control functions |
-| GPS | NEO-8M | Positioning information |
-| Embedded controller | ESP32 | Sensor processing, avoidance logic, monitoring |
-| Distance sensors | 3 × VL53L0X | Front/left/right ranging |
-| BLDC motors | EMAX 930KV | Propulsion |
-| ESCs | ReadyToSky 30A | Motor-speed control |
-| Battery | 5200 mAh LiPo | Main energy source |
-| Power interface | Pixhawk power module | Flight-controller power interface and supported monitoring |
-| Actuator | Servo motor | Payload release |
-| Payload enclosure | Prototype payload box | Carries the delivery item |
-| Structure | Frame and propellers | Mechanical support and thrust generation |
+| 🧠 Flight controller | Pixhawk 2.4.8 | Autopilot and flight-control functions |
+| 🛰️ GPS | NEO-8M | Positioning information |
+| ⚡ Embedded controller | ESP32 | Sensor processing, avoidance logic, monitoring |
+| 📏 Distance sensors | 3 × VL53L0X | Front/left/right ranging |
+| 🌀 BLDC motors | EMAX 930KV | Propulsion |
+| 🎛️ ESCs | ReadyToSky 30A | Motor-speed control |
+| 🔋 Battery | 5200 mAh LiPo | Main energy source |
+| 🔌 Power interface | Pixhawk power module | Flight-controller power interface and supported monitoring |
+| 🦾 Actuator | Servo motor | Payload release |
+| 📦 Payload enclosure | Prototype payload box | Carries the delivery item |
+| 🚁 Structure | Frame and propellers | Mechanical support and thrust generation |
 
-## Pixhawk 2.4.8 Flight Controller
+## 🧠 Pixhawk 2.4.8 Flight Controller
 
 **Purpose:** Main flight-control platform.
 
@@ -621,7 +744,7 @@ Responsibilities in the system include:
 - Verify the flight mode before testing external control commands.
 - Verify that the pilot can safely take control.
 
-## NEO-8M GPS Receiver
+## 🛰️ NEO-8M GPS Receiver
 
 **Purpose:** Provide position information for navigation.
 
@@ -635,7 +758,7 @@ Practical considerations:
 - A GPS position estimate should be checked before autonomous operation.
 - GPS should not be treated as a substitute for local obstacle sensing.
 
-## ESP32 Embedded Controller
+## ⚡ ESP32 Embedded Controller
 
 **Purpose:** Run the additional embedded subsystem.
 
@@ -652,7 +775,7 @@ Integration considerations:
 - Handle communication failures and invalid measurements.
 - Avoid issuing commands that are unsupported by the active flight mode.
 
-## VL53L0X Time-of-Flight Sensors
+## 📏 VL53L0X Time-of-Flight Sensors
 
 **Purpose:** Measure local distance in three directions.
 
@@ -668,7 +791,7 @@ The commonly quoted range can reach approximately 2 m under suitable conditions,
 
 The firmware should distinguish a valid distance from an error, timeout, or stale value. A failed reading must not automatically be interpreted as a clear path.
 
-## EMAX 930KV BLDC Motors
+## 🌀 EMAX 930KV BLDC Motors
 
 **Purpose:** Generate propulsion thrust.
 
@@ -676,7 +799,7 @@ The motors convert electrical power into rotation and thrust through the propell
 
 The KV rating alone does not establish the safe payload or thrust capability of the assembled aircraft. Thrust must be measured or supported by reliable manufacturer data for the actual motor/propeller combination.
 
-## ReadyToSky 30A ESCs
+## 🎛️ ReadyToSky 30A ESCs
 
 **Purpose:** Regulate power to the motors.
 
@@ -693,7 +816,7 @@ Verify the following against the actual hardware:
 
 An ESC rating does not prove that the entire propulsion system is safe at that current or with a particular payload.
 
-## 5200 mAh LiPo Battery
+## 🔋 5200 mAh LiPo Battery
 
 **Purpose:** Supply electrical energy.
 
@@ -703,13 +826,13 @@ Flight endurance depends on the battery voltage and condition, current consumpti
 
 Battery checks should include correct charging, physical condition, secure mounting, suitable wiring, and voltage monitoring. Follow the battery manufacturer's handling and charging requirements.
 
-## Pixhawk Power Module
+## 🔌 Pixhawk Power Module
 
 **Purpose:** Provide the configured power interface to the flight controller and, where supported, electrical measurements.
 
 The exact model and supported measurements should be recorded. Verify connector polarity, voltage compatibility, current limits, and the wiring arrangement before powering the system.
 
-## Servo Motor and Payload Mechanism
+## 🦾 Servo Motor and Payload Mechanism
 
 **Purpose:** Physically operate the payload release.
 
@@ -717,7 +840,7 @@ The servo moves a mechanical release according to its configured control signal.
 
 A command sent to the servo output is not proof of a successful physical release. The mechanism must be tested and the outcome observed.
 
-## Payload Box
+## 📦 Payload Box
 
 **Purpose:** Hold and secure the delivery item.
 
@@ -727,7 +850,7 @@ The box contributes to the all-up mass and changes the aircraft's center of grav
 
 A safe payload limit requires measured mass, thrust margin, balance, structural integrity, current draw, hover performance, and controlled flight tests.
 
-## Frame and Propellers
+## 🚁 Frame and Propellers
 
 **Purpose:** Provide structure and generate thrust.
 
@@ -735,25 +858,29 @@ The frame supports the flight controller, battery, motors, sensors, payload mech
 
 Inspect the frame for cracks, loose fasteners, sensor movement, and payload interference. Never handle spinning propellers during powered tests.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
 
 # 💻 Software and Technologies
 
+<p><img src="https://img.shields.io/badge/SECTION-SOFTWARE-7C3AED?style=flat-square" alt="SOFTWARE"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
+
 | Technology | Role in the project |
 |---|---|
-| Mission Planner | Mission planning, waypoint upload, telemetry observation |
-| Pixhawk autopilot firmware | Flight-control and mission functions |
-| MAVLink | Telemetry and supported command communication |
-| ESP32 firmware | Sensor acquisition, decision logic, web server |
-| FreeRTOS | Task scheduling, as described in the project design |
-| VL53L0X interface/library | Distance measurement |
-| Web technologies used by the firmware | Browser-based monitoring interface |
+| 🗺️ Mission Planner | Mission planning, waypoint upload, telemetry observation |
+| 🧠 Pixhawk autopilot firmware | Flight-control and mission functions |
+| 📡 MAVLink | Telemetry and supported command communication |
+| ⚡ ESP32 firmware | Sensor acquisition, decision logic, web server |
+| ⚙️ FreeRTOS | Task scheduling, as described in the project design |
+| 📏 VL53L0X interface/library | Distance measurement |
+| 🌐 Web technologies used by the firmware | Browser-based monitoring interface |
 
 The exact ESP32 framework, source files, libraries, software versions, and build procedure must be documented from the actual implementation. This README does not assume a particular framework or invent library versions.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
 
 # 🗺️ Autonomous Navigation with Mission Planner
+
+<p><img src="https://img.shields.io/badge/SECTION-NAVIGATION-6366F1?style=flat-square" alt="NAVIGATION"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 ## What is a waypoint mission?
 
@@ -821,9 +948,11 @@ Compare the actual flight with the planned route and record any deviations, warn
 
 Exact behavior depends on the installed autopilot firmware, parameters, vehicle setup, and telemetry configuration.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
 
 # 🛡️ Real-Time Obstacle Avoidance
+
+<p><img src="https://img.shields.io/badge/SECTION-SENSING-F97316?style=flat-square" alt="SENSING"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 <p><img src="https://img.shields.io/badge/FRONT%20SENSOR-F97316?style=for-the-badge" alt="Front sensor"/> <img src="https://img.shields.io/badge/LEFT%20SENSOR-2563EB?style=for-the-badge" alt="Left sensor"/> <img src="https://img.shields.io/badge/RIGHT%20SENSOR-16A34A?style=for-the-badge" alt="Right sensor"/></p>
 
@@ -833,7 +962,7 @@ A planned waypoint route does not establish that every point along the route is 
 
 The Aero Drop concept uses front, left, and right ToF measurements to support a bounded avoidance decision.
 
-## Sensor arrangement
+## 📐 Sensor arrangement
 
 ```text
                     FRONT
@@ -884,7 +1013,7 @@ flowchart TB
 8. Release temporary control commands according to the actual control logic.
 9. Resume the mission only when explicit conditions allow it.
 
-## Illustrative pseudocode
+## 💾 Illustrative pseudocode
 
 ```text
 Read front_distance
@@ -945,15 +1074,17 @@ Important checks include:
 - Safe behavior after communication loss.
 - Conditions for mission resumption.
 
-## Limits of the current arrangement
+## 🚧 Limits of the current arrangement
 
 Three directional ToF sensors do not provide full 360-degree coverage or a complete 3D map. The described scope does not establish SLAM, comprehensive environmental mapping, or global path planning around arbitrary obstacles.
 
 The feature should be described as local obstacle detection and response, with performance verified through controlled testing.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
 
 # 📦 Payload Delivery
+
+<p><img src="https://img.shields.io/badge/SECTION-PAYLOAD-16A34A?style=flat-square" alt="PAYLOAD"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 <p><img src="https://img.shields.io/badge/MECHANISM-SERVO-16A34A?style=for-the-badge" alt="Servo mechanism"/> <img src="https://img.shields.io/badge/PROCESS-CONFIGURE%20%7C%20TEST%20%7C%20VERIFY-0EA5E9?style=for-the-badge" alt="Configure test verify"/></p>
 
@@ -983,7 +1114,7 @@ flowchart LR
 ```
 
 
-## Delivery sequence
+## 🔁 Delivery sequence
 
 1. Secure the payload.
 2. Inspect the box, mounting, and release mechanism.
@@ -1001,7 +1132,7 @@ A mission action such as `DO_SET_SERVO` may be appropriate when supported by the
 
 Do not copy channel numbers or PWM values from another drone without verifying the hardware and configuration.
 
-## Payload capacity
+## ⚖️ Payload capacity
 
 **Maximum tested payload capacity: Not verified in the available records.**
 
@@ -1020,15 +1151,17 @@ A defensible payload evaluation should record:
 - Hover stability and handling.
 - Frame and release-mechanism integrity.
 
-## Delivery accuracy
+## 🎯 Delivery accuracy
 
 The project history includes a previously reported delivery deviation of approximately **2–3 metres**. This should remain a reported observation until supported by repeatable measurements, test conditions, and flight logs.
 
 Recommended records include the intended target, actual delivery position, measurement method, payload mass, GPS conditions, and number of trials.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
 
 # 📡 MAVLink Communication
+
+<p><img src="https://img.shields.io/badge/SECTION-COMMUNICATION-0EA5E9?style=flat-square" alt="COMMUNICATION"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 MAVLink is used by many autopilot systems to exchange telemetry and commands. In this project, it is the intended communication protocol between the flight-control system and the ESP32-based subsystem.
 
@@ -1055,9 +1188,11 @@ MAVLink is used by many autopilot systems to exchange telemetry and commands. In
 
 Sending a command does not prove that the autopilot accepted it or that the aircraft performed the requested action. Verify command handling through supported acknowledgements and actual state feedback.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
 
 # 🌐 ESP32 Web Dashboard
+
+<p><img src="https://img.shields.io/badge/SECTION-MONITORING-9333EA?style=flat-square" alt="MONITORING"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 The ESP32-hosted web server presents selected information in a browser.
 
@@ -1100,9 +1235,11 @@ The documented page-refresh interval is approximately **500 ms**. This describes
 
 The dashboard can help developers observe sensor values and reported flight status during tests. It should clearly distinguish current values from stale or invalid values and should not be treated as a safety-critical pilot interface unless it has been designed and validated for that purpose.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
 
 # ⚙️ FreeRTOS Task Design
+
+<p><img src="https://img.shields.io/badge/SECTION-EMBEDDED-0D9488?style=flat-square" alt="EMBEDDED"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 The project description identifies five task responsibilities.
 
@@ -1142,9 +1279,11 @@ Separating communication, sensor acquisition, decision logic, web serving, and d
 
 Actual real-time behavior depends on task priorities, execution time, stack allocation, shared-data protection, and interface behavior. The final repository should document those details from the actual source code rather than assuming default values.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
 
 # 🔄 End-to-End Mission Workflow
+
+<p><img src="https://img.shields.io/badge/SECTION-WORKFLOW-2563EB?style=flat-square" alt="WORKFLOW"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 ```mermaid
 flowchart TD
@@ -1173,11 +1312,13 @@ flowchart TD
 
 This flowchart describes the intended concept, not a guarantee of the exact firmware state machine. The implementation may abort or follow a different transition when faults or safety conditions occur.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
 
 # 🔌 Electrical and Mechanical Integration
 
-## Power-system checks
+<p><img src="https://img.shields.io/badge/SECTION-INTEGRATION-CA8A04?style=flat-square" alt="INTEGRATION"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
+
+## 🔋 Power-system checks
 
 - Verify battery voltage and polarity.
 - Verify the power module and flight-controller input compatibility.
@@ -1188,7 +1329,7 @@ This flowchart describes the intended concept, not a guarantee of the exact firm
 - Avoid powering components from an unsuitable rail.
 - Record the actual power distribution and grounding arrangement.
 
-## Signal and communication checks
+## 📶 Signal and communication checks
 
 - Confirm the actual sensor interface and pin mapping.
 - Confirm whether any sensor address configuration is needed.
@@ -1198,7 +1339,7 @@ This flowchart describes the intended concept, not a guarantee of the exact firm
 - Verify servo output configuration and power requirements.
 - Document the final wiring rather than relying on memory.
 
-## Mechanical checks
+## 🔩 Mechanical checks
 
 - Inspect frame and fasteners.
 - Verify motor mounting and rotation.
@@ -1212,9 +1353,11 @@ This flowchart describes the intended concept, not a guarantee of the exact firm
 
 Exact pin numbers, wire colors, voltages, and connectors are intentionally not invented here. Add them only after checking the actual build.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
 
 # 🧪 Testing and Validation
+
+<p><img src="https://img.shields.io/badge/SECTION-VALIDATION-059669?style=flat-square" alt="VALIDATION"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 <p><img src="https://img.shields.io/badge/TESTING-BENCH%20%2B%20FIELD-2563EB?style=for-the-badge" alt="Bench and field testing"/> <img src="https://img.shields.io/badge/DATA-REAL%20MEASUREMENTS%20ONLY-F97316?style=for-the-badge" alt="Real measurements only"/> <img src="https://img.shields.io/badge/REPORTING-TRACEABLE%20EVIDENCE-7C3AED?style=for-the-badge" alt="Traceable evidence"/></p>
 
@@ -1222,7 +1365,7 @@ Project history describes autonomous mission flights, Loiter-mode hovering, obst
 
 These observations are preliminary and do not constitute a complete quantitative validation dataset.
 
-## Test matrix
+## 🧮 Test matrix
 
 ### 🧪 Validation Pipeline
 
@@ -1315,13 +1458,15 @@ For every test, record:
 - Outcome: pass, fail, or inconclusive.
 - Corrective actions.
 
-## Performance claims
+## 📊 Performance claims
 
 Do not publish a sensor success rate, payload capacity, flight duration, avoidance success percentage, or delivery-accuracy guarantee unless the value is supported by a recorded measurement and a clearly described test method.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
 
 # ⚠️ Known Limitations
+
+<p><img src="https://img.shields.io/badge/SECTION-LIMITATIONS-EA580C?style=flat-square" alt="LIMITATIONS"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 1. **Directional sensing:** Three ToF sensors cannot observe every direction.
 2. **Range variation:** ToF readings depend on target surface, ambient conditions, alignment, and configuration.
@@ -1334,9 +1479,11 @@ Do not publish a sensor success rate, payload capacity, flight duration, avoidan
 9. **Incomplete quantitative dataset:** The available information does not establish comprehensive performance statistics.
 10. **Prototype status:** The system is an academic prototype, not a certified delivery platform.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
 
 # 🛡️ Safety Considerations
+
+<p><img src="https://img.shields.io/badge/SECTION-SAFETY-E7352C?style=flat-square" alt="SAFETY"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 - Follow applicable local drone laws and operating restrictions.
 - Test only in an authorized and controlled area.
@@ -1350,13 +1497,15 @@ Do not publish a sensor success rate, payload capacity, flight duration, avoidan
 - Define a safe response for invalid sensor readings and communication loss.
 - Do not rely on the web dashboard as a safety-critical control interface.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
 
 # 🛠️ Installation and Reproduction
 
+<p><img src="https://img.shields.io/badge/SECTION-SETUP-475569?style=flat-square" alt="SETUP"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
+
 The precise build procedure depends on the actual source code, board variant, libraries, and configuration. This section should be completed from the implemented firmware.
 
-## Hardware preparation
+## 🧰 Hardware preparation
 
 1. Inspect the frame, motors, propellers, and mounting points.
 2. Verify power connections and polarity.
@@ -1367,7 +1516,7 @@ The precise build procedure depends on the actual source code, board variant, li
 7. Verify servo wiring and output configuration.
 8. Check the payload attachment and center of gravity.
 
-## Ground-station preparation
+## 🖥️ Ground-station preparation
 
 1. Install the appropriate Mission Planner version.
 2. Connect to the flight controller.
@@ -1376,7 +1525,7 @@ The precise build procedure depends on the actual source code, board variant, li
 5. Prepare a small test mission in an authorized test area.
 6. Verify pilot takeover and failsafe behavior.
 
-## Firmware details to add
+## 💡 Firmware details to add
 
 - ESP32 board model.
 - Development environment and version.
@@ -1391,32 +1540,39 @@ The precise build procedure depends on the actual source code, board variant, li
 
 **Build status:** Do not claim reproducible firmware compilation until the real source code and tested build instructions are included.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
 
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
 
 ## 🚧 Project Status
 
 Aero Drop is an academic drone-delivery prototype project focused on medical and essential-supply delivery concepts.
 
-### Available in This Repository
+### ✅ Available in This Repository
 - Project overview and technical documentation
 - System architecture and obstacle-avoidance documentation
 - Prototype photographs, diagrams, and project videos
 - Repository organization and documentation guides
 
-### Planned Repository Additions
+### 🔜 Planned Repository Additions
 - ESP32 firmware source code and build instructions
 - Detailed test records and validation reports
 - Additional implementation evidence and reproducible setup instructions
 
-### Important Notes
+### 📌 Important Notes
 - Documentation does not by itself establish that every described feature has been implemented or validated.
 - Actual firmware and test evidence will be added when available.
 - Performance claims should be supported by documented measurements and test conditions.
 
 ## 📁 Current Repository Structure
+
+<p align="center">
+  <img src="https://img.shields.io/badge/%F0%9F%93%9A-docs-0EA5E9?style=flat-square" alt="docs"/>
+  <img src="https://img.shields.io/badge/%F0%9F%92%BE-firmware-16A34A?style=flat-square" alt="firmware"/>
+  <img src="https://img.shields.io/badge/%F0%9F%A7%AA-test--results-F97316?style=flat-square" alt="test-results"/>
+</p>
+
 
 The repository keeps the main project overview, technical documentation, and project media accessible from the root directory. Dedicated folders are provided for documentation, firmware development, and test records.
 
@@ -1435,7 +1591,7 @@ Aero-Drop-Drone-Delivery/
 └── Existing images, diagrams, and project media
 ```
 
-### Folder Guide
+### 🗂️ Folder Guide
 
 | Folder or File | Purpose |
 |---|---|
@@ -1452,9 +1608,11 @@ Existing project images, diagrams, and video links remain in their current locat
 
 This is a proposed structure. Populate folders with actual source files, photos, wiring diagrams, mission screenshots, and test data when available.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
 
 # 🚀 Future Enhancements
+
+<p><img src="https://img.shields.io/badge/SECTION-ROADMAP-8B5CF6?style=flat-square" alt="ROADMAP"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 ### 🗺️ Engineering Roadmap — Conceptual View
 
@@ -1491,9 +1649,11 @@ flowchart LR
 
 These are future possibilities, not claims that the current prototype already implements them.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
 
 # 👥 Project Team
+
+<p><img src="https://img.shields.io/badge/SECTION-TEAM-DB2777?style=flat-square" alt="TEAM"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 **Institution:** Sir C. R. Reddy College of Engineering (Autonomous)  
 **Department:** Electronics and Communication Engineering
@@ -1508,9 +1668,11 @@ These are future possibilities, not claims that the current prototype already im
 | S. Venkata Srikanth | `22B81A04G0` |
 | T. Sai Ganesh | `22B81A04H0` |
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
 
 # 📖 Glossary
+
+<p><img src="https://img.shields.io/badge/SECTION-REFERENCE-0891B2?style=flat-square" alt="REFERENCE"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 | Term | Meaning |
 |---|---|
@@ -1527,11 +1689,13 @@ These are future possibilities, not claims that the current prototype already im
 | ToF | Time of Flight |
 | Waypoint | Geographic position used as part of a planned route |
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
 
 # ✅ Engineering Checklists
 
-## Before a ground test
+<p><img src="https://img.shields.io/badge/SECTION-CHECKLISTS-65A30D?style=flat-square" alt="CHECKLISTS"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
+
+## 🧪 Before a ground test
 
 - [ ] Check the frame and fasteners.
 - [ ] Check wiring and power polarity.
@@ -1543,7 +1707,7 @@ These are future possibilities, not claims that the current prototype already im
 - [ ] Verify the servo mechanism without a live payload.
 - [ ] Record the hardware and software configuration.
 
-## Before a supervised flight
+## 🛫 Before a supervised flight
 
 - [ ] Confirm legal permission and a controlled test area.
 - [ ] Inspect propellers and motor mounting.
@@ -1556,7 +1720,7 @@ These are future possibilities, not claims that the current prototype already im
 - [ ] Ensure people are clear of the flight and release areas.
 - [ ] Have a plan for aborting the test.
 
-## After a test
+## 📝 After a test
 
 - [ ] Save the flight log.
 - [ ] Save sensor and debug logs.
@@ -1567,9 +1731,11 @@ These are future possibilities, not claims that the current prototype already im
 - [ ] Document pass, fail, or inconclusive outcomes.
 - [ ] Record follow-up actions.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
 
 # 🏁 Conclusion
+
+<p><img src="https://img.shields.io/badge/SECTION-SUMMARY-0B6E99?style=flat-square" alt="SUMMARY"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
 
 Aero Drop combines autonomous waypoint navigation, embedded distance sensing, local obstacle-response logic, MAVLink communication, servo-based payload release, and web-based monitoring in one academic drone-delivery prototype.
 
@@ -1585,10 +1751,13 @@ The next stage is to strengthen reproducibility and evidence: include the real f
 </div>
 
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
 
 # 🧰 Engineering Appendix: Detailed Review and Verification
 
+<p><img src="https://img.shields.io/badge/SECTION-APPENDIX-52525B?style=flat-square" alt="APPENDIX"/> <a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86-BACK%20TO%20TOP-334155?style=flat-square" alt="Back to top"/></a></p>
+
+> [!WARNING]
 > This appendix expands the project documentation with practical review procedures. It is not a claim that every check has already been performed. Mark a checklist only after the corresponding real test has been completed.
 
 ## A. Configuration Record
@@ -1658,7 +1827,7 @@ Create one configuration record for every tested aircraft setup.
 - [ ] Flight log can be matched to this test.
 - [ ] No credentials or private network secrets are included in public files.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
 
 ## B. Sensor Validation Protocol
 
@@ -1706,7 +1875,7 @@ Set acceptance criteria before running the test. Do not choose a tolerance after
 - Decision:
 - Evidence file:
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
 
 ## C. Obstacle-Response Test Protocol
 
@@ -1767,7 +1936,7 @@ A logic decision is not the same as a successful physical maneuver. Record separ
 - Loss of telemetry during the response.
 - Mission resumption while the obstacle remains present.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
 
 ## D. Mission Planner Review Protocol
 
@@ -1803,7 +1972,7 @@ A logic decision is not the same as a successful physical maneuver. Record separ
 | Test notes | Add filename | Yes/No |
 | Delivery measurement | Add filename | Yes/No |
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
 
 ## E. Payload Release Validation
 
@@ -1839,7 +2008,7 @@ If coordinates are used, document how the distance was calculated and the qualit
 ### E.4 Release reliability
 A single successful release does not establish a reliable release rate. Record each attempt, including unsuccessful and inconclusive attempts, and describe the number of trials.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
 
 ## F. Battery and Endurance Test Record
 
@@ -1876,7 +2045,7 @@ A single successful release does not establish a reliable release rate. Record e
 ### F.4 Reporting
 Report endurance with the configuration and conditions. Do not present one flight duration as a universal value for every payload, battery condition, or environment.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
 
 ## G. Telemetry and Dashboard Validation
 
@@ -1904,7 +2073,7 @@ The project description records an approximately 500 ms web-page refresh interva
 - [ ] Serial interface interruption.
 - [ ] Recovery after communication returns.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=24&height=4" width="100%" alt="divider"/></p>
 
 ## H. Firmware Review Checklist
 
@@ -1941,7 +2110,7 @@ The project description records an approximately 500 ms web-page refresh interva
 
 Fill these values from the actual source code and verified tests. Do not infer them from this documentation template.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=2&height=4" width="100%" alt="divider"/></p>
 
 ## I. Release Checklist for the GitHub Repository
 
@@ -1973,7 +2142,7 @@ Fill these values from the actual source code and verified tests. Do not infer t
 - [ ] Do not claim a successful build if the source has not been compiled.
 - [ ] Distinguish designed behavior from observed behavior.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=18&height=4" width="100%" alt="divider"/></p>
 
 ## J. Viva and Technical Discussion Preparation
 
@@ -2029,7 +2198,7 @@ These questions can help explain the design during a project review. Answers sho
 5. What are the known limitations?
 6. What would be the next improvement?
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=6&height=4" width="100%" alt="divider"/></p>
 
 ## K. Evidence Inventory
 
@@ -2046,24 +2215,38 @@ Keep an inventory of every image, log, video, mission file, and measurement used
 
 Only assign an evidence ID after the corresponding artifact has been added and checked.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12&height=4" width="100%" alt="divider"/></p>
 
 ## L. Project Status Definitions
 
 Use consistent labels when describing progress.
 
-- **Planned:** The feature is part of the design but has not been demonstrated.
-- **Implemented:** The relevant code or hardware has been integrated.
-- **Bench-tested:** The feature has been tested outside flight.
-- **Flight-tested:** The feature has been observed during a documented flight test.
-- **Measured:** A quantitative value has been recorded with a method and test conditions.
-- **Verified:** The evidence has been reviewed against predefined acceptance criteria.
-- **Not verified:** The available evidence does not establish the claim.
-- **Future work:** The feature is a proposal, not a current capability.
+```mermaid
+flowchart LR
+    A["🔵 Planned"] --> B["🟣 Implemented"] --> C["🟠 Bench-tested"] --> D["🟢 Flight-tested"] --> E["📏 Measured"] --> F["✅ Verified"]
+    classDef s1 fill:#dbeafe,stroke:#2563eb,color:#172554,stroke-width:2px;
+    classDef s2 fill:#f3e8ff,stroke:#9333ea,color:#581c87,stroke-width:2px;
+    classDef s3 fill:#ffedd5,stroke:#ea580c,color:#7c2d12,stroke-width:2px;
+    classDef s4 fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:2px;
+    classDef s5 fill:#fef9c3,stroke:#ca8a04,color:#713f12,stroke-width:2px;
+    classDef s6 fill:#bbf7d0,stroke:#16a34a,color:#052e16,stroke-width:2px;
+    class A s1; class B s2; class C s3; class D s4; class E s5; class F s6;
+```
+
+*Evidence maturity ladder — each label must be earned with real evidence.*
+
+- 🔵 **Planned:** The feature is part of the design but has not been demonstrated.
+- 🟣 **Implemented:** The relevant code or hardware has been integrated.
+- 🟠 **Bench-tested:** The feature has been tested outside flight.
+- 🟢 **Flight-tested:** The feature has been observed during a documented flight test.
+- 📏 **Measured:** A quantitative value has been recorded with a method and test conditions.
+- ✅ **Verified:** The evidence has been reviewed against predefined acceptance criteria.
+- ⚠️ **Not verified:** The available evidence does not establish the claim.
+- 🔮 **Future work:** The feature is a proposal, not a current capability.
 
 These labels prevent planned functionality from being confused with verified performance.
 
----
+<p align="center"><img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=20&height=4" width="100%" alt="divider"/></p>
 
 ## M. Final Documentation Quality Gate
 
@@ -2084,3 +2267,17 @@ Before sharing the repository with a supervisor, recruiter, or reviewer:
 - [ ] The repository is readable without requiring the reader to guess missing details.
 
 **A professional project is not impressive because every section claims success. It is impressive because the architecture is clear, the implementation is reproducible, the evidence is honest, and the limitations are understood.**
+
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/AERO%20DROP-SMART%20DRONE%20DELIVERY-0B6E99?style=for-the-badge" alt="Aero Drop"/>
+<img src="https://img.shields.io/badge/BUILT%20WITH-EMBEDDED%20ENGINEERING-1D8A78?style=for-the-badge" alt="Built with embedded engineering"/>
+
+<sub>🚁 Sir C. R. Reddy College of Engineering (Autonomous) · Department of ECE</sub>
+
+<a href="#top"><img src="https://img.shields.io/badge/%E2%AC%86%EF%B8%8F-BACK%20TO%20TOP-334155?style=for-the-badge" alt="Back to top"/></a>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=150&section=footer" alt="footer" width="100%"/>
+
+</div>
