@@ -31,6 +31,7 @@
 <div align="center">
 
 <p>
+  <a href="https://aero-drop-drone-delivery.vercel.app"><img src="https://img.shields.io/badge/%F0%9F%8C%90%20LIVE%20DEMO-Open%20Website-22C55E?style=for-the-badge" alt="Live demo"/></a>
   <img src="https://img.shields.io/badge/ESP32-Embedded%20Controller-E7352C?style=flat-square&logo=espressif&logoColor=white" alt="ESP32"/>
   <img src="https://img.shields.io/badge/Pixhawk-2.4.8-364FC7?style=flat-square" alt="Pixhawk"/>
   <img src="https://img.shields.io/badge/ArduPilot-Mission%20Planner-0B6E99?style=flat-square&logo=ardupilot&logoColor=white" alt="Mission Planner"/>
@@ -62,9 +63,38 @@
 
 <p align="center"><img src="./aero-drop-divider.svg" width="100%" alt="divider"/></p>
 
+<h2 align="center">🌐 Explore the Interactive Website</h2>
+
+<p align="center">
+  <a href="https://aero-drop-drone-delivery.vercel.app"><img src="./aero-drop-site-preview.png" alt="Aero Drop interactive website preview" width="100%"/></a>
+</p>
+
+<p align="center">
+  <a href="https://aero-drop-drone-delivery.vercel.app"><img src="https://img.shields.io/badge/%E2%96%B6%20OPEN%20THE%20LIVE%20WEBSITE-aero--drop--drone--delivery.vercel.app-0EA5E9?style=for-the-badge&logo=vercel&logoColor=white" alt="Open the live website"/></a>
+</p>
+
+<p align="center">
+  <img src="./aero-drop-site-collage.png" alt="Website sections: architecture, hardware, workflow, validation" width="100%"/>
+</p>
+
+<div align="center">
+
+| 🎮 Interactive simulator | 🧩 Clickable architecture | 🃏 3D hardware cards | 🎬 Flight videos |
+|:-:|:-:|:-:|:-:|
+| Place obstacles and watch the 5-step response loop | Explore each subsystem and its data flow | 11 documented components | 6 recorded flight tests |
+
+<sub>The website (`index.html`) is a static page served by Vercel. It is an educational presentation of the project — simulator values are illustrative, not firmware measurements.</sub>
+
+</div>
+
 <h2 align="center">🎞️ Watch It Work — Live Mission Simulation</h2>
 
 <p align="center"><img src="./aero-drop-mission-live.svg" alt="Animated mission simulation: takeoff, cruise, obstacle detection, avoidance, resume, payload release" width="100%"/></p>
+
+<p align="center">
+  <a href="https://aero-drop-drone-delivery.vercel.app#simulator"><img src="./aero-drop-simulator.gif" alt="Interactive obstacle-avoidance simulator preview" width="90%"/></a><br/>
+  <sub>🎮 Preview of the interactive simulator — <a href="https://aero-drop-drone-delivery.vercel.app#simulator"><b>try it live and place your own obstacles</b></a></sub>
+</p>
 
 <div align="center">
 
