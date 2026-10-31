@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aero Drop — Smart Drone System for Medical &amp; Essentials Delivery</title>
+<meta name="description" content="Aero Drop is an academic drone-delivery prototype combining Pixhawk flight control, GPS waypoint missions, ESP32 obstacle response with VL53L0X ToF sensors, MAVLink telemetry and a servo payload release.">
+<meta property="og:title" content="Aero Drop — Smart Drone Delivery System">
+<meta property="og:description" content="Autonomous waypoint navigation, ToF obstacle response, ESP32 + Pixhawk, MAVLink telemetry and servo payload release.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#050816">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚁%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050816;--bg2:#0a1030;--card:#0e1638;--line:#ffffff18;
+  --cyan:#22d3ee;--blue:#3b82f6;--violet:#8b5cf6;--pink:#ec4899;--orange:#f97316;--green:#22c55e;--yellow:#facc15;--red:#ef4444;
+  --text:#e6eeff;--mute:#94a3c7;
+  --grad:linear-gradient(90deg,#22d3ee,#8b5cf6 50%,#ec4899);
+  --font:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--head:'Space Grotesk','Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:#8b5cf666}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:linear-gradient(var(--cyan),var(--violet));border-radius:10px}
+.wrap{width:min(1200px,92%);margin:0 auto}
+section{position:relative;padding:110px 0}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:shift 6s linear infinite}
+@keyframes shift{to{background-position:200% 0}}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:700 12px var(--mono);letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.eyebrow::before{content:"";width:34px;height:2px;background:var(--grad);border-radius:2px}
+h2.title{font:700 clamp(32px,5vw,56px)/1.1 var(--head);letter-spacing:-1px;margin-bottom:16px}
+p.lead{color:var(--mute);font-size:18px;max-width:760px}
+.center{text-align:center}.center .lead{margin:0 auto}.center .eyebrow{justify-content:center}
+.center .eyebrow::after{content:"";width:34px;height:2px;background:var(--grad);border-radius:2px}
+.glass{background:linear-gradient(145deg,#ffffff0f,#ffffff05);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:50px;font:700 15px var(--font);cursor:pointer;border:0;transition:.3s;position:relative;overflow:hidden}
+.btn.primary{background:var(--grad);color:#fff;box-shadow:0 10px 40px #8b5cf655}
+.btn.primary:hover{transform:translateY(-3px);box-shadow:0 16px 50px #8b5cf6aa}
+.btn.ghost{background:#ffffff0d;border:1px solid #ffffff30;color:#fff}
+.btn.ghost:hover{background:#ffffff1f;transform:translateY(-3px);border-color:var(--cyan)}
+.btn svg{width:18px;height:18px}
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
+/* progress + cursor */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:200;box-shadow:0 0 14px var(--cyan)}
+#glow{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#8b5cf622,transparent 65%);transform:translate(-50%,-50%);z-index:0;transition:opacity .3s}
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:150;transition:.35s;padding:16px 0}
+nav.scrolled{background:#050816d9;backdrop-filter:blur(16px);padding:10px 0;border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.logo{font:700 20px var(--head);letter-spacing:5px;display:flex;align-items:center;gap:10px}
+.logo i{font-style:normal;font-size:22px;animation:bob 3s ease-in-out infinite}
+.links{display:flex;gap:26px;align-items:center}
+.links a{font-size:14px;font-weight:600;color:var(--mute);transition:.25s;position:relative}
+.links a:hover,.links a.act{color:#fff}
+.links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--grad);transition:.3s}
+.links a:hover::after,.links a.act::after{width:100%}
+.burger{display:none;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
+@media(max-width:980px){.burger{display:block}.links{position:fixed;top:0;right:-100%;height:100vh;width:min(300px,80%);flex-direction:column;justify-content:center;gap:28px;background:#0a1030f5;backdrop-filter:blur(20px);transition:.4s;border-left:1px solid var(--line)}.links.open{right:0}}
+/* hero */
+#hero{min-height:100vh;display:flex;align-items:center;padding:130px 0 80px;overflow:hidden}
+#stars{position:absolute;inset:0;width:100%;height:100%}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 80% 30%,#7c3aed55,transparent 55%),radial-gradient(ellipse at 10% 90%,#0ea5e944,transparent 50%),radial-gradient(ellipse at 95% 90%,#ec489933,transparent 40%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff09 1px,transparent 1px),linear-gradient(90deg,#ffffff09 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%)}
+.hero-in{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border-radius:40px;border:1px solid #22d3ee55;background:#22d3ee14;font:600 13px var(--mono);color:var(--cyan);letter-spacing:1px}
+.badge b{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:pulse 1.6s infinite}
+h1{font:700 clamp(58px,10vw,128px)/.95 var(--head);letter-spacing:-3px;margin:22px 0 14px}
+.typed{font:600 clamp(18px,2.4vw,26px) var(--head);color:#bae6fd;min-height:68px}
+.typed span.cur{display:inline-block;width:3px;height:1.1em;background:var(--cyan);margin-left:4px;vertical-align:-3px;animation:blink 1s steps(1) infinite}
+.hero-in p.d{color:var(--mute);max-width:560px;margin:18px 0 32px;font-size:17px}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:44px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:640px}
+.stat{padding:16px 14px;text-align:center}
+.stat b{display:block;font:700 34px var(--head);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--mute);text-transform:uppercase}
+.hero-art{position:relative;aspect-ratio:1;max-width:560px;margin:auto;width:100%}
+.orbit{position:absolute;inset:6%;border-radius:50%;border:1.5px dashed #22d3ee55;animation:spin 40s linear infinite}
+.orbit.o2{inset:-2%;border-color:#ec489944;animation-duration:60s;animation-direction:reverse}
+.orbit i{position:absolute;padding:7px 14px;border-radius:30px;font:700 12px var(--mono);letter-spacing:1px;font-style:normal;box-shadow:0 8px 30px #0009;color:#fff}
+.orbit i:nth-child(1){top:-16px;left:45%;background:var(--red)}.orbit i:nth-child(2){right:-22px;top:46%;background:var(--violet)}.orbit i:nth-child(3){bottom:-16px;left:42%;background:var(--orange)}.orbit i:nth-child(4){left:-24px;top:44%;background:var(--green)}
+.orbit i{animation:counter 40s linear infinite}.orbit.o2 i{animation-duration:60s;animation-direction:reverse}
+@keyframes counter{to{transform:rotate(-360deg)}}
+.drone-main{position:absolute;inset:0;display:grid;place-items:center;animation:bob 4s ease-in-out infinite;filter:drop-shadow(0 30px 60px #22d3ee55)}
+.drone-main svg{width:92%}
+@keyframes bob{50%{transform:translateY(-16px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{opacity:.35;transform:scale(1.4)}}
+@keyframes blink{50%{opacity:0}}
+.rotor{transform-box:fill-box;transform-origin:center;animation:flick .12s linear infinite alternate}
+@keyframes flick{from{transform:scaleX(1)}to{transform:scaleX(.3)}}
+.scroll-ind{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font:600 11px var(--mono);letter-spacing:3px;color:var(--mute)}
+.scroll-ind i{width:24px;height:40px;border:2px solid #ffffff44;border-radius:14px;position:relative}
+.scroll-ind i::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--cyan);animation:scr 1.6s infinite}
+@keyframes scr{60%{transform:translateY(14px);opacity:0}}
+@media(max-width:900px){.hero-in{grid-template-columns:1fr;text-align:center}.hero-in p.d{margin-inline:auto}.cta,.stats{margin-inline:auto;justify-content:center}.hero-art{max-width:400px}.scroll-ind{display:none}}
+/* marquee */
+.marq{border-block:1px solid var(--line);background:#ffffff05;overflow:hidden;padding:18px 0}
+.marq-t{display:flex;gap:56px;width:max-content;animation:mq 32s linear infinite}
+.marq-t span{font:700 18px var(--head);letter-spacing:3px;color:#64748b;white-space:nowrap}.marq-t span b{color:var(--cyan)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* overview cards */
+.grid{display:grid;gap:22px}
+.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:980px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){.g3,.g2,.g4{grid-template-columns:1fr}}
+.card{padding:30px;position:relative;overflow:hidden;transition:.4s}
+.card:hover{transform:translateY(-8px);border-color:#22d3ee66;box-shadow:0 24px 60px #0008,0 0 40px #22d3ee22}
+.card .ic{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:28px;margin-bottom:18px}
+.card h3{font:700 22px var(--head);margin-bottom:8px}.card p{color:var(--mute);font-size:15px}
+.card::before{content:"";position:absolute;top:-60%;right:-30%;width:70%;height:120%;background:radial-gradient(circle,var(--c,#22d3ee)33,transparent 60%);opacity:.5;transition:.5s}
+.card:hover::before{opacity:1;transform:scale(1.2)}
+.cap{margin-top:50px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:900px){.cap{grid-template-columns:repeat(2,1fr)}}
+.cap div{padding:22px 16px;text-align:center;border-radius:18px;font-weight:700;font-size:14px;color:#fff;transition:.3s}
+.cap div:hover{transform:translateY(-6px) scale(1.03)}
+.cap div small{display:block;font-weight:500;opacity:.9;margin-top:4px;font-size:12px}
+/* simulator */
+.sim-box{padding:18px;margin-top:40px}
+.sim-top{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:14px}
+.sim-btns{display:flex;flex-wrap:wrap;gap:10px}
+.sb{padding:10px 18px;border-radius:12px;border:1px solid #ffffff2a;background:#ffffff0d;color:#fff;font:700 13px var(--font);cursor:pointer;transition:.25s}
+.sb:hover{background:#22d3ee22;border-color:var(--cyan);transform:translateY(-2px)}
+.sb.on{background:var(--grad);border-color:transparent}
+.state-pill{padding:9px 20px;border-radius:30px;font:700 13px var(--mono);letter-spacing:1.5px;transition:.3s;background:#334155}
+canvas#sim{width:100%;aspect-ratio:900/400;border-radius:16px;background:#070d26;cursor:crosshair;display:block;border:1px solid var(--line)}
+.sim-hud{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px}
+@media(max-width:800px){.sim-hud{grid-template-columns:repeat(2,1fr)}}
+.hud{padding:14px;border-radius:14px;background:#0a1030;border:1px solid var(--line);text-align:center;transition:.3s}
+.hud small{display:block;font:700 10.5px var(--mono);letter-spacing:2px;color:var(--mute)}
+.hud b{display:block;font:700 26px var(--head);margin-top:4px;transition:.2s}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.chip{flex:1;min-width:120px;text-align:center;padding:10px;border-radius:12px;font:700 12px var(--mono);letter-spacing:1.5px;background:#1e293b;color:#64748b;transition:.3s}
+.chip.on{color:#fff;transform:translateY(-3px);box-shadow:0 8px 26px var(--cc)}
+#log{margin-top:14px;background:#050a1e;border:1px solid var(--line);border-radius:14px;padding:14px 16px;font:500 12.5px var(--mono);color:#7dd3fc;height:128px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+#log div{opacity:.95;animation:ln .4s}@keyframes ln{from{opacity:0;transform:translateX(-10px)}}
+.note{font-size:12.5px;color:var(--mute);margin-top:12px}
+/* architecture */
+.arch{display:grid;grid-template-columns:1.6fr 1fr;gap:26px;margin-top:44px;align-items:start}
+@media(max-width:980px){.arch{grid-template-columns:1fr}}
+#archsvg{width:100%;height:auto;padding:12px}
+.node{cursor:pointer;transition:.3s}
+.node:hover rect,.node.sel rect{filter:brightness(1.25) drop-shadow(0 0 14px #fff6)}
+.node.sel rect{stroke:#fff;stroke-width:3}
+.flow{stroke-dasharray:7 7;animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-28}}
+#archinfo{padding:28px;position:sticky;top:100px}
+#archinfo h3{font:700 26px var(--head);margin-bottom:6px}
+#archinfo .tag{display:inline-block;padding:4px 12px;border-radius:20px;font:700 11px var(--mono);letter-spacing:1.5px;margin-bottom:14px}
+#archinfo ul{margin:14px 0 0 18px;color:var(--mute);font-size:14.5px}#archinfo li{margin-bottom:6px}
+/* hardware */
+.hw{perspective:1000px}
+.hwc{padding:26px;transform-style:preserve-3d;transition:transform .15s ease-out,box-shadow .3s;position:relative;overflow:hidden;cursor:default}
+.hwc .badge2{width:64px;height:64px;border-radius:18px;display:grid;place-items:center;font:700 17px var(--mono);color:#fff;margin-bottom:16px;box-shadow:0 10px 30px var(--c);background:var(--g)}
+.hwc h3{font:700 20px var(--head)}.hwc .role{color:var(--cyan);font:600 12px var(--mono);letter-spacing:1px;margin:4px 0 10px;text-transform:uppercase}
+.hwc p{color:var(--mute);font-size:14px}
+.hwc .spec{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.hwc .spec span{padding:4px 11px;border-radius:20px;background:#ffffff10;border:1px solid var(--line);font:600 11.5px var(--mono)}
+.hwc::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),#ffffff14,transparent 50%);pointer-events:none}
+/* timeline */
+.tl{position:relative;margin-top:60px;padding:10px 0}
+.tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;margin-left:-2px;background:#ffffff12;border-radius:4px}
+.tl-line{position:absolute;left:50%;top:0;width:4px;margin-left:-2px;border-radius:4px;background:linear-gradient(var(--cyan),var(--violet),var(--pink));box-shadow:0 0 20px var(--violet);height:0}
+.tli{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;margin-bottom:50px}
+.tli .box{padding:26px}.tli .box h3{font:700 24px var(--head);margin-bottom:6px}.tli .box p{color:var(--mute);font-size:15px}
+.tli .dot{width:62px;height:62px;border-radius:50%;margin:auto;display:grid;place-items:center;font:700 26px var(--head);color:#fff;box-shadow:0 0 0 8px #050816,0 0 30px var(--c);background:var(--c);position:relative;z-index:2}
+.tli:nth-child(odd) .box{grid-column:1;text-align:right}.tli:nth-child(odd) .dot{grid-column:2}
+.tli:nth-child(even) .box{grid-column:3}.tli:nth-child(even) .dot{grid-column:2;grid-row:1}
+@media(max-width:800px){.tl::before,.tl-line{left:31px}.tli{grid-template-columns:70px 1fr}.tli .dot{grid-column:1!important;grid-row:1}.tli .box{grid-column:2!important;text-align:left!important}}
+/* tasks */
+.tasks{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:44px}
+@media(max-width:1000px){.tasks{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.tasks{grid-template-columns:1fr}}
+.task{padding:22px;text-align:center;border-radius:20px;color:#fff;position:relative;overflow:hidden;transition:.35s}
+.task:hover{transform:translateY(-8px) rotate(-1deg)}.task h4{font:700 16px var(--head);letter-spacing:1.5px;margin:8px 0}.task p{font-size:13px;opacity:.92}
+.task .pulse{position:absolute;inset:0;border-radius:20px;border:2px solid #fff;opacity:0;animation:tp 3s infinite}
+@keyframes tp{0%{opacity:.8;transform:scale(.9)}100%{opacity:0;transform:scale(1.15)}}
+.bus{margin:26px auto 0;max-width:760px;padding:22px;text-align:center;border-radius:20px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#451a03;font:700 18px var(--head);letter-spacing:2px;box-shadow:0 0 50px #f59e0b55;animation:bp 3s ease-in-out infinite}
+.bus small{display:block;font:500 13px var(--font);letter-spacing:0;margin-top:4px;color:#78350f}
+@keyframes bp{50%{box-shadow:0 0 90px #f59e0b99}}
+/* payload */
+.pay{display:grid;grid-template-columns:1.3fr 1fr;gap:26px;margin-top:44px;align-items:center}
+@media(max-width:980px){.pay{grid-template-columns:1fr}}
+.pay svg{width:100%;height:auto}
+.pstep{padding:14px 18px;border-radius:14px;background:#ffffff0a;border:1px solid var(--line);display:flex;gap:14px;align-items:center;margin-bottom:10px;opacity:.55}
+.pstep b{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#334155;font:700 15px var(--head);flex:none}
+.pstep span{font-size:14px;color:var(--mute)}.pstep strong{display:block;color:#fff;font:700 14px var(--mono);letter-spacing:1.5px}
+.pstep.on{opacity:1;background:var(--c);border-color:transparent;transform:translateX(8px)}.pstep.on span{color:#fff}.pstep.on b{background:#fff3}
+.warn{margin-top:14px;padding:14px 18px;border:2px dashed #f59e0b99;border-radius:14px;color:#fcd34d;font-size:13.5px}
+/* gallery */
+.gal{columns:3 300px;gap:18px;margin-top:44px}
+.gal figure{break-inside:avoid;margin-bottom:18px;border-radius:18px;overflow:hidden;position:relative;cursor:zoom-in;border:1px solid var(--line);transition:.4s}
+.gal figure:hover{transform:scale(1.025);box-shadow:0 20px 60px #000a,0 0 40px #8b5cf633}
+.gal img{width:100%;transition:.6s}.gal figure:hover img{transform:scale(1.07)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 14px;background:linear-gradient(transparent,#000d);font:600 13px var(--font);opacity:0;transition:.3s}
+.gal figure:hover figcaption{opacity:1}
+#lb{position:fixed;inset:0;background:#000e;z-index:300;display:none;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+#lb.on{display:flex}#lb img{max-height:90vh;border-radius:14px;box-shadow:0 0 80px #22d3ee44}
+/* videos */
+.vid{display:block;padding:0;overflow:hidden}
+.vid .th{height:170px;display:grid;place-items:center;position:relative;background:var(--g)}
+.vid .th::before{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff14 1px,transparent 1px),linear-gradient(90deg,#ffffff14 1px,transparent 1px);background-size:26px 26px}
+.play{width:70px;height:70px;border-radius:50%;background:#fff;display:grid;place-items:center;position:relative;box-shadow:0 0 0 0 #fff8;animation:ring 2s infinite;transition:.3s}
+.play::after{content:"";border-left:22px solid #0b1226;border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:6px}
+@keyframes ring{70%{box-shadow:0 0 0 24px #fff0}100%{box-shadow:0 0 0 0 #fff0}}
+.vid:hover .play{transform:scale(1.15)}
+.vid .in{padding:20px 24px}.vid h3{font:700 19px var(--head)}.vid p{color:var(--mute);font-size:13.5px}
+/* validation */
+.ladder{display:flex;flex-wrap:wrap;gap:12px;margin:44px 0 30px;justify-content:center;align-items:center}
+.ladder div{padding:14px 22px;border-radius:50px;font:700 14px var(--mono);color:#fff;letter-spacing:1px;transition:.3s}
+.ladder div:hover{transform:translateY(-5px)}.ladder span{color:var(--mute);font-size:22px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}@media(max-width:800px){.two{grid-template-columns:1fr}}
+.list{padding:30px}.list h3{font:700 22px var(--head);margin-bottom:16px}
+.list li{list-style:none;padding:10px 0 10px 34px;position:relative;color:var(--mute);font-size:14.5px;border-bottom:1px solid #ffffff0d}
+.list li::before{content:attr(data-i);position:absolute;left:0;top:9px;font-size:18px}
+.tick{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}@media(max-width:700px){.tick{grid-template-columns:1fr 1fr}}
+.tick div{padding:16px;border-radius:16px;text-align:center;font:700 13px var(--mono);letter-spacing:1px;border:1px solid var(--line);background:#ffffff08}
+.tick .ok{border-color:#22c55e88;background:#22c55e14;color:#86efac}.tick .pl{border-color:#f59e0b88;background:#f59e0b14;color:#fcd34d}
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}@media(max-width:900px){.road{grid-template-columns:1fr}}
+.rcol{padding:28px}.rcol h3{font:700 21px var(--head);margin-bottom:14px}
+.rcol li{list-style:none;padding:9px 0 9px 28px;position:relative;font-size:14px;color:var(--mute)}
+.rcol li::before{content:"";position:absolute;left:2px;top:15px;width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+/* faq */
+.faq{max-width:860px;margin:44px auto 0}
+.fq{border:1px solid var(--line);border-radius:18px;margin-bottom:12px;background:#ffffff08;overflow:hidden;transition:.3s}
+.fq.open{border-color:#22d3ee66;background:#22d3ee0c}
+.fq button{width:100%;text-align:left;padding:20px 24px;background:none;border:0;color:#fff;font:700 17px var(--head);cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.fq button i{font-style:normal;font-size:24px;color:var(--cyan);transition:.3s}.fq.open button i{transform:rotate(45deg)}
+.fq .a{max-height:0;overflow:hidden;transition:max-height .45s ease;color:var(--mute);padding:0 24px;font-size:15px}
+.fq.open .a{max-height:240px;padding-bottom:20px}
+/* footer */
+footer{padding:90px 0 40px;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--line);background:radial-gradient(ellipse at 50% 120%,#7c3aed44,transparent 60%)}
+footer h2{font:700 clamp(36px,6vw,72px)/1 var(--head);margin-bottom:18px}
+footer .cta{justify-content:center;margin:30px 0}
+footer small{display:block;color:var(--mute);font-size:13px;max-width:760px;margin:0 auto;line-height:1.7}
+.top{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;border:0;background:var(--grad);color:#fff;font-size:20px;cursor:pointer;z-index:120;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 10px 30px #8b5cf655}
+.top.show{opacity:1;pointer-events:auto}.top:hover{transform:translateY(-4px)}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="progress"></div><div id="glow"></div>
+
+<nav id="nav"><div class="wrap nav-in">
+  <a href="#hero" class="logo"><i>🚁</i><span class="grad">AERO DROP</span></a>
+  <div class="links" id="links">
+    <a href="#overview">Overview</a><a href="#simulator">Simulator</a><a href="#architecture">Architecture</a><a href="#hardware">Hardware</a><a href="#how">How It Works</a><a href="#gallery">Gallery</a><a href="#videos">Videos</a><a href="#validation">Validation</a>
+    <a class="btn primary" style="padding:9px 20px;color:#fff" href="https://github.com/uppalapati-ajay/aero-drop-drone-delivery" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+</div></nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="stars"></canvas><div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="wrap hero-in">
+    <div>
+      <span class="badge"><b></b>ACADEMIC PROTOTYPE · ECE · EMBEDDED SYSTEMS</span>
+      <h1 class="grad">AERO<br>DROP</h1>
+      <div class="typed"><span id="typed"></span><span class="cur"></span></div>
+      <p class="d">A connected drone-delivery prototype that brings together flight control, GPS waypoint missions, local distance sensing, embedded decision logic, telemetry, and a servo-operated payload mechanism.</p>
+      <div class="cta">
+        <a class="btn primary" href="#simulator">▶ Try the Live Simulator</a>
+        <a class="btn ghost" href="https://github.com/uppalapati-ajay/aero-drop-drone-delivery" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+        <a class="btn ghost" href="#videos">🎬 Flight Videos</a>
+      </div>
+      <div class="stats">
+        <div class="stat glass"><b data-n="3">0</b><span>ToF Sensors</span></div>
+        <div class="stat glass"><b data-n="5">0</b><span>Step Flow</span></div>
+        <div class="stat glass"><b data-n="11">0</b><span>Components</span></div>
+        <div class="stat glass"><b data-n="6">0</b><span>Flight Videos</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="orbit o2"></div>
+      <div class="orbit"><i>ESP32</i><i>PIXHAWK</i><i>ToF</i><i>MAVLINK</i></div>
+      <div class="drone-main">
+        <svg viewBox="0 0 560 460" aria-label="Aero Drop drone illustration">
+          <defs>
+            <radialGradient id="halo"><stop offset="0" stop-color="#22d3ee" stop-opacity=".5"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+            <linearGradient id="bd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#94a3b8"/></linearGradient>
+            <linearGradient id="bs" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4ade80" stop-opacity=".8"/><stop offset="1" stop-color="#4ade80" stop-opacity="0"/></linearGradient>
+            <linearGradient id="bm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#facc15" stop-opacity=".9"/><stop offset="1" stop-color="#facc15" stop-opacity="0"/></linearGradient>
+            <filter id="g"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <circle cx="280" cy="200" r="220" fill="url(#halo)"/>
+          <polygon points="330,215 560,150 560,290" fill="url(#bs)"><animate attributeName="opacity" values=".4;1;.4" dur="1.8s" repeatCount="indefinite"/></polygon>
+          <polygon points="230,215 0,150 0,290" fill="url(#bs)"><animate attributeName="opacity" values="1;.4;1" dur="1.8s" repeatCount="indefinite"/></polygon>
+          <polygon points="280,230 215,440 345,440" fill="url(#bm)" opacity=".5"><animate attributeName="opacity" values=".25;.6;.25" dur="2.4s" repeatCount="indefinite"/></polygon>
+          <line x1="215" y1="165" x2="95" y2="120" stroke="#cbd5e1" stroke-width="12" stroke-linecap="round"/><line x1="345" y1="165" x2="465" y2="120" stroke="#cbd5e1" stroke-width="12" stroke-linecap="round"/>
+          <ellipse class="rotor" cx="95" cy="110" rx="82" ry="10" fill="#e0f2fe" opacity=".85"/><ellipse class="rotor" cx="465" cy="110" rx="82" ry="10" fill="#e0f2fe" opacity=".85"/>
+          <rect x="195" y="140" width="170" height="88" rx="34" fill="url(#bd)" stroke="#22d3ee" stroke-width="5" filter="url(#g)"/>
+          <circle cx="280" cy="184" r="22" fill="#0b1226" stroke="#22d3ee" stroke-width="4"/><circle cx="280" cy="184" r="10" fill="#22d3ee" filter="url(#g)"><animate attributeName="opacity" values="1;.3;1" dur="1.2s" repeatCount="indefinite"/></circle>
+          <circle cx="222" cy="184" r="7" fill="#4ade80" filter="url(#g)"/><circle cx="338" cy="184" r="7" fill="#f87171" filter="url(#g)"/>
+          <line x1="230" y1="228" x2="210" y2="262" stroke="#94a3b8" stroke-width="7" stroke-linecap="round"/><line x1="330" y1="228" x2="350" y2="262" stroke="#94a3b8" stroke-width="7" stroke-linecap="round"/><line x1="280" y1="228" x2="280" y2="262" stroke="#94a3b8" stroke-width="5"/>
+          <rect x="235" y="262" width="90" height="72" rx="8" fill="#f8fafc" stroke="#ef4444" stroke-width="5"/><rect x="274" y="274" width="12" height="48" fill="#ef4444"/><rect x="253" y="292" width="54" height="12" fill="#ef4444"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-ind"><i></i>SCROLL</div>
+</section>
+
+<div class="marq"><div class="marq-t" id="marq"></div></div>
+
+<!-- OVERVIEW -->
+<section id="overview"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">Project Overview</div><h2 class="title">One drone. <span class="grad">Six engineering disciplines.</span></h2>
+  <p class="lead">Aero Drop integrates flight control, GPS navigation, embedded firmware, distance sensing, communication and mechanical design into a single delivery-drone prototype.</p></div>
+  <div class="grid g3" style="margin-top:56px">
+    <div class="card glass rv" style="--c:#3b82f6"><div class="ic" style="background:#3b82f633">🛰️</div><h3>Autonomous Navigation</h3><p>Waypoint missions planned in Mission Planner and flown by a Pixhawk 2.4.8 with NEO-8M GPS positioning.</p></div>
+    <div class="card glass rv d1" style="--c:#f97316"><div class="ic" style="background:#f9731633">📏</div><h3>Local Obstacle Sensing</h3><p>Three VL53L0X Time-of-Flight sensors measure clearance at the front, left and right of the aircraft.</p></div>
+    <div class="card glass rv d2" style="--c:#ef4444"><div class="ic" style="background:#ef444433">🧠</div><h3>Embedded Decision Logic</h3><p>An ESP32 running FreeRTOS tasks evaluates distance thresholds and selects an avoidance response.</p></div>
+    <div class="card glass rv" style="--c:#8b5cf6"><div class="ic" style="background:#8b5cf633">📡</div><h3>MAVLink Telemetry</h3><p>Supported messages and commands are exchanged between the ESP32 and the flight controller.</p></div>
+    <div class="card glass rv d1" style="--c:#22c55e"><div class="ic" style="background:#22c55e33">📦</div><h3>Servo Payload Release</h3><p>A servo-operated mechanism in the payload box releases the carried item at the delivery stage.</p></div>
+    <div class="card glass rv d2" style="--c:#ec4899"><div class="ic" style="background:#ec489933">🌐</div><h3>Live Web Dashboard</h3><p>The ESP32 hosts a web page showing selected flight and sensor information, refreshed about every 500 ms.</p></div>
+  </div>
+  <div class="cap rv">
+    <div style="background:linear-gradient(135deg,#0ea5e9,#2563eb)">PLAN<small>Mission Planner</small></div>
+    <div style="background:linear-gradient(135deg,#6366f1,#7c3aed)">NAVIGATE<small>Pixhawk + GPS</small></div>
+    <div style="background:linear-gradient(135deg,#f97316,#dc2626)">SENSE<small>3 × ToF</small></div>
+    <div style="background:linear-gradient(135deg,#16a34a,#0d9488)">RESPOND<small>ESP32 logic</small></div>
+    <div style="background:linear-gradient(135deg,#ec4899,#be185d)">DELIVER<small>Servo release</small></div>
+  </div>
+</div></section>
+
+<!-- SIMULATOR -->
+<section id="simulator" style="background:linear-gradient(180deg,transparent,#0a103066,transparent)"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">Interactive</div><h2 class="title">Live <span class="grad">Obstacle-Avoidance</span> Simulator</h2>
+  <p class="lead">Click anywhere on the map to drop an obstacle in the drone's path and watch the Sense → Decide → Respond → Verify → Resume loop run in real time.</p></div>
+  <div class="sim-box glass rv">
+    <div class="sim-top">
+      <div class="sim-btns">
+        <button class="sb on" id="bRun">⏸ Pause</button><button class="sb" id="bReset">↺ Restart</button><button class="sb" id="bRand">＋ Random obstacle</button><button class="sb" id="bClear">✕ Clear obstacles</button><button class="sb" id="bSpd">Speed 1×</button>
+      </div>
+      <div class="state-pill" id="stPill">READY</div>
+    </div>
+    <canvas id="sim"></canvas>
+    <div class="sim-hud">
+      <div class="hud"><small>FRONT ToF</small><b id="hF">—</b></div>
+      <div class="hud"><small>LEFT ToF</small><b id="hL">—</b></div>
+      <div class="hud"><small>RIGHT ToF</small><b id="hR">—</b></div>
+      <div class="hud"><small>THRESHOLD</small><b style="color:#fbbf24">60 cm</b></div>
+      <div class="hud"><small>PAYLOAD</small><b id="hP" style="color:#fbbf24">LOADED</b></div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div id="log"></div>
+    <p class="note">⚠️ Educational simulation of the intended behaviour. Distances, thresholds and speeds here are illustrative — they are not measurements or firmware values from the real prototype.</p>
+  </div>
+</div></section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">System Architecture</div><h2 class="title">How the <span class="grad">pieces connect</span></h2>
+  <p class="lead">Click any block to explore what it does. Moving dots show the conceptual flow of data and commands.</p></div>
+  <div class="arch">
+    <div class="glass rv"><svg id="archsvg" viewBox="0 0 1000 560" aria-label="System architecture diagram"></svg></div>
+    <div class="glass rv d1" id="archinfo"></div>
+  </div>
+</div></section>
+
+<!-- HARDWARE -->
+<section id="hardware" style="background:linear-gradient(180deg,transparent,#0a103066,transparent)"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">Hardware</div><h2 class="title">The <span class="grad">components</span> inside</h2>
+  <p class="lead">Eleven documented components form the prototype. Hover the cards — they respond to your cursor.</p></div>
+  <div class="grid g4 hw" id="hwgrid" style="margin-top:56px"></div>
+</div></section>
+
+<!-- HOW IT WORKS -->
+<section id="how"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">Workflow</div><h2 class="title">The <span class="grad">five-step</span> response loop</h2>
+  <p class="lead">While the autopilot follows GPS waypoints, the embedded controller continuously runs this cycle.</p></div>
+  <div class="tl" id="tl"><div class="tl-line" id="tlline"></div>
+    <div class="tli rv"><div class="box glass"><h3>Sensor Reading</h3><p>Three VL53L0X Time-of-Flight sensors measure distance ahead and to both sides. The ESP32 collects readings continuously.</p></div><div class="dot" style="--c:#0ea5e9">1</div></div>
+    <div class="tli rv"><div class="box glass"><h3>Obstacle Detection</h3><p>Readings are compared against a defined distance threshold. A front reading below it indicates an obstacle in the flight path.</p></div><div class="dot" style="--c:#f97316">2</div></div>
+    <div class="tli rv"><div class="box glass"><h3>Path Adjustment</h3><p>The controller compares side clearances and selects a response toward the side with more room, coordinating with the flight controller.</p></div><div class="dot" style="--c:#16a34a">3</div></div>
+    <div class="tli rv"><div class="box glass"><h3>Path Verification</h3><p>Sensor data is checked again to confirm the path ahead is clear before the normal mission resumes.</p></div><div class="dot" style="--c:#8b5cf6">4</div></div>
+    <div class="tli rv"><div class="box glass"><h3>Mission Resumption</h3><p>With the obstacle cleared, the aircraft returns to waypoint navigation and continues toward the delivery point.</p></div><div class="dot" style="--c:#ec4899">5</div></div>
+  </div>
+</div></section>
+
+<!-- FIRMWARE -->
+<section id="firmware" style="background:linear-gradient(180deg,transparent,#0a103066,transparent)"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">Embedded Firmware</div><h2 class="title">FreeRTOS <span class="grad">task design</span></h2>
+  <p class="lead">Separate tasks keep sensing, decisions, communication and the web page from blocking each other. All tasks share validated data.</p></div>
+  <div class="tasks">
+    <div class="task rv" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)"><div class="pulse"></div><div style="font-size:30px">📏</div><h4>SENSOR</h4><p>Reads ToF sensors and updates distance values with validity.</p></div>
+    <div class="task rv d1" style="background:linear-gradient(135deg,#6366f1,#4338ca)"><div class="pulse" style="animation-delay:.6s"></div><div style="font-size:30px">📡</div><h4>MAVLINK</h4><p>Receives and sends supported messages; handles timeouts.</p></div>
+    <div class="task rv d2" style="background:linear-gradient(135deg,#ef4444,#b91c1c)"><div class="pulse" style="animation-delay:1.2s"></div><div style="font-size:30px">🛡️</div><h4>AVOIDANCE</h4><p>Evaluates thresholds and selects the response command.</p></div>
+    <div class="task rv d3" style="background:linear-gradient(135deg,#a855f7,#7e22ce)"><div class="pulse" style="animation-delay:1.8s"></div><div style="font-size:30px">🌐</div><h4>WEB SERVER</h4><p>Serves the dashboard with status and sensor values.</p></div>
+    <div class="task rv d4" style="background:linear-gradient(135deg,#64748b,#334155)"><div class="pulse" style="animation-delay:2.4s"></div><div style="font-size:30px">🔧</div><h4>SERIAL / DEBUG</h4><p>Diagnostic output that must never block critical work.</p></div>
+  </div>
+  <div class="bus rv">▲ VALIDATED SHARED STATE ▲<small>Distance values · validity · age — read by every task, written by its owner</small></div>
+</div></section>
+
+<!-- PAYLOAD -->
+<section id="payload"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">Delivery</div><h2 class="title">Payload <span class="grad">release sequence</span></h2>
+  <p class="lead">A servo-operated latch in the payload box releases the item at the delivery stage. Watch the cycle loop.</p></div>
+  <div class="pay">
+    <div class="glass rv" style="padding:14px">
+      <svg viewBox="0 0 760 440" id="paysvg">
+        <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1b45"/><stop offset="1" stop-color="#1e1b4b"/></linearGradient><filter id="gl2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+        <rect width="760" height="440" rx="16" fill="url(#sky)"/>
+        <rect y="360" width="760" height="80" fill="#14532d" opacity=".55"/><line x1="0" y1="360" x2="760" y2="360" stroke="#22c55e" stroke-width="3"/>
+        <ellipse cx="470" cy="364" rx="80" ry="11" fill="#7f1d1d" stroke="#f43f5e" stroke-width="2"/><path d="M455 364h30M470 358v12" stroke="#fda4af" stroke-width="2"/>
+        <g id="pdrone" style="animation:bob 2s ease-in-out infinite">
+          <line x1="300" y1="100" x2="268" y2="84" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round"/><line x1="460" y1="100" x2="492" y2="84" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round"/>
+          <ellipse class="rotor" cx="268" cy="80" rx="30" ry="4" fill="#e0f2fe"/><ellipse class="rotor" cx="492" cy="80" rx="30" ry="4" fill="#e0f2fe"/>
+          <rect x="290" y="92" width="180" height="48" rx="16" fill="#e2e8f0" stroke="#22d3ee" stroke-width="3"/><circle cx="380" cy="116" r="8" fill="#22d3ee" filter="url(#gl2)"/>
+          <rect x="340" y="140" width="80" height="64" fill="none" stroke="#94a3b8" stroke-width="3"/>
+          <rect x="424" y="140" width="30" height="24" rx="4" fill="#06b6d4" stroke="#0e7490" stroke-width="2"/>
+          <g class="arm"><line x1="439" y1="152" x2="439" y2="186" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/></g>
+          <g class="door"><line x1="340" y1="204" x2="420" y2="204" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/></g>
+        </g>
+        <g class="pkg"><rect x="354" y="160" width="48" height="40" rx="3" fill="#f8fafc" stroke="#ef4444" stroke-width="2"/><rect x="376" y="165" width="4" height="30" fill="#ef4444"/><rect x="363" y="178" width="26" height="4" fill="#ef4444"/></g>
+        <g class="dev"><line x1="378" y1="344" x2="470" y2="344" stroke="#fbbf24" stroke-width="3" stroke-dasharray="4 4"/><circle cx="378" cy="344" r="4" fill="#fbbf24"/><circle cx="470" cy="344" r="4" fill="#fbbf24"/><text x="424" y="332" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="700" font-family="Inter,sans-serif">DEVIATION — MEASURE &amp; RECORD</text></g>
+      </svg>
+      <style>
+        #paysvg .arm{transform-origin:439px 152px;animation:arm 10s infinite}
+        #paysvg .door{transform-origin:340px 204px;animation:door 10s infinite}
+        #paysvg .pkg{animation:pk 10s infinite}
+        #paysvg .dev{animation:dv 10s infinite}
+        @keyframes arm{0%,25%{transform:rotate(0)}40%,90%{transform:rotate(-70deg)}100%{transform:rotate(0)}}
+        @keyframes door{0%,40%{transform:rotate(0)}50%,90%{transform:rotate(85deg)}100%{transform:rotate(0)}}
+        @keyframes pk{0%,50%{transform:translate(0,0)}70%,97%{transform:translate(0,138px)}100%{transform:translate(0,0)}}
+        @keyframes dv{0%,74%{opacity:0}78%,96%{opacity:1}100%{opacity:0}}
+      </style>
+    </div>
+    <div class="rv d1" id="psteps"></div>
+  </div>
+</div></section>
+
+<!-- GALLERY -->
+<section id="gallery" style="background:linear-gradient(180deg,transparent,#0a103066,transparent)"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">Real Prototype</div><h2 class="title">Photos from <span class="grad">the build</span></h2>
+  <p class="lead">Images of the prototype, its components and the field tests. Tap any photo to enlarge.</p></div>
+  <div class="gal" id="gal"></div>
+</div></section>
+<div id="lb"><img alt=""></div>
+
+<!-- VIDEOS -->
+<section id="videos"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">Flight Tests</div><h2 class="title">Watch it <span class="grad">in the air</span></h2>
+  <p class="lead">Six recorded flight tests, hosted on Google Drive. Each opens in a new tab.</p></div>
+  <div class="grid g3" id="vgrid" style="margin-top:56px"></div>
+</div></section>
+
+<!-- VALIDATION -->
+<section id="validation" style="background:linear-gradient(180deg,transparent,#0a103066,transparent)"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">Honest Engineering</div><h2 class="title">Testing, <span class="grad">limits &amp; safety</span></h2>
+  <p class="lead">Good engineering separates what is designed, tested and verified. This project states its limits openly.</p></div>
+  <div class="ladder rv">
+    <div style="background:#2563eb">🔵 PLANNED</div><span>›</span><div style="background:#7c3aed">🟣 IMPLEMENTED</div><span>›</span><div style="background:#ea580c">🟠 BENCH-TESTED</div><span>›</span><div style="background:#16a34a">🟢 FLIGHT-TESTED</div><span>›</span><div style="background:#ca8a04">📏 MEASURED</div><span>›</span><div style="background:#059669">✅ VERIFIED</div>
+  </div>
+  <div class="tick rv">
+    <div class="ok">✔ DOCUMENTATION</div><div class="ok">✔ PHOTOS &amp; DIAGRAMS</div><div class="ok">✔ 6 FLIGHT VIDEOS</div>
+    <div class="pl">⏳ FIRMWARE SOURCE</div><div class="pl">⏳ TEST RECORDS</div><div class="pl">⏳ MEASURED RESULTS</div>
+  </div>
+  <div class="two" style="margin-top:34px">
+    <div class="list glass rv"><h3>🚧 Known Limitations</h3><ul>
+      <li data-i="👁️">Three sensors cover three directions only — not full 360° detection.</li>
+      <li data-i="📶">ToF sensors have limited range and can be affected by surface and lighting.</li>
+      <li data-i="⚖️">Maximum payload and delivery accuracy are not yet verified.</li>
+      <li data-i="🧪">Measured performance needs repeated, documented trials.</li>
+      <li data-i="🌐">The web dashboard is for monitoring, not safety-critical control.</li></ul></div>
+    <div class="list glass rv d1"><h3>🛡️ Safety Considerations</h3><ul>
+      <li data-i="⚖️">Follow local drone laws and operate only in an authorized area.</li>
+      <li data-i="👥">Keep people clear of the flight path and release area.</li>
+      <li data-i="🔋">Use safe LiPo charging, storage and handling; secure battery and payload.</li>
+      <li data-i="🎮">Verify pilot takeover and failsafes before every flight.</li>
+      <li data-i="🏢">Never test avoidance near people, roads or buildings.</li></ul></div>
+  </div>
+</div></section>
+
+<!-- ROADMAP -->
+<section id="roadmap"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">What's Next</div><h2 class="title">Engineering <span class="grad">roadmap</span></h2>
+  <p class="lead">Planned directions to make the system more capable, more reliable and better documented.</p></div>
+  <div class="road">
+    <div class="rcol glass rv" style="--c:#22d3ee"><h3>📡 Sensing &amp; Autonomy</h3><ul>
+      <li>Expand obstacle coverage with suitable additional sensing hardware</li><li>Improve filtering and validity checks for distance readings</li><li>Investigate more advanced mapping and path planning</li><li>Improve command verification and mission recovery</li></ul></div>
+    <div class="rcol glass rv d1" style="--c:#f97316"><h3>🛡️ Reliability &amp; Safety</h3><ul>
+      <li>Define explicit safe states for avoidance failures</li><li>Add command timeouts and communication-loss handling</li><li>Log sensor data and control decisions with timestamps</li><li>Automated tests for sensor processing and decision logic</li></ul></div>
+    <div class="rcol glass rv d2" style="--c:#ec4899"><h3>📊 Validation &amp; Release</h3><ul>
+      <li>Measure maximum payload and endurance systematically</li><li>Evaluate delivery deviation over repeated trials</li><li>Record exact firmware, libraries and build settings</li><li>Establish a repeatable build, test and release process</li></ul></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq" style="background:linear-gradient(180deg,transparent,#0a103066,transparent)"><div class="wrap">
+  <div class="center rv"><div class="eyebrow">FAQ</div><h2 class="title">Questions, <span class="grad">answered</span></h2></div>
+  <div class="faq" id="faq"></div>
+</div></section>
+
+<footer><div class="wrap">
+  <h2 class="grad">Explore the full project</h2>
+  <p class="lead" style="margin:0 auto">Architecture diagrams, animated walkthroughs, hardware details, flight-test videos and the validation framework are all on GitHub.</p>
+  <div class="cta"><a class="btn primary" href="https://github.com/uppalapati-ajay/aero-drop-drone-delivery" target="_blank" rel="noopener">⭐ Open the GitHub Repository</a><a class="btn ghost" href="#simulator">▶ Run the Simulator Again</a></div>
+  <small>Aero Drop is an academic prototype developed at Sir C. R. Reddy College of Engineering (Autonomous), Department of Electronics &amp; Communication Engineering. It is intended for demonstration and controlled experimentation, not as a certified or commercial delivery platform. Operate any drone only in compliance with applicable laws and safety practices.</small>
+</div></footer>
+<button class="top" id="top" aria-label="Back to top">↑</button>
+
+<script>
+(()=>{
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const GH='https://github.com/uppalapati-ajay/aero-drop-drone-delivery';
+
+/* nav, progress, top button, glow */
+const nav=$('#nav'),prog=$('#progress'),topb=$('#top');
+function onScroll(){const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;prog.style.width=(y/h*100)+'%';nav.classList.toggle('scrolled',y>40);topb.classList.toggle('show',y>700);
+  const secs=$$('section[id]');let cur='';secs.forEach(s=>{if(y+160>=s.offsetTop)cur=s.id});$$('.links a').forEach(a=>a.classList.toggle('act',a.getAttribute('href')==='#'+cur));
+  const tl=$('#tl');if(tl){const r=tl.getBoundingClientRect();const p=Math.min(1,Math.max(0,(innerHeight*.6-r.top)/r.height));$('#tlline').style.height=(p*100)+'%'}}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+topb.onclick=()=>scrollTo({top:0});
+$('#burger').onclick=()=>$('#links').classList.toggle('open');$$('.links a').forEach(a=>a.onclick=()=>$('#links').classList.remove('open'));
+const gl=$('#glow');addEventListener('pointermove',e=>{gl.style.left=e.clientX+'px';gl.style.top=e.clientY+'px'});
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+function observe(){$$('.rv:not(.in)').forEach(el=>io.observe(el))}observe();
+
+/* counters */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,n=+el.dataset.n;let i=0;const t=setInterval(()=>{i++;el.textContent=i;if(i>=n)clearInterval(t)},700/n);cio.unobserve(el)}),{threshold:.5});
+$$('[data-n]').forEach(el=>cio.observe(el));
+
+/* typed */
+const phrases=['Smart Drone System for Medical & Essentials Delivery','Autonomous waypoint navigation','Embedded obstacle response with ToF sensing','Servo-operated payload release'];
+let pi=0,ci=0,del=false;const tEl=$('#typed');
+(function type(){const p=phrases[pi];tEl.textContent=p.slice(0,ci);if(!del){ci++;if(ci>p.length+18){del=true}}else{ci-=2;if(ci<=0){del=false;ci=0;pi=(pi+1)%phrases.length}}setTimeout(type,del?22:48)})();
+
+/* marquee */
+const tech=['ESP32','PIXHAWK 2.4.8','NEO-8M GPS','VL53L0X','FREERTOS','MAVLINK','MISSION PLANNER','EMAX 930KV','30A ESC','5200 mAh LIPO','SERVO RELEASE','WEB DASHBOARD'];
+$('#marq').innerHTML=[...tech,...tech].map(t=>`<span><b>◆</b> ${t}</span>`).join('');
+
+/* starfield */
+(function(){const c=$('#stars'),x=c.getContext('2d');let w,h,st=[];function rs(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;st=Array.from({length:Math.min(140,w/8)},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+.3,s:Math.random()*.4+.05,t:Math.random()*6}))}
+rs();addEventListener('resize',rs);let mx=0,my=0;addEventListener('pointermove',e=>{mx=(e.clientX/innerWidth-.5)*20;my=(e.clientY/innerHeight-.5)*20});
+(function f(){x.clearRect(0,0,w,h);st.forEach(s=>{s.t+=.03;s.y-=s.s;if(s.y<0){s.y=h;s.x=Math.random()*w}x.globalAlpha=.4+Math.sin(s.t)*.4;x.fillStyle='#fff';x.beginPath();x.arc(s.x+mx*s.r*.4,s.y+my*s.r*.4,s.r,0,7);x.fill()});
+ x.globalAlpha=.12;x.strokeStyle='#22d3ee';for(let i=0;i<st.length;i+=3){for(let j=i+3;j<st.length;j+=9){const a=st[i],b=st[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<110){x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}requestAnimationFrame(f)})()})();
+
+/* ============ SIMULATOR ============ */
+(function(){
+const cv=$('#sim'),ctx=cv.getContext('2d');const W=900,H=400,dpr=Math.min(2,devicePixelRatio||1);cv.width=W*dpr;cv.height=H*dpr;ctx.scale(dpr,dpr);
+const RY=200,SX=70,DX=800,WP=[280,540],THR=75,RAY=160,CM=0.8,DRN=16;
+let obs=[{x:430,y:196,r:30},{x:690,y:222,r:24}],running=true,speed=1,clock=0,lastT=performance.now();
+let d,wpHit,logs=[],pkg;
+const STATES={IDLE:['READY','#334155'],CRUISE:['AUTO MISSION','#6366f1'],AVOID:['AVOIDING OBSTACLE','#f97316'],VERIFY:['VERIFYING PATH','#8b5cf6'],RESUME:['RESUMING ROUTE','#14b8a6'],DELIVER:['SERVO RELEASE','#16a34a'],DONE:['MISSION COMPLETE','#0ea5e9']};
+const CH=[['1 SENSE','#0ea5e9'],['2 DECIDE','#f97316'],['3 RESPOND','#16a34a'],['4 VERIFY','#8b5cf6'],['5 RESUME','#ec4899']];
+$('#chips').innerHTML=CH.map(c=>`<div class="chip" style="--cc:${c[1]}88;" data-c="${c[1]}">${c[0]}</div>`).join('');
+const chips=$$('.chip');
+function reset(){d={x:SX,y:RY,off:0,st:'IDLE',t:0,ang:0,trail:[],target:null,vt:0,servo:0};wpHit=[false,false];pkg={on:true,y:0,vy:0,rel:false};logs=[];$('#log').innerHTML='';log('System armed — mission loaded (home → WP1 → WP2 → drop zone)');setTimeout(()=>{if(d.st==='IDLE')d.st='CRUISE'},500)}
+function log(m){logs.push(`[${clock.toFixed(1).padStart(5)}s] ${m}`);if(logs.length>6)logs.shift();$('#log').innerHTML=logs.map(l=>`<div>${l}</div>`).join('')}
+function ray(ox,oy,dx,dy){let b=RAY;for(const o of obs){const fx=o.x-ox,fy=o.y-oy,tca=fx*dx+fy*dy;if(tca<0)continue;const d2=fx*fx+fy*fy-tca*tca;if(d2>o.r*o.r)continue;const t=tca-Math.sqrt(o.r*o.r-d2);if(t>=0&&t<b)b=t}return b}
+function nextObs(){let b=null;for(const o of obs){if(o.x+o.r<d.x-6)continue;if(Math.abs(o.y-d.y)<o.r+DRN+4){if(!b||o.x<b.x)b=o}}return b}
+function setState(s,m){if(d.st!==s){d.st=s;if(m)log(m)}}
+function step(dt){
+  if(d.st==='IDLE'||d.st==='DONE')return;
+  const f=ray(d.x,d.y,1,0),l=ray(d.x,d.y,0,-1),r=ray(d.x,d.y,0,1);
+  d.ang+=dt*40;
+  if(d.st==='CRUISE'||d.st==='RESUME'||d.st==='AVOID'){
+    const v=(d.st==='AVOID'?80:110)*speed;d.x=Math.min(DX,d.x+v*dt);
+    d.y+=(RY+d.off-d.y)*Math.min(1,dt*3.2);
+  }
+  if((d.st==='CRUISE'||d.st==='RESUME')&&f<THR){
+    const o=nextObs();const side=l>r?-1:1;d.target=o;
+    const oy=o?o.y:d.y,orr=o?o.r:30;d.off=oy+side*(orr+DRN+26)-RY;
+    setState('AVOID',`Front ToF ${Math.round(f*CM)} cm < threshold → comparing sides: L ${Math.round(l*CM)} cm / R ${Math.round(r*CM)} cm`);
+    log(`Responding: moving ${side<0?'LEFT':'RIGHT'} (more clearance)`);
+  }else if(d.st==='AVOID'){
+    if(f<THR*.8){const o=nextObs();if(o&&o!==d.target){d.target=o;const side=l>r?-1:1;d.off=o.y+side*(o.r+DRN+26)-RY;log('New obstacle ahead — recalculating response')}}
+    if(d.target&&d.x>d.target.x+d.target.r+18){setState('VERIFY','Obstacle passed — verifying path ahead');d.vt=0}
+  }else if(d.st==='VERIFY'){
+    d.vt+=dt;d.y+=(RY+d.off-d.y)*Math.min(1,dt*3);
+    if(d.vt>.7){const ff=ray(d.x,d.y,1,0);if(ff>=THR+20){d.off=0;setState('RESUME',`Path clear (${Math.round(ff*CM)} cm) — resuming mission route`)}else{setState('AVOID','Still blocked — continuing avoidance')}}
+  }
+  if(d.st==='RESUME'&&Math.abs(d.y-RY)<5&&Math.abs(d.off)<1){setState('CRUISE','Back on route — following waypoints')}
+  WP.forEach((w,i)=>{if(!wpHit[i]&&d.x>=w){wpHit[i]=true;log(`Waypoint ${i+1} reached`)}});
+  if(d.x>=DX&&(d.st==='CRUISE'||d.st==='RESUME')){d.y=RY;setState('DELIVER','Drop zone reached — servo commanded');d.vt=0}
+  if(d.st==='DELIVER'){d.vt+=dt;d.servo=Math.min(1,d.vt/.8);if(d.vt>.8&&!pkg.rel){pkg.rel=true;pkg.vy=0;log('Latch open — payload released')}if(pkg.rel){pkg.vy+=380*dt;pkg.y+=pkg.vy*dt;if(pkg.y>26){pkg.y=26;pkg.on=false}}if(d.vt>2.3){setState('DONE','Mission complete — position and deviation should be recorded');$('#hP').textContent='RELEASED';$('#hP').style.color='#4ade80'}}
+  d.trail.push([d.x,d.y]);if(d.trail.length>90)d.trail.shift();
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#08112e');g.addColorStop(1,'#0b1b3d');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='#ffffff0d';ctx.lineWidth=1;for(let x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}for(let y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+  ctx.setLineDash([10,9]);ctx.lineDashOffset=-clock*30;ctx.strokeStyle='#22d3ee88';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(SX,RY);ctx.lineTo(DX,RY);ctx.stroke();ctx.setLineDash([]);
+  // home
+  ctx.fillStyle='#0c4a6e';ctx.strokeStyle='#38bdf8';ctx.lineWidth=3;ctx.beginPath();ctx.arc(SX,RY,28,0,7);ctx.fill();ctx.stroke();ctx.fillStyle='#e0f2fe';ctx.font='bold 26px Inter,sans-serif';ctx.textAlign='center';ctx.fillText('H',SX,RY+9);
+  // waypoints
+  WP.forEach((w,i)=>{const p=1+Math.sin(clock*3+i)*.3;ctx.fillStyle=wpHit[i]?'#4ade80':'#a78bfa';ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=14;ctx.beginPath();ctx.arc(w,RY,7,0,7);ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle=ctx.fillStyle;ctx.globalAlpha=.4;ctx.beginPath();ctx.arc(w,RY,12*p+4,0,7);ctx.stroke();ctx.globalAlpha=1;ctx.fillStyle='#c4b5fd';ctx.font='bold 11px JetBrains Mono,monospace';ctx.fillText('WP '+(i+1),w,RY-22)});
+  // drop zone
+  ctx.strokeStyle='#f43f5e';ctx.lineWidth=2;ctx.beginPath();ctx.arc(DX,RY,40,0,7);ctx.stroke();ctx.globalAlpha=.5+Math.sin(clock*4)*.4;ctx.beginPath();ctx.arc(DX,RY,24+Math.sin(clock*3)*6,0,7);ctx.stroke();ctx.globalAlpha=1;ctx.fillStyle='#fda4af';ctx.font='bold 11px JetBrains Mono,monospace';ctx.fillText('DROP ZONE',DX,RY+62);
+  // obstacles
+  obs.forEach(o=>{const gr=ctx.createRadialGradient(o.x,o.y,2,o.x,o.y,o.r+16);gr.addColorStop(0,'#ef4444');gr.addColorStop(.6,'#991b1b');gr.addColorStop(1,'#ef444400');ctx.fillStyle=gr;ctx.beginPath();ctx.arc(o.x,o.y,o.r+16+Math.sin(clock*5)*2,0,7);ctx.fill();ctx.fillStyle='#7f1d1d';ctx.strokeStyle='#f87171';ctx.lineWidth=3;ctx.beginPath();ctx.arc(o.x,o.y,o.r,0,7);ctx.fill();ctx.stroke();ctx.strokeStyle='#fecaca';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(o.x-9,o.y-9);ctx.lineTo(o.x+9,o.y+9);ctx.moveTo(o.x+9,o.y-9);ctx.lineTo(o.x-9,o.y+9);ctx.stroke()});
+  // trail
+  if(d.trail.length>1){for(let i=1;i<d.trail.length;i++){ctx.strokeStyle=`rgba(34,211,238,${i/d.trail.length*.6})`;ctx.lineWidth=2+i/d.trail.length*3;ctx.beginPath();ctx.moveTo(d.trail[i-1][0],d.trail[i-1][1]);ctx.lineTo(d.trail[i][0],d.trail[i][1]);ctx.stroke()}}
+  // sensors
+  const f=ray(d.x,d.y,1,0),l=ray(d.x,d.y,0,-1),r=ray(d.x,d.y,0,1);
+  function beam(dx,dy,len,col,spread){const ex=d.x+dx*len,ey=d.y+dy*len,px=-dy*spread,py=dx*spread;const gr=ctx.createLinearGradient(d.x,d.y,ex,ey);gr.addColorStop(0,col+'88');gr.addColorStop(1,col+'00');ctx.fillStyle=gr;ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(ex+px,ey+py);ctx.lineTo(ex-px,ey-py);ctx.closePath();ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2;ctx.globalAlpha=.9;ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(ex,ey);ctx.stroke();ctx.globalAlpha=1;ctx.fillStyle=col;ctx.beginPath();ctx.arc(ex,ey,4,0,7);ctx.fill()}
+  if(d.st!=='IDLE'&&d.st!=='DONE'){beam(1,0,f,f<THR?'#ef4444':'#22c55e',22);beam(0,-1,l,l<THR?'#ef4444':'#38bdf8',16);beam(0,1,r,r<THR?'#ef4444':'#38bdf8',16)}
+  // drone
+  ctx.save();ctx.translate(d.x,d.y);
+  [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>{ctx.strokeStyle='#94a3b8';ctx.lineWidth=4;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(a*18,b*18);ctx.stroke();ctx.fillStyle='#38bdf833';ctx.beginPath();ctx.arc(a*18,b*18,12,0,7);ctx.fill();ctx.save();ctx.translate(a*18,b*18);ctx.rotate(d.ang+a*b);ctx.strokeStyle='#e0f2fe';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-12,0);ctx.lineTo(12,0);ctx.moveTo(0,-12);ctx.lineTo(0,12);ctx.stroke();ctx.restore()});
+  ctx.fillStyle='#e2e8f0';ctx.strokeStyle='#38bdf8';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(-13,-13,26,26,8);ctx.fill();ctx.stroke();ctx.fillStyle='#22d3ee';ctx.shadowColor='#22d3ee';ctx.shadowBlur=10;ctx.beginPath();ctx.arc(7,0,3.5,0,7);ctx.fill();ctx.shadowBlur=0;
+  if(pkg.on&&!pkg.rel){ctx.fillStyle='#f8fafc';ctx.strokeStyle='#ef4444';ctx.lineWidth=1.5;ctx.fillRect(-6,-5,12,10);ctx.strokeRect(-6,-5,12,10);ctx.fillStyle='#ef4444';ctx.fillRect(-1,-4,2,8);ctx.fillRect(-4,-1,8,2)}
+  ctx.restore();
+  if(pkg.rel){ctx.save();ctx.translate(d.x,d.y+pkg.y);ctx.fillStyle='#f8fafc';ctx.strokeStyle='#ef4444';ctx.lineWidth=1.5;ctx.fillRect(-7,-6,14,12);ctx.strokeRect(-7,-6,14,12);ctx.fillStyle='#ef4444';ctx.fillRect(-1,-5,2,10);ctx.fillRect(-5,-1,10,2);ctx.restore()}
+  // label
+  const lb=STATES[d.st];ctx.font='bold 11px JetBrains Mono,monospace';const tw=ctx.measureText(lb[0]).width+22;ctx.fillStyle=lb[1];ctx.beginPath();ctx.roundRect(d.x-tw/2,d.y-52,tw,22,11);ctx.fill();ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText(lb[0],d.x,d.y-37);
+  ctx.fillStyle='#64748b';ctx.font='11px Inter,sans-serif';ctx.textAlign='left';ctx.fillText('Click to place obstacles',12,H-12);
+  // HUD
+  const set=(id,v)=>{const e=$(id);e.textContent=Math.round(v*CM)+' cm';e.style.color=v<THR?'#f87171':'#4ade80'};
+  if(d.st==='IDLE'||d.st==='DONE'){$('#hF').textContent=$('#hL').textContent=$('#hR').textContent='—';$('#hF').style.color=$('#hL').style.color=$('#hR').style.color='#94a3b8'}else{set('#hF',f);set('#hL',l);set('#hR',r)}
+  const pill=$('#stPill');pill.textContent=lb[0];pill.style.background=lb[1];
+  const act={CRUISE:[0],AVOID:[0,1,2],VERIFY:[3],RESUME:[4],DELIVER:[],DONE:[],IDLE:[]}[d.st]||[];chips.forEach((c,i)=>{const on=act.includes(i);c.classList.toggle('on',on);c.style.background=on?c.dataset.c:''});
+}
+function loop(now){const dt=Math.min(.05,(now-lastT)/1000);lastT=now;if(running){clock+=dt;step(dt*1)}draw();requestAnimationFrame(loop)}
+reset();requestAnimationFrame(t=>{lastT=t;loop(t)});
+$('#bRun').onclick=function(){running=!running;this.textContent=running?'⏸ Pause':'▶ Resume';this.classList.toggle('on',running)};
+$('#bReset').onclick=()=>{reset();$('#hP').textContent='LOADED';$('#hP').style.color='#fbbf24'};
+$('#bClear').onclick=()=>{obs=[];log('All obstacles cleared')};
+$('#bRand').onclick=()=>{if(obs.length>=8)return;obs.push({x:200+Math.random()*540,y:RY+(Math.random()-.5)*90,r:20+Math.random()*16});log('Obstacle added')};
+$('#bSpd').onclick=function(){speed=speed===1?2:speed===2?.5:1;this.textContent='Speed '+speed+'×'};
+cv.addEventListener('pointerdown',e=>{const b=cv.getBoundingClientRect(),x=(e.clientX-b.left)/b.width*W,y=(e.clientY-b.top)/b.height*H;if(x<SX+50||x>DX-50||obs.length>=8)return;obs.push({x,y,r:22+Math.random()*12});log(`Obstacle placed at (${Math.round(x)}, ${Math.round(y)})`)});
+})();
+
+/* ============ ARCHITECTURE ============ */
+(function(){
+const N=[
+{id:'mp',x:30,y:200,w:200,h:90,c:['#3b82f6','#1d4ed8'],t:'MISSION PLANNER',s:'Ground station',tag:'GROUND',d:'Used to plan waypoint missions and observe telemetry. Supported mission actions are configured here before flight.',b:['Waypoint mission planning','Telemetry observation','Parameter and mission setup']},
+{id:'px',x:400,y:200,w:210,h:90,c:['#6366f1','#4338ca'],t:'PIXHAWK 2.4.8',s:'+ NEO-8M GPS',tag:'NAVIGATION',d:'The flight controller and autopilot. It uses GPS positioning to follow waypoint missions and manages the motors through the ESCs.',b:['Flight control & stabilization','GPS-assisted waypoint navigation','Drives ESCs and servo output','MAVLink endpoint']},
+{id:'es',x:400,y:400,w:210,h:90,c:['#ef4444','#b91c1c'],t:'ESP32',s:'FreeRTOS firmware',tag:'EMBEDDED',d:'The companion controller. It reads the distance sensors, applies obstacle-response logic, exchanges supported MAVLink messages and hosts the web dashboard.',b:['Reads 3 × VL53L0X sensors','Evaluates distance thresholds','Coordinates response with autopilot','Serves a monitoring web page']},
+{id:'tf',x:30,y:400,w:200,h:90,c:['#f97316','#c2410c'],t:'3 × VL53L0X',s:'Front · Left · Right',tag:'SENSING',d:'Time-of-Flight sensors measure distance from the time emitted light takes to return. They give short-range clearance in three directions.',b:['Front clearance','Left clearance','Right clearance','Limited range — not 360° coverage']},
+{id:'mt',x:770,y:60,w:200,h:90,c:['#22c55e','#15803d'],t:'ESCs + MOTORS',s:'30A · 930KV',tag:'ACTUATION',d:'ReadyToSky 30A ESCs control the speed of the EMAX 930KV brushless motors that provide thrust for flight.',b:['Motor-speed control','Propulsion','Powered from the LiPo battery']},
+{id:'sv',x:770,y:200,w:200,h:90,c:['#14b8a6','#0f766e'],t:'SERVO + PAYLOAD',s:'Release mechanism',tag:'PAYLOAD',d:'A servo operates the latch of the payload box so the carried item can be released at the delivery stage.',b:['Servo-operated latch','Payload box carries the item','Capacity not yet verified']},
+{id:'wd',x:770,y:400,w:200,h:90,c:['#a855f7','#7e22ce'],t:'WEB DASHBOARD',s:'Hosted on ESP32',tag:'MONITORING',d:'A page served by the ESP32 shows selected flight and sensor information in a browser, refreshed roughly every 500 ms per the project description.',b:['Selected status and sensor values','For monitoring only','Not a safety-critical control interface']}];
+const F=[['mp','px','M230,245 L400,245','#60a5fa'],['px','mt','M610,225 C690,225 690,105 770,105','#4ade80'],['px','sv','M610,245 L770,245','#2dd4bf'],['tf','es','M230,445 L400,445','#fb923c'],['es','wd','M610,445 L770,445','#c084fc'],['es','px','M495,400 L495,290','#e879f9'],['px','es','M520,290 L520,400','#e879f9']];
+const svg=$('#archsvg');let h='<defs>'+N.map(n=>`<linearGradient id="ng${n.id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${n.c[0]}"/><stop offset="1" stop-color="${n.c[1]}"/></linearGradient>`).join('')+'<filter id="ngl"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
+F.forEach(f=>{h+=`<path class="flow" d="${f[2]}" fill="none" stroke="${f[3]}" stroke-width="3" opacity=".75"/>`;[0,1].forEach(j=>{h+=`<circle r="5.5" fill="${f[3]}" filter="url(#ngl)"><animateMotion dur="2.6s" begin="${j*1.3}s" repeatCount="indefinite" path="${f[2]}"/></circle>`})});
+h+='<rect x="440" y="318" width="140" height="26" rx="13" fill="#701a75"/><text x="510" y="336" text-anchor="middle" fill="#fff" font-size="12" font-weight="800" font-family="JetBrains Mono,monospace" letter-spacing="1.5">MAVLINK</text>';
+N.forEach(n=>{h+=`<g class="node" data-id="${n.id}"><rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="16" fill="url(#ng${n.id})" filter="url(#ngl)"/><text x="${n.x+n.w/2}" y="${n.y+40}" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" font-family="Space Grotesk,sans-serif">${n.t}</text><text x="${n.x+n.w/2}" y="${n.y+62}" text-anchor="middle" fill="#fff" opacity=".88" font-size="12.5" font-family="Inter,sans-serif">${n.s}</text></g>`});
+svg.innerHTML=h;
+function show(id){const n=N.find(x=>x.id===id);$$('.node',svg).forEach(g=>g.classList.toggle('sel',g.dataset.id===id));$('#archinfo').innerHTML=`<span class="tag" style="background:${n.c[0]}33;color:${n.c[0]}">${n.tag}</span><h3>${n.t}</h3><p style="color:var(--mute);font-size:15px">${n.d}</p><ul>${n.b.map(x=>`<li>${x}</li>`).join('')}</ul><p style="margin-top:18px;font-size:12px;color:#64748b">Conceptual diagram — verify wiring and message paths against the real build.</p>`}
+$$('.node',svg).forEach(g=>{g.onclick=()=>show(g.dataset.id);g.onmouseenter=()=>show(g.dataset.id)});show('es');
+})();
+
+/* ============ HARDWARE ============ */
+(function(){
+const H=[['FC','Pixhawk 2.4.8','Flight controller','Autopilot managing flight and GPS-assisted waypoint navigation.',['Autopilot','MAVLink'],'#6366f1','#4338ca'],
+['GPS','NEO-8M','GPS receiver','Provides position data used for waypoint-based navigation.',['GNSS','Navigation'],'#8b5cf6','#6d28d9'],
+['ESP','ESP32','Embedded controller','Reads sensors, runs obstacle logic and hosts the dashboard.',['FreeRTOS','Wi-Fi'],'#ef4444','#b91c1c'],
+['ToF','3 × VL53L0X','Distance sensors','Front, left and right short-range clearance measurement.',['Time-of-Flight','3 directions'],'#f97316','#c2410c'],
+['BLDC','EMAX 930KV','Propulsion motors','Brushless motors providing thrust for the aircraft.',['930KV','Brushless'],'#22c55e','#15803d'],
+['ESC','ReadyToSky 30A','Speed controllers','Control motor speed from the flight controller output.',['30A','Motor control'],'#14b8a6','#0f766e'],
+['LiPo','5200 mAh','Main battery','Main power source for propulsion and electronics.',['5200 mAh','LiPo'],'#eab308','#a16207'],
+['PWR','Power Module','Pixhawk power interface','Supplies the flight controller from the main battery.',['Power','Pixhawk'],'#f59e0b','#b45309'],
+['SRV','Servo Motor','Payload release','Operates the latch of the payload mechanism.',['Servo','Release'],'#06b6d4','#0e7490'],
+['BOX','Payload Box','Carries the item','Enclosure that carries the delivery item and holds the latch.',['Payload','Latch'],'#ec4899','#be185d'],
+['FRM','Frame + Props','Structure & thrust','Mechanical frame and propellers that carry everything.',['Frame','Propellers'],'#3b82f6','#1d4ed8']];
+$('#hwgrid').innerHTML=H.map((x,i)=>`<div class="hwc glass rv d${i%4}" style="--c:${x[5]}88;--g:linear-gradient(135deg,${x[5]},${x[6]})"><div class="badge2">${x[0]}</div><h3>${x[1]}</h3><div class="role">${x[2]}</div><p>${x[3]}</p><div class="spec">${x[4].map(s=>`<span>${s}</span>`).join('')}</div></div>`).join('')+'<div class="hwc glass rv" style="display:grid;place-items:center;text-align:center;border-style:dashed"><div><div style="font-size:34px">🔍</div><h3 style="margin-top:8px">Verify before use</h3><p style="margin-top:6px">Confirm every part against the actual prototype before quoting it as a specification.</p></div></div>';
+observe();
+$$('.hwc').forEach(c=>{c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;c.style.transform=`rotateY(${(x-.5)*14}deg) rotateX(${(.5-y)*14}deg) translateY(-6px)`;c.style.setProperty('--mx',x*100+'%');c.style.setProperty('--my',y*100+'%')});c.addEventListener('pointerleave',()=>c.style.transform='')});
+})();
+
+/* ============ PAYLOAD STEPS ============ */
+(function(){
+const S=[['ARRIVE','Reach the configured delivery phase',0,.25,'#0ea5e9'],['COMMAND','Supported servo output activated',.25,.4,'#f97316'],['LATCH OPENS','Servo moves, mechanism opens',.4,.55,'#eab308'],['RELEASE','Payload leaves the box',.55,.75,'#16a34a'],['RECORD','Measure position and deviation',.75,1,'#a855f7']];
+$('#psteps').innerHTML=S.map((s,i)=>`<div class="pstep" style="--c:${s[4]}"><b>${i+1}</b><div><strong>${s[0]}</strong><span>${s[1]}</span></div></div>`).join('')+'<div class="warn">⚠ <b>Not verified until tested:</b> maximum payload · servo channel &amp; PWM settings · delivery accuracy</div>';
+const el=$$('.pstep');const t0=performance.now();(function f(n){const p=((n-t0)/10000)%1;el.forEach((e,i)=>e.classList.toggle('on',p>=S[i][2]&&p<S[i][3]));requestAnimationFrame(f)})(t0);
+})();
+
+/* ============ GALLERY ============ */
+(function(){
+const P=[['prototype 1 - Copy.jpeg','Aero Drop prototype'],['prototype 1(1).jpeg','Prototype — another angle'],['prototype 3 - Copy.jpeg','Prototype — close view'],['components - Copy.jpeg','Flight electronics and components'],['components 1 - Copy.jpeg','Components close-up'],['components(1).jpeg','Component overview'],['drone-field-test.jpeg','Field testing'],['field-test-preparation.jpeg','Field-test preparation'],['team-flight-demonstration.jpeg','Flight demonstration'],['Obstacle Avoidance Workflow .png','Obstacle-avoidance workflow'],['Aero Drop Drone Delivery Architecture.png','System architecture']];
+$('#gal').innerHTML=P.map(p=>`<figure class="rv"><img loading="lazy" src="${encodeURI(p[0])}" alt="${p[1]}"><figcaption>${p[1]}</figcaption></figure>`).join('');
+$$('#gal img').forEach(im=>{im.onerror=()=>{im.closest('figure').remove()}});observe();
+const lb=$('#lb'),li=$('img',lb);$('#gal').addEventListener('click',e=>{const im=e.target.closest('img');if(im){li.src=im.src;lb.classList.add('on')}});lb.onclick=()=>lb.classList.remove('on');addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+})();
+
+/* ============ VIDEOS ============ */
+(function(){
+const V=['1Fbjw1Pz-1gFRTSq7l7yDvbrRSLIZA7hu','1XUPTdHZIBxy2QSfTNEFAJBH4Ilrn7chb','1R1NiR6lLr082Um87en-610RGrQzF2w-g','1Xy7SSq4uWVLR5EgGfu1jIaB7Bxmt4zyw','13YNOyZcHwFSxX8AI5emh71bFJl_IKPMD','1_g-dzM5s7iTkPrZjr3yRnYVc7PUF2DuK'];
+const G=[['#0ea5e9','#2563eb'],['#f97316','#dc2626'],['#a855f7','#ec4899'],['#10b981','#0d9488'],['#eab308','#f97316'],['#6366f1','#8b5cf6']];
+$('#vgrid').innerHTML=V.map((id,i)=>`<a class="card glass vid rv d${i%3}" href="https://drive.google.com/file/d/${id}/view" target="_blank" rel="noopener" style="--c:${G[i][0]}"><div class="th" style="--g:linear-gradient(135deg,${G[i][0]},${G[i][1]})"><div class="play"></div></div><div class="in"><h3>🎬 Flight Test 0${i+1}</h3><p>Recorded prototype test · opens on Google Drive ↗</p></div></a>`).join('');observe();
+})();
+
+/* ============ FAQ ============ */
+(function(){
+const Q=[['🚁 What is Aero Drop?','An academic drone-delivery prototype combining GPS waypoint missions, local distance sensing, embedded decision logic, MAVLink communication, a servo payload release and a web dashboard.'],
+['🧠 Why use an ESP32 alongside the Pixhawk?','The Pixhawk handles flight control and navigation. The ESP32 reads the distance sensors, evaluates obstacle-response logic, exchanges supported messages with the autopilot and hosts the monitoring page.'],
+['📏 How do Time-of-Flight sensors work?','A ToF sensor measures distance from the time emitted light takes to bounce back from a surface. Three VL53L0X sensors provide short-range front, left and right clearance.'],
+['🛡️ Does it detect obstacles in every direction?','No. Three sensors cover three directions with limited range. The project does not claim full 360-degree detection.'],
+['📦 How much can it carry and how accurate is delivery?','Maximum payload and delivery accuracy are not yet verified in the available records. They should only be quoted after repeated, documented tests.'],
+['🏭 Is this a commercial delivery product?','No. It is an academic prototype for demonstration and controlled experimentation, not a certified platform.'],
+['💾 Where is the firmware and test data?','ESP32 firmware source, detailed test records and validation reports are planned additions to the GitHub repository.'],
+['🎥 Where can I see it fly?','See the Flight Videos section above — six recordings are hosted on Google Drive — and the photo gallery for field-test images.']];
+$('#faq').innerHTML=Q.map(q=>`<div class="fq rv"><button>${q[0]}<i>+</i></button><div class="a">${q[1]}</div></div>`).join('');observe();
+$$('.fq button').forEach(b=>b.onclick=()=>{const f=b.parentElement,o=f.classList.contains('open');$$('.fq').forEach(x=>x.classList.remove('open'));if(!o)f.classList.add('open')});
+})();
+})();
+</script>
+</body>
+</html>
